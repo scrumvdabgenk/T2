@@ -29,6 +29,14 @@ namespace TerraTeam2
         {
             Console.WriteLine("TERRARIUM");
             Console.WriteLine("---------");
+            Console.WriteLine("Press enter to show next day, 'stop' to quit.");
+            string input = Console.ReadLine();
+            while(input != "stop")
+            {
+                NextDay();
+                Console.ReadLine();
+            }
+            
         }
 
         public void Stop()
@@ -38,7 +46,24 @@ namespace TerraTeam2
 
         public void NextDay()
         {
-
+            // Increase day by one
+            Day++;
+            Console.WriteLine("Day: " + Day);
+            Console.WriteLine("---------");
+            // Prints out terrarium in console
+            PrintTerrarium();
+        }
+        public void PrintTerrarium ()
+        {
+            for(int x = 0; x < Terrarium.Height; x++)
+            {
+                for (int y = 0; y < Terrarium.Width; y++)
+                {
+                    Console.Write(".");
+                    Console.Write("\t");
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
