@@ -10,6 +10,9 @@ namespace TerraTeam2
     {
         static void Main(string[] args)
         {
+            // Create new game controller with Terrarium
+            GameController gameController = new GameController(new Terrarium(6,6));
+            gameController.Start();
         }
     }
 }

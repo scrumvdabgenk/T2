@@ -8,13 +8,7 @@ namespace TerraTeam2
 {
     public class Terrarium
     {
-
-        // private properties
-        private List<ITerrariumItem> listTerrariumItemsValue;
-        private int heightValue;
-        private int widthValue;
-
-        //public properties
+        //properties
         public List<ITerrariumItem> TerrariumItems { get; set; }
 
         public int Height { get; set; }
