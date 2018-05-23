@@ -8,35 +8,17 @@ namespace TerraTeam2
 {
     public class Terrarium
     {
+        //properties
+        public List<ITerrariumItem> TerrariumItems { get; set; }
 
-        // private properties
-        private List<TerrariumItems> listTerrariumItemsValue;
-        private int lenghtValue;
-        private int widthValue;
+        public int Height { get; set; }
 
-        //public properties
-        public List<TerrariumItems> ListTerrariumItems
-        {
-            get { return listTerrariumItemsValue; }
-            set { listTerrariumItemsValue = value; }
-        }
-
-        public int Length
-        {
-            get { return lenghtValue; }
-            set { lenghtValue = value; }
-        }
-
-        public int Width
-        {
-            get { return widthValue; }
-            set { widthValue = value; }
-        }
+        public int Width { get; set; }
 
         //constructor
-        public Terrarium(int length, int width)
+        public Terrarium(int height, int width)
         {
-            Length = length;
+            Height = height;
             Width = width;
         }
     }

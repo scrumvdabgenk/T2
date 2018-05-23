@@ -13,20 +13,22 @@ namespace TerraTeam2
         public int Day { get; set; }
 
         // Constructor
-        public GameController()
+        public GameController(Terrarium terrarium)
         {
-
+            Day = 0;
+            Terrarium = terrarium;
         }
 
         // Methods
-        public void Menu()
+        public void WaitForInput()
         {
 
         }
 
         public void Start()
         {
-
+            Console.WriteLine("TERRARIUM");
+            Console.WriteLine("---------");
         }
 
         public void Stop()

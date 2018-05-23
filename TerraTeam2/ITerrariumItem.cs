@@ -1,9 +1,14 @@
 ﻿namespace TerraTeam2
 {
-    interface ITerrariumItem
+    public interface ITerrariumItem
     {
         /* Properties */
         Position Position
+        {
+            get;
+            set;
+        }
+        Terrarium Terrarium
         {
             get;
             set;
