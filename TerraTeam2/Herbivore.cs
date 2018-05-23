@@ -12,8 +12,9 @@ namespace TerraTeam2
         public Herbivore(Terrarium terrarium)
             :base(terrarium)
         {
-
+            
         }
+
 
         public override void AnimalAction()
         {
