@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace TerraTeam2
 {
-    class Position
+    public class Position
     {
         /* Properties */
         public int X { get; set; }
         public int Y { get; set; }
+        /* Constructor */
+        public Position(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
     }
 }
