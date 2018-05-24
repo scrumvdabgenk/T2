@@ -23,9 +23,16 @@ namespace TerraLibrary
         {
             throw new NotImplementedException();
         }
-        private void CheckRight()
+        private bool CheckRight()
         {
-            throw new NotImplementedException();
+            foreach(Organism organism in Terrarium.Organisms )
+            {
+                if(organism.Position==new Position(Position.X + 1,Position.Y))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         private void Eat()
         {
