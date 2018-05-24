@@ -3,20 +3,9 @@
     public interface ITerrariumItem
     {
         /* Properties */
-        Position Position
+        char DisplayLetter
         {
             get;
-            set;
-        }
-        Terrarium Terrarium
-        {
-            get;
-            set;
-        }
-        string Type
-        {
-            get;
-            set;
         }
         
     }
