@@ -1,15 +1,14 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TerraLibrary;
 
-namespace TerraTeam2Tests
+namespace TerraTeam2
 {
-    //to do
     [TestClass]
-    public class PlantTests
+    public class HerbivoreTests
     {
-        
         [TestMethod]
-        public void PlantConstructorTest()
+        public void HerbivoreConstructorTest()
         {
             
         }

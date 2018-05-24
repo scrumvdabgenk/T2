@@ -1,4 +1,4 @@
-﻿namespace TerraTeam2
+﻿namespace TerraLibrary
 {
     public interface ITerrariumItem
     {
