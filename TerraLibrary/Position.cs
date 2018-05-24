@@ -11,6 +11,7 @@ namespace TerraLibrary
         /* Properties */
         public int X { get; set; }
         public int Y { get; set; }
+        
         /* Constructor */
         public Position(int x, int y)
         {

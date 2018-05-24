@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TerraLibrary;
 
 namespace TerraLibrary
 {
-    public class Plant : ITerrariumItem
+    public class Plant : Organism
     {
-        /* Properties */
-        public char DisplayLetter { get { return 'P'; } }
-        public int posX { get; set; }
-        public int posY { get; set; }
-        public ITerrariumItem[,] TerrariumItems { get; set; }
+        /* Constructor */
+        public Plant (Position position, Terrarium terrarium)
+            :base(position, terrarium)
+        {
+            Health = 1;
+            DisplayLetter = 'P';
+        }
     }
 }

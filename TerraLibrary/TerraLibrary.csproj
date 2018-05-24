@@ -42,10 +42,9 @@
   <ItemGroup>
     <Compile Include="Animal.cs" />
     <Compile Include="Carnivore.cs" />
-    <Compile Include="GameController.cs" />
+    <Compile Include="Organism.cs" />
+    <Compile Include="WorldController.cs" />
     <Compile Include="Herbivore.cs" />
-    <Compile Include="IItemBehaviour.cs" />
-    <Compile Include="ITerrariumItem.cs" />
     <Compile Include="Plant.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

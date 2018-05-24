@@ -8,13 +8,16 @@ namespace TerraLibrary
 {
     public class Herbivore : Animal
     {
-        // Represents the animal type in the console, set in subclass
-        public override char DisplayLetter { get { return 'H'; } }
-
-        public override void ItemAction(ITerrariumItem[,] terrariumItems)
+        /* Constructor */
+        public Herbivore (Position position, Terrarium terrarium)
+            :base(position, terrarium)
         {
-            base.ItemAction(terrariumItems);
-            // Eat plant
+            DisplayLetter = 'H';
+            Health = 0;
+        }
+        private void Breed()
+        {
+            throw new NotImplementedException();
         }
     }
 }
