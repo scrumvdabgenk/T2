@@ -12,7 +12,7 @@ namespace TerraTeam2
         public Herbivore(Terrarium terrarium)
             :base(terrarium)
         {
-            
+            Type = "H";
         }
 
 

@@ -13,5 +13,11 @@
             get;
             set;
         }
+        string Type
+        {
+            get;
+            set;
+        }
+        
     }
 }

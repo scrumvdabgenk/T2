@@ -20,6 +20,15 @@ namespace TerraTeam2
         {
             Height = height;
             Width = width;
+            TerrariumItems = new List<ITerrariumItem>();
+        }
+
+        public void SpawnPlants(int amount)
+        {
+            for(int i = 0; i < amount; i++)
+            {
+                TerrariumItems.Add(new Plant(this));
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace TerraTeam2
         public int Health { get; set; }             // Health for fighting, eating, ...
         public Terrarium Terrarium { get; set; }    // Terrarium that created this item, for deletion, checking adjacency,...
         public Position Position { get; set; }      // Position within the terrarium (X, Y)
-
+        public string Type { get; set; }            // Represents the animal type in the console, set in subclass
         /* Constructor */
         public Animal(Terrarium terrarium)
         {

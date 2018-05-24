@@ -50,6 +50,7 @@ namespace TerraTeam2
             Day++;
             Console.WriteLine("Day: " + Day);
             Console.WriteLine("---------");
+            Terrarium.SpawnPlants(3);
             // Prints out terrarium in console
             PrintTerrarium();
         }
@@ -59,7 +60,20 @@ namespace TerraTeam2
             {
                 for (int y = 0; y < Terrarium.Width; y++)
                 {
-                    Console.Write(".");
+                    bool empty = true;
+                    foreach (ITerrariumItem item in Terrarium.TerrariumItems)
+                    {
+                        if (item.Position.X == x && item.Position.Y == y)
+                        {
+                            Console.Write(item.Type);
+                            empty = false;
+                        }
+                    }
+                    if(empty)
+                    {
+                        Console.Write('.');
+                    }
+                    
                     Console.Write("\t");
                 }
                 Console.WriteLine();
