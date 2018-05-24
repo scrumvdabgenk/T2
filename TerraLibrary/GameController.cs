@@ -27,9 +27,16 @@ namespace TerraLibrary
 
         public void Start()
         {
+            // Print start instructions
             Console.WriteLine("TERRARIUM");
             Console.WriteLine("---------");
             Console.WriteLine("Press enter to show next day, 'stop' to quit.");
+
+            // Spawn terrarium items
+            Terrarium.SpawnHerbivore(2);
+            Terrarium.SpawnCarnivore(2);
+
+            // Wait for input
             string input = Console.ReadLine();
             while(input != "stop")
             {
@@ -48,8 +55,13 @@ namespace TerraLibrary
         {
             // Increase day by one
             Day++;
+            // Print the day
             Console.WriteLine("Day: " + Day);
             Console.WriteLine("---------");
+
+            // Spawn new items
+            Terrarium.SpawnPlants(1);
+
             // Prints out terrarium in console
             PrintTerrarium();
         }
@@ -59,7 +71,9 @@ namespace TerraLibrary
             {
                 for (int y = 0; y < Terrarium.Width; y++)
                 {
-                    Console.Write(".");
+                    var item = Terrarium.TerrariumItems[x, y];
+                    Console.Write(item == null ? '.' : item.DisplayLetter);
+                    
                     Console.Write("\t");
                 }
                 Console.WriteLine();

@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TerraTeam2
+namespace TerraLibrary
 {
-    public class Herbivore : Animal
+    public class Carnivore : Animal
     {
         // Represents the animal type in the console, set in subclass
-        public override char DisplayLetter { get { return 'H'; } }
+        public override char DisplayLetter { get { return 'C'; } }
 
         public override void AnimalAction()
         {
             base.AnimalAction();
-            // Eat plant
+            // Eat others
         }
     }
 }

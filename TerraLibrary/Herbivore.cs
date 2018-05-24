@@ -8,13 +8,8 @@ namespace TerraLibrary
 {
     public class Herbivore : Animal
     {
-        /* Constructor */
-        public Herbivore(Terrarium terrarium)
-            :base(terrarium)
-        {
-            
-        }
-
+        // Represents the animal type in the console, set in subclass
+        public override char DisplayLetter { get { return 'H'; } }
 
         public override void AnimalAction()
         {
