@@ -32,14 +32,38 @@ namespace TerraLibrary
             while(input != "stop")
             {
                 NextDay();
-                Console.ReadLine();
+                input = Console.ReadLine();
             }
-            
         }
 
         private void NextDay()
         {
-            throw new NotImplementedException();
+            // Go to next day
+            Day++;
+
+            // Add plant
+            AddPlant();
+
+            // Display day
+            Console.WriteLine("Day " + Day);
+            Console.WriteLine("---------");
+            // Display terrarium
+            foreach (Organism organism in Terrarium.Organisms)
+            {
+                Console.WriteLine(organism.Position.ToString());
+            }
+        }
+
+        private void AddPlant ()
+        {
+            // Check if there is space left in the terrarium
+            if(Terrarium.Organisms.Count < (Terrarium.Width * Terrarium.Height))
+            {
+                // Add Plant
+                Terrarium.Organisms.Add(new Plant(GenerateRandomEmptyPosition(), Terrarium));
+            }
+              
+            
         }
 
         private void OrganismActions()
@@ -47,13 +71,33 @@ namespace TerraLibrary
             throw new NotImplementedException();
         }
 
-        private void PrintTerrarium ()
+        private Position GenerateRandomEmptyPosition()
         {
-            throw new NotImplementedException();
-        }
-        private void GenerateRandomEmptyPosition()
-        {
-            throw new NotImplementedException();
+            // Random number generator
+            Random random = new Random();
+
+            // To check if position is empty
+            bool empty;
+            // Position container
+            Position pos;
+            do
+            {
+                // Reset empty
+                empty = true;
+                // Generate random position
+                pos = new Position(random.Next(0, Terrarium.Width), random.Next(0, Terrarium.Height));
+                // Check if position already exists, if so set fals to empty
+                foreach (Organism organism in Terrarium.Organisms)
+                {
+                    if (organism.Position.X == pos.X && organism.Position.Y == pos.Y)
+                    {
+                        empty = false;
+                    }
+                }
+            } while (!empty);
+            
+            // Return position
+            return pos;
         }
     }
 }
