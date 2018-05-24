@@ -7,6 +7,21 @@
         {
             get;
         }
-        
+        int posX
+        {
+            get;
+            set;
+        }
+        int posY
+        {
+            get;
+            set;
+        }
+        ITerrariumItem[,] TerrariumItems
+        {
+            get;
+            set;
+        }
+
     }
 }

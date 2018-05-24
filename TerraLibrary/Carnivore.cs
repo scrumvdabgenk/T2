@@ -11,9 +11,9 @@ namespace TerraLibrary
         // Represents the animal type in the console, set in subclass
         public override char DisplayLetter { get { return 'C'; } }
 
-        public override void AnimalAction()
+        public override void ItemAction(ITerrariumItem[,] terrariumItems)
         {
-            base.AnimalAction();
+            base.ItemAction(terrariumItems);
             // Eat others
         }
     }

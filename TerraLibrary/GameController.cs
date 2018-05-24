@@ -33,8 +33,8 @@ namespace TerraLibrary
             Console.WriteLine("Press enter to show next day, 'stop' to quit.");
 
             // Spawn terrarium items
-            Terrarium.SpawnHerbivore(2);
-            Terrarium.SpawnCarnivore(2);
+            Terrarium.SpawnTerrariumItems(2, typeof(Herbivore));
+            //Terrarium.SpawnTerrariumItems(2, new Carnivore());
 
             // Wait for input
             string input = Console.ReadLine();
@@ -60,16 +60,19 @@ namespace TerraLibrary
             Console.WriteLine("---------");
 
             // Spawn new items
-            Terrarium.SpawnPlants(1);
+            Terrarium.SpawnTerrariumItems(1, typeof(Plant));
+
+            // Perform all item actions
+            Terrarium.TerrariumItemActions();
 
             // Prints out terrarium in console
             PrintTerrarium();
         }
         public void PrintTerrarium ()
         {
-            for(int x = 0; x < Terrarium.Height; x++)
+            for(int y = 0; y < Terrarium.Height; y++)
             {
-                for (int y = 0; y < Terrarium.Width; y++)
+                for (int x = 0; x < Terrarium.Width; x++)
                 {
                     var item = Terrarium.TerrariumItems[x, y];
                     Console.Write(item == null ? '.' : item.DisplayLetter);

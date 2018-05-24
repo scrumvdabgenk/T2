@@ -23,27 +23,40 @@ namespace TerraLibrary
             TerrariumItems = new ITerrariumItem[Width, Height];
         }
 
-        public void SpawnPlants(int amount)
-        {
-            for(int i = 0; i < amount; i++)
-            {
-                SpawnItemOnRandomEmptyPosition(new Plant());
-            }
-        }
-
-        public void SpawnHerbivore(int amount)
+        public void SpawnTerrariumItems(int amount, Type type)
         {
             for (int i = 0; i < amount; i++)
             {
-                SpawnItemOnRandomEmptyPosition(new Herbivore());
+                // Create instance of type
+                var item = Activator.CreateInstance(type);
+                // Spawn instance on random position
+                SpawnItemOnRandomEmptyPosition((ITerrariumItem)item);
             }
         }
 
-        public void SpawnCarnivore(int amount)
+        public void TerrariumItemActions()
         {
-            for (int i = 0; i < amount; i++)
+            for (int y = 0; y < Height; y++)
             {
-                SpawnItemOnRandomEmptyPosition(new Carnivore());
+                for (int x = 0; x < Width; x++)
+                {
+                    // Check if this position contains an object (null = empty)
+                    if(TerrariumItems[x,y] != null)
+                    {
+                        // Get the item from the array
+                        ITerrariumItem item = TerrariumItems[x, y];
+                        Console.WriteLine(item.ToString() + item.posX + item.posY);
+                        // If this item has an itembehaviour
+                        if (item is IItemBehaviour)
+                        {
+                            // Cast to itembehaviour to access ItemAction();
+                            IItemBehaviour behaviourItem = (IItemBehaviour)item;
+                            // Call this item's action
+                            behaviourItem.ItemAction(TerrariumItems);
+                        }
+                    }
+                    
+                }
             }
         }
 
@@ -52,6 +65,7 @@ namespace TerraLibrary
             // New randomizer
             Random random = new Random();
 
+            // Generate random position until an empty spot is found
             int xPos, yPos;
             do
             {
@@ -59,8 +73,15 @@ namespace TerraLibrary
                 yPos = random.Next(0, Height);
             } while (TerrariumItems[xPos, yPos] != null);
 
+            // Set properties of the terrarium item
+            item.posX = xPos;
+            item.posY = yPos;
+            item.TerrariumItems = TerrariumItems;
+
             // Place item in array at random generated position
             TerrariumItems[xPos, yPos] = item;
+
+            //Console.WriteLine("Spawned " + item.DisplayLetter + " at " + item.posX + " " + item.posY);
         }
 
     }

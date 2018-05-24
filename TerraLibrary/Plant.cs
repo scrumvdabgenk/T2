@@ -10,5 +10,8 @@ namespace TerraLibrary
     {
         /* Properties */
         public char DisplayLetter { get { return 'P'; } }
+        public int posX { get; set; }
+        public int posY { get; set; }
+        public ITerrariumItem[,] TerrariumItems { get; set; }
     }
 }

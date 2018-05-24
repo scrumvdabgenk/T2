@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TerraLibrary
 {
-    public interface IAnimalBehaviour
+    public interface IItemBehaviour
     {
-        void AnimalAction();
+        void ItemAction(ITerrariumItem[,] terrariumItems);
     }
 }
