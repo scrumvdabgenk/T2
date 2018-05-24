@@ -53,6 +53,12 @@
     <Compile Include="HerbivoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TerraLibrary\TerraLibrary.csproj">
+      <Project>{c6a0a9d0-988d-4e64-a712-57f490547fb9}</Project>
+      <Name>TerraLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
