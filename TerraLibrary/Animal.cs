@@ -144,10 +144,10 @@ namespace TerraLibrary
         {
             return !CheckAbove() || !CheckRightBool() || !CheckBelow() || !CheckLeft();
         }
-        public void Eat(Organism organism)
+        public void Eat(Organism organism,List<Organism>toDelete)
         {
             Health += organism.Health;
-            Terrarium.Organisms.Remove(organism);
+            toDelete.Add(organism);
             Move(2);
         }
     }
