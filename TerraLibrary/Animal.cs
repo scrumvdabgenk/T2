@@ -68,36 +68,42 @@ namespace TerraLibrary
         private bool CheckRightBool()
         {
             foreach (Organism organism in Terrarium.Organisms)
-            {
-                if (organism.Position == new Position(Position.X + 1, Position.Y)&&(Position.X<Terrarium.Width-1))
                 {
-                    return true;
-                }
-            }
-            return false;
-        }
-        private bool CheckBelow()
-        {
-            if (Position.Y < Terrarium.Height - 1)
-            {
-                foreach (Organism organism in Terrarium.Organisms)
-                {
-                    if (organism.Position == new Position(Position.X, Position.Y - 1))
+                    if (organism.Position == new Position(Position.X + 1, Position.Y))
                     {
                         return true;
                     }
                 }
-            } else { return true; }
+            if (Position.X == Terrarium.Width - 1)
+                return true;
+            return false;
+            
+        }
+        private bool CheckBelow()
+        {
+            foreach (Organism organism in Terrarium.Organisms)
+            {
+                if (organism.Position == new Position(Position.X, Position.Y - 1))
+                {
+                    return true;
+                }
+            }
+            if (Position.Y == Terrarium.Height - 1)
+                return true;
             return false;
         }
         private bool CheckLeft()
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position == new Position(Position.X - 1, Position.Y) && (Position.X > 0))
+                if (organism.Position == new Position(Position.X - 1, Position.Y))
                 {
                     return true;
                 }
+            }
+            if(Position.X== 0)
+            {
+                return true;
             }
             return false;
         }
@@ -105,11 +111,13 @@ namespace TerraLibrary
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position == new Position(Position.X, Position.Y - 1) && (Position.Y > 0))
+                if (organism.Position == new Position(Position.X, Position.Y - 1))
                 {
                     return true;
                 }
             }
+            if (Position.Y > 0)
+                return true;
             return false;
         }
 
