@@ -18,9 +18,9 @@ namespace TerraLibrary
         /* Methods */
         public void Move()
         {
-            if (CheckAll())
+            if (
+                CheckAll())
             {
-
                 int randomGetal = random.Next(1, 5);
                 if (!CheckAbove() && randomGetal == 1)
                 {
@@ -102,7 +102,7 @@ namespace TerraLibrary
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position.X == Position.X && organism.Position.Y == Position.Y - 1)
+                if (organism.Position.X == Position.X && organism.Position.Y == Position.Y + 1)
                 {
                     return true;
                 }
