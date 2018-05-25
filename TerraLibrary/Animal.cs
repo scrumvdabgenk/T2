@@ -18,66 +18,65 @@ namespace TerraLibrary
         /* Methods */
         public void Move()
         {
-            Move(random.Next(1, 5));
+            if (!CheckAll())
+            {
+
+                int randomGetal = random.Next(1, 5);
+                if (!CheckAbove() && randomGetal == 1)
+                {
+                    Move(1);
+                }
+                else if (!CheckRightBool() && randomGetal == 2)
+                {
+                    Move(2);
+                }
+                else if (!CheckBelow() && randomGetal == 3)
+                {
+                    Move(3);
+                }
+                else if (!CheckLeft() && randomGetal == 4)
+                {
+                    Move(4);
+                }
+                else Move();
+            }
         }
         public void Move(int direction)
         {
-            if (CheckAll())
+            switch (direction)
             {
-                switch (direction)
-                {
 
-                    case 1: // Move up
-                        if (CheckAbove())
-                        {
-                            Move(2); // Move right
-                        }
-                        else
-                        {
-                            Position.Y -= 1;
-                        }
-                        break;
-                    case 2:// Move right
-                        if (CheckRightBool())
-                        {
-                            Move(3); // Move down
-                        }
-                        else
-                        {
-                            Position.X += 1;
-                        }                       
-                        break;
-                    case 3: //Move down
-                        if (CheckBelow())
-                        {
-                            Move(4); //Move left
-                        }
-                        else
-                        {
-                            Position.Y += 1;
-                        }
-                        break;
-                    case 4: //Move left
-                        if (CheckLeft())
-                        {
-                            Move(1); // Move up
-                        }
-                        else
-                        {
-                            Position.X -= 1;
-                        }
-                        break;
-                    default:
-                        break;
-                }
+                case 1: // Move up
+
+                    Position.Y -= 1;
+
+                    break;
+                case 2:// Move right
+
+                    Position.X += 1;
+
+                    break;
+                case 3: //Move down
+
+                    Position.Y += 1;
+
+                    break;
+                case 4: //Move left
+
+                    Position.X -= 1;
+
+                    break;
+                default:
+                    break;
             }
+
         }
 
         public Organism CheckRight()
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position.X == Position.X + 1&& organism.Position.Y== Position.Y)
+                if (organism.Position.X == Position.X + 1 && organism.Position.Y == Position.Y)
                 {
                     return organism;
                 }
@@ -88,22 +87,22 @@ namespace TerraLibrary
         private bool CheckRightBool()
         {
             foreach (Organism organism in Terrarium.Organisms)
+            {
+                if (organism.Position.X == Position.X + 1 && organism.Position.Y == Position.Y)
                 {
-                    if (organism.Position.X == Position.X+1 &&organism.Position.Y== Position.Y)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
+            }
             if (Position.X == Terrarium.Width - 1)
                 return true;
             return false;
-            
+
         }
         private bool CheckBelow()
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position.X==Position.X&&organism.Position.Y== Position.Y - 1)
+                if (organism.Position.X == Position.X && organism.Position.Y == Position.Y - 1)
                 {
                     return true;
                 }
@@ -116,12 +115,12 @@ namespace TerraLibrary
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position.X==Position.X - 1&&organism.Position.Y==Position.Y)
+                if (organism.Position.X == Position.X - 1 && organism.Position.Y == Position.Y)
                 {
                     return true;
                 }
             }
-            if(Position.X== 0)
+            if (Position.X == 0)
             {
                 return true;
             }
@@ -131,12 +130,12 @@ namespace TerraLibrary
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position.X == Position.X&&organism.Position.Y== Position.Y - 1)
+                if (organism.Position.X == Position.X && organism.Position.Y == Position.Y - 1)
                 {
                     return true;
                 }
             }
-            if (Position.Y== 0)
+            if (Position.Y == 0)
                 return true;
             return false;
         }
