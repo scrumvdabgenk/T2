@@ -116,7 +116,7 @@ namespace TerraLibrary
                     return true;
                 }
             }
-            if (Position.Y > 0)
+            if (Position.Y== 0)
                 return true;
             return false;
         }
