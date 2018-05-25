@@ -17,7 +17,7 @@ namespace TerraLibrary
         }
         private void Breed()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

@@ -43,8 +43,8 @@ namespace TerraLibrary
         private void FirstDay()
         {
             AddHerbivore();
-            //AddCarnivore();
-            //AddPlant();
+            AddCarnivore();
+            AddPlant();
 
             // Print day in console
             DisplayDay();
@@ -106,7 +106,7 @@ namespace TerraLibrary
             if (IsEmptySpaceInTerrarium())
             {
                 // Add Plant
-                Terrarium.Organisms.Add(new Plant(GenerateRandomEmptyPosition(), Terrarium));
+                Terrarium.Organisms.Add(new Plant(Position.GenerateRandomEmptyPosition(Terrarium), Terrarium));
             }
         }
 
@@ -116,7 +116,7 @@ namespace TerraLibrary
             if (IsEmptySpaceInTerrarium())
             {
                 // Add Plant
-                Terrarium.Organisms.Add(new Herbivore(GenerateRandomEmptyPosition(), Terrarium));
+                Terrarium.Organisms.Add(new Herbivore(Position.GenerateRandomEmptyPosition(Terrarium), Terrarium));
             }
         }
         private void AddCarnivore()
@@ -125,7 +125,7 @@ namespace TerraLibrary
             if (IsEmptySpaceInTerrarium())
             {
                 // Add Plant
-                Terrarium.Organisms.Add(new Carnivore(GenerateRandomEmptyPosition(), Terrarium));
+                Terrarium.Organisms.Add(new Carnivore(Position.GenerateRandomEmptyPosition(Terrarium), Terrarium));
             }
         }
         private bool IsEmptySpaceInTerrarium ()
@@ -164,39 +164,31 @@ namespace TerraLibrary
                 if (organism is Herbivore)
                 {
                     Herbivore herbivore = organism as Herbivore;
-                    herbivore.Move();
-                }
-            }
-
-        }
-
-        private Position GenerateRandomEmptyPosition()
-        {
-            // Random number generator
-            Random random = new Random();
-
-            // To check if position is empty
-            bool empty;
-            // Position container
-            Position pos;
-            do
-            {
-                // Reset empty
-                empty = true;
-                // Generate random position
-                pos = new Position(random.Next(0, Terrarium.Width), random.Next(0, Terrarium.Height));
-                // Check if position already exists, if so set fals to empty
-                foreach (Organism organism in Terrarium.Organisms)
-                {
-                    if (organism.Position.X == pos.X && organism.Position.Y == pos.Y)
+                    Organism organismRight = herbivore.CheckRight();
+                    if (organismRight == null)
+                        herbivore.Move();
+                    else if (organismRight is Plant)
                     {
-                        empty = false;
+                        Console.WriteLine("eat");
+                    }
+                    else if (organismRight is Herbivore)
+                    {
+                        Console.WriteLine("Breed");
                     }
                 }
-            } while (!empty);
+                else if (organism is Herbivore)
+                {
+                    Herbivore herbivore = organism as Herbivore;
+                    Organism organismRight = herbivore.CheckRight();
+                    if (organismRight == null)
+                        herbivore.Move();
+                    else if (organismRight is Plant)
+                    {
+                        Console.WriteLine("eat");
+                    }
 
-            // Return position
-            return pos;
+                }
+            }
         }
     }
 }
