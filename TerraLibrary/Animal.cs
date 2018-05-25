@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace TerraLibrary
 {
-    public abstract class Animal: Organism
+    public abstract class Animal : Organism
     {
         private Random random = new Random();
         /* Constructor */
         public Animal(Position position, Terrarium terrarium)
-            :base(position, terrarium)
+            : base(position, terrarium)
         {
         }
 
@@ -22,20 +22,29 @@ namespace TerraLibrary
         }
         public void Move(int direction)
         {
-            if(!CheckRight())
+            if (CheckAll())
             {
                 switch (direction)
                 {
-                    case 1:
+
+                    case 1: // Move up
+                        if (CheckAbove())
+                            Move(2); // Move right
                         Position.Y -= 1;
                         break;
-                    case 2:
+                    case 2:// Move right
+                        if (CheckRightBool())
+                            Move(3); // Move down
                         Position.X += 1;
                         break;
-                    case 3:
+                    case 3: //Move down
+                        if (CheckBelow())
+                            Move(4); //Move left
                         Position.Y += 1;
                         break;
-                    case 4:
+                    case 4: //Move left
+                        if (CheckLeft())
+                            Move(1); // Move up
                         Position.X -= 1;
                         break;
                     default:
@@ -43,11 +52,24 @@ namespace TerraLibrary
                 }
             }
         }
-        private bool CheckRight()
+
+        public Organism CheckRight()
         {
-            foreach(Organism organism in Terrarium.Organisms )
+            foreach (Organism organism in Terrarium.Organisms)
             {
-                if(organism.Position==new Position(Position.X + 1,Position.Y))
+                if (organism.Position == new Position(Position.X + 1, Position.Y))
+                {
+                    return organism;
+                }
+            }
+            return null;
+        }
+
+        private bool CheckRightBool()
+        {
+            foreach (Organism organism in Terrarium.Organisms)
+            {
+                if (organism.Position == new Position(Position.X + 1, Position.Y))
                 {
                     return true;
                 }
@@ -58,7 +80,7 @@ namespace TerraLibrary
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position == new Position(Position.X, Position.Y-1))
+                if (organism.Position == new Position(Position.X, Position.Y - 1))
                 {
                     return true;
                 }
@@ -80,12 +102,17 @@ namespace TerraLibrary
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position == new Position(Position.X, Position.Y-1))
+                if (organism.Position == new Position(Position.X, Position.Y - 1))
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        private bool CheckAll()
+        {
+            return !CheckAbove() || !CheckRightBool() || !CheckBelow() || !CheckLeft();
         }
         private void Eat()
         {
