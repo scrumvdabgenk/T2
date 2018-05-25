@@ -18,7 +18,7 @@ namespace TerraLibrary
         /* Methods */
         public void Move()
         {
-            Move(random.Next(1, 4));
+            Move(random.Next(1, 5));
         }
         public void Move(int direction)
         {
