@@ -78,13 +78,16 @@ namespace TerraLibrary
         }
         private bool CheckBelow()
         {
-            foreach (Organism organism in Terrarium.Organisms)
+            if (Position.Y < Terrarium.Height - 1)
             {
-                if (organism.Position == new Position(Position.X, Position.Y - 1)&&(Position.Y<Terrarium.Height-1))
+                foreach (Organism organism in Terrarium.Organisms)
                 {
-                    return true;
+                    if (organism.Position == new Position(Position.X, Position.Y - 1))
+                    {
+                        return true;
+                    }
                 }
-            }
+            } else { return true; }
             return false;
         }
         private bool CheckLeft()
