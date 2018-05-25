@@ -55,6 +55,15 @@ namespace TerraLibrary
             return terraArray;
         }
 
+        public bool IsEmptySpaceInTerrarium()
+        {
+            if (!(Organisms.Count < (Width * Height)))
+            {
+                Console.WriteLine("Field is full, exiting game");
+            }
+            return Organisms.Count < (Width * Height);
+        }
+
     }
 }
 

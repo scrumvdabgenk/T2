@@ -15,9 +15,16 @@ namespace TerraLibrary
             DisplayLetter = 'H';
             Health = 0;
         }
-        private void Breed()
+        public void Breed()
         {
-            
+            if (Terrarium.IsEmptySpaceInTerrarium())
+            {
+                Terrarium.Organisms.Add(new Herbivore(Position.GenerateRandomEmptyPosition(Terrarium), Terrarium));
+            }
+            else
+            {
+                Console.WriteLine("No space to breed");
+            }
         }
     }
 }
