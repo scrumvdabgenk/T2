@@ -77,7 +77,7 @@ namespace TerraLibrary
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position.X == Position.X + 1&& organism.Position.Y== Position.Y))
+                if (organism.Position.X == Position.X + 1&& organism.Position.Y== Position.Y)
                 {
                     return organism;
                 }
@@ -89,7 +89,7 @@ namespace TerraLibrary
         {
             foreach (Organism organism in Terrarium.Organisms)
                 {
-                    if (organism.Position.X == Position.X+1 &&organism.Position.Y== Position.Y))
+                    if (organism.Position.X == Position.X+1 &&organism.Position.Y== Position.Y)
                     {
                         return true;
                     }
@@ -131,7 +131,7 @@ namespace TerraLibrary
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position.X == Position.X&&organism.Position.Y== Position.Y - 1))
+                if (organism.Position.X == Position.X&&organism.Position.Y== Position.Y - 1)
                 {
                     return true;
                 }
