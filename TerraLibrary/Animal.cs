@@ -69,7 +69,7 @@ namespace TerraLibrary
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position == new Position(Position.X + 1, Position.Y))
+                if (organism.Position == new Position(Position.X + 1, Position.Y)&&(Position.X<Terrarium.Width))
                 {
                     return true;
                 }
@@ -80,7 +80,7 @@ namespace TerraLibrary
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position == new Position(Position.X, Position.Y - 1))
+                if (organism.Position == new Position(Position.X, Position.Y - 1)&&(Position.Y<Terrarium.Height))
                 {
                     return true;
                 }
@@ -91,7 +91,7 @@ namespace TerraLibrary
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position == new Position(Position.X - 1, Position.Y))
+                if (organism.Position == new Position(Position.X - 1, Position.Y) && (Position.X > 0))
                 {
                     return true;
                 }
@@ -102,7 +102,7 @@ namespace TerraLibrary
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position == new Position(Position.X, Position.Y - 1))
+                if (organism.Position == new Position(Position.X, Position.Y - 1) && (Position.Y > 0))
                 {
                     return true;
                 }
