@@ -145,9 +145,11 @@ namespace TerraLibrary
         {
             return !CheckAbove() || !CheckRightBool() || !CheckBelow() || !CheckLeft();
         }
-        private void Eat()
+        public void Eat(Organism organism)
         {
-            throw new NotImplementedException();
+            Health += organism.Health;
+            Terrarium.Organisms.Remove(organism);
+            Move(2);
         }
     }
 }
