@@ -44,10 +44,7 @@ namespace TerraLibrary
         {
             AddHerbivore();
             AddHerbivore();
-            AddHerbivore();
-            AddHerbivore();
-            AddHerbivore();
-            AddHerbivore();
+
             //AddCarnivore();
             AddPlant();
             AddPlant();
@@ -81,6 +78,7 @@ namespace TerraLibrary
             // Display day
             Console.WriteLine("Day " + Day);
             Console.WriteLine("---------");
+            Console.WriteLine(Terrarium.Organisms.Count());
             // Display terrarium
             foreach (Organism organism in Terrarium.Organisms)
             {
@@ -89,7 +87,7 @@ namespace TerraLibrary
             Console.WriteLine(Terrarium.ToString());
         }
 
-        private void AddOrganism(char t)
+        /*private void AddOrganism(char t)
         {
             //Organism newOrganism = typeof();
             //// Check if there is space left in the terrarium
@@ -108,7 +106,7 @@ namespace TerraLibrary
             //            Terrarium.Organisms.Add(new Plant(randomPosition, Terrarium));
             //            break;
             //    }
-            }
+            }*/
 
         private void AddPlant()
         {
@@ -168,12 +166,15 @@ namespace TerraLibrary
                     //}
                 }
             }
-
-            // Remove all killed organisms from list
-            foreach(Organism organism in organismsToDelete)
+            if (organismsToDelete.Count > 0)
             {
-                Terrarium.Organisms.Remove(organism);
+                // Remove all killed organisms from list
+                foreach (Organism organism in organismsToDelete)
+                {
+                    Terrarium.Organisms.Remove(organism);
+                }
             }
+            
         }
     }
 }

@@ -102,7 +102,7 @@ namespace TerraLibrary
         {
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism.Position.X == Position.X && organism.Position.Y == Position.Y - 1)
+                if (organism.Position.X == Position.X && organism.Position.Y == Position.Y + 1)
                 {
                     return true;
                 }
