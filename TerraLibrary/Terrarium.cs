@@ -24,12 +24,21 @@ namespace TerraLibrary
         {
             // Creates array filled with dots
             string[,] terraArray = CreateEmptyTerrarium();
-            // Place letters in array
+            // Place organism letters in array
             foreach(Organism organism in Organisms)
             {
                 terraArray[organism.Position.X, organism.Position.Y] = organism.DisplayLetter.ToString();
             }
+            // Make new string
             StringBuilder s = new StringBuilder();
+
+            // Create new colors
+            ConsoleColor red = ConsoleColor.Red;
+            ConsoleColor blue = ConsoleColor.Blue;
+            ConsoleColor green = ConsoleColor.Green;
+            ConsoleColor brown = ConsoleColor.DarkYellow;
+
+            // Check every terrarium coordinate for a letter
             for (int y = 0; y < Height; y++)
             {
                 for (int x = 0; x < Width; x++)
