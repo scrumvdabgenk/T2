@@ -29,23 +29,43 @@ namespace TerraLibrary
 
                     case 1: // Move up
                         if (CheckAbove())
+                        {
                             Move(2); // Move right
-                        Position.Y -= 1;
+                        }
+                        else
+                        {
+                            Position.Y -= 1;
+                        }
                         break;
                     case 2:// Move right
                         if (CheckRightBool())
+                        {
                             Move(3); // Move down
-                        Position.X += 1;
+                        }
+                        else
+                        {
+                            Position.X += 1;
+                        }                       
                         break;
                     case 3: //Move down
                         if (CheckBelow())
+                        {
                             Move(4); //Move left
-                        Position.Y += 1;
+                        }
+                        else
+                        {
+                            Position.Y += 1;
+                        }
                         break;
                     case 4: //Move left
                         if (CheckLeft())
+                        {
                             Move(1); // Move up
-                        Position.X -= 1;
+                        }
+                        else
+                        {
+                            Position.X -= 1;
+                        }
                         break;
                     default:
                         break;
