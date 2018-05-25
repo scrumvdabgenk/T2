@@ -22,7 +22,37 @@ namespace TerraLibrary
         }
         public override string ToString()
         {
-            return base.ToString();
+            // Creates array filled with dots
+            char[,] terraArray = CreateEmptyTerrarium();
+            // Place letters in array
+            foreach(Organism organism in Organisms)
+            {
+                terraArray[organism.Position.X, organism.Position.Y] = organism.DisplayLetter;
+            }
+            StringBuilder s = new StringBuilder();
+            for (int y = 0; y < Height; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    s.Append(terraArray[x, y]);
+                    s.Append('\t');
+                }
+                s.Append('\n');
+            }
+            return s.ToString();
+
+        }
+        private char[,] CreateEmptyTerrarium ()
+        {
+            char[,] terraArray = new char[Width, Height];
+            for (int y = 0; y < Height; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    terraArray[x, y] = '.';
+                }
+            }
+            return terraArray;
         }
 
     }

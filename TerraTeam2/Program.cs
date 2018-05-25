@@ -12,7 +12,7 @@ namespace TerraTeam2
         static void Main(string[] args)
         {
             // Create new game controller with Terrarium
-            WorldController worldController = new WorldController(new Terrarium(2,2));
+            WorldController worldController = new WorldController(new Terrarium(3,3));
             worldController.Start();
         }
     }

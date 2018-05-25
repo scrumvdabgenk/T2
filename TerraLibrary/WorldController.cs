@@ -15,7 +15,7 @@ namespace TerraLibrary
         /* Constructor */
         public WorldController(Terrarium terrarium)
         {
-            Day = 0;
+            Day = 1;
             Terrarium = terrarium;
         }
 
@@ -27,13 +27,27 @@ namespace TerraLibrary
             Console.WriteLine("---------");
             Console.WriteLine("Press enter to show next day, 'stop' to quit.");
 
+            // Initial day (different from regular next day)
+            FirstDay();
+
             // Wait for input
             string input = Console.ReadLine();
-            while(input != "stop")
+            while (input != "stop" && IsEmptySpaceInTerrarium())
             {
                 NextDay();
                 input = Console.ReadLine();
             }
+            
+        }
+
+        private void FirstDay()
+        {
+            AddHerbivore();
+            AddCarnivore();
+            AddPlant();
+
+            // Print day in console
+            DisplayDay();
         }
 
         private void NextDay()
@@ -41,34 +55,89 @@ namespace TerraLibrary
             // Go to next day
             Day++;
 
-            // Add plant
+            // Add organisms
             AddPlant();
 
+            // For every organism, perform its actions
+            //OrganismActions();
+
+            // Print day console
+            DisplayDay();
+            
+        }
+
+        private void DisplayDay()
+        {
             // Display day
             Console.WriteLine("Day " + Day);
             Console.WriteLine("---------");
             // Display terrarium
-            foreach (Organism organism in Terrarium.Organisms)
-            {
-                Console.WriteLine(organism.Position.ToString());
-            }
+            //foreach (Organism organism in Terrarium.Organisms)
+            //{
+            //    Console.WriteLine(organism.Position.ToString());
+            //}
+            Console.WriteLine(Terrarium.ToString());
         }
 
-        private void AddPlant ()
+        private void AddPlant()
         {
             // Check if there is space left in the terrarium
-            if(Terrarium.Organisms.Count < (Terrarium.Width * Terrarium.Height))
+            if (IsEmptySpaceInTerrarium())
             {
                 // Add Plant
                 Terrarium.Organisms.Add(new Plant(GenerateRandomEmptyPosition(), Terrarium));
             }
-              
-            
+        }
+
+        private void AddHerbivore()
+        {
+            // Check if there is space left in the terrarium
+            if (IsEmptySpaceInTerrarium())
+            {
+                // Add Plant
+                Terrarium.Organisms.Add(new Herbivore(GenerateRandomEmptyPosition(), Terrarium));
+            }
+        }
+        private void AddCarnivore()
+        {
+            // Check if there is space left in the terrarium
+            if (IsEmptySpaceInTerrarium())
+            {
+                // Add Plant
+                Terrarium.Organisms.Add(new Carnivore(GenerateRandomEmptyPosition(), Terrarium));
+            }
+        }
+        private bool IsEmptySpaceInTerrarium ()
+        {
+            if (!(Terrarium.Organisms.Count < (Terrarium.Width * Terrarium.Height)))
+            {
+                Console.WriteLine("Field is full, exiting game");
+            }
+            return Terrarium.Organisms.Count < (Terrarium.Width * Terrarium.Height);
         }
 
         private void OrganismActions()
         {
-            throw new NotImplementedException();
+            //foreach(Organism organism in Terrarium.Organisms)
+            //{
+            //    if(organism is Herbivore)
+            //    {
+            //        Herbivore herbivore = organism as Herbivore;
+            //        Organism rightOrganism = herbivore.CheckRight();
+            //        if(rightOrganism == null)
+            //        {
+            //            herbivore.Move();
+            //        }
+            //        else if (rightOrganism is Plant)
+            //        {
+            //            herbivore.Eat(rightOrganism);
+            //        }
+            //        else if (rightOrganism is Herbivore)
+            //        {
+            //            herbivore.Breed(rightOrganism);
+            //        }
+            //    }
+            //}
         }
 
         private Position GenerateRandomEmptyPosition()
@@ -95,7 +164,7 @@ namespace TerraLibrary
                     }
                 }
             } while (!empty);
-            
+
             // Return position
             return pos;
         }
