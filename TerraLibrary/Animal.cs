@@ -18,7 +18,7 @@ namespace TerraLibrary
         /* Methods */
         public void Move()
         {
-            if (!CheckAll())
+            if (CheckAll())
             {
 
                 int randomGetal = random.Next(1, 5);
