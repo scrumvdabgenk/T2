@@ -46,10 +46,7 @@ namespace TerraLibrary
             AddHerbivore();
 
             //AddCarnivore();
-            AddPlant();
-            AddPlant();
-            AddPlant();
-            AddPlant();
+ 
             AddPlant();
             AddPlant();
 
