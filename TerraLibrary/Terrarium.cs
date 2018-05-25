@@ -23,11 +23,11 @@ namespace TerraLibrary
         public override string ToString()
         {
             // Creates array filled with dots
-            char[,] terraArray = CreateEmptyTerrarium();
+            string[,] terraArray = CreateEmptyTerrarium();
             // Place letters in array
             foreach(Organism organism in Organisms)
             {
-                terraArray[organism.Position.X, organism.Position.Y] = organism.DisplayLetter;
+                terraArray[organism.Position.X, organism.Position.Y] = organism.DisplayLetter.ToString();
             }
             StringBuilder s = new StringBuilder();
             for (int y = 0; y < Height; y++)
@@ -42,14 +42,14 @@ namespace TerraLibrary
             return s.ToString();
 
         }
-        private char[,] CreateEmptyTerrarium ()
+        private string[,] CreateEmptyTerrarium ()
         {
-            char[,] terraArray = new char[Width, Height];
+            string[,] terraArray = new string[Width, Height];
             for (int y = 0; y < Height; y++)
             {
                 for (int x = 0; x < Width; x++)
                 {
-                    terraArray[x, y] = '.';
+                    terraArray[x, y] = ".";
                 }
             }
             return terraArray;
