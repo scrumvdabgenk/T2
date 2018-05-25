@@ -43,8 +43,8 @@ namespace TerraLibrary
         private void FirstDay()
         {
             AddHerbivore();
-            AddCarnivore();
-            AddPlant();
+            //AddCarnivore();
+            //AddPlant();
 
             // Print day in console
             DisplayDay();
@@ -59,7 +59,7 @@ namespace TerraLibrary
             AddPlant();
 
             // For every organism, perform its actions
-            //OrganismActions();
+            OrganismActions();
 
             // Print day console
             DisplayDay();
@@ -72,12 +72,33 @@ namespace TerraLibrary
             Console.WriteLine("Day " + Day);
             Console.WriteLine("---------");
             // Display terrarium
-            //foreach (Organism organism in Terrarium.Organisms)
-            //{
-            //    Console.WriteLine(organism.Position.ToString());
-            //}
+            foreach (Organism organism in Terrarium.Organisms)
+            {
+                Console.WriteLine(organism.Position.ToString());
+            }
             Console.WriteLine(Terrarium.ToString());
         }
+
+        private void AddOrganism(char t)
+        {
+            //Organism newOrganism = typeof();
+            //// Check if there is space left in the terrarium
+            //if (IsEmptySpaceInTerrarium())
+            //{
+            //    var randomPosition = GenerateRandomEmptyPosition();
+            //    switch (t)
+            //    {
+            //        case 'P':
+            //            Terrarium.Organisms.Add(new Plant(randomPosition, Terrarium));
+            //            break;
+            //        case 'C':
+            //            Terrarium.Organisms.Add(new Carnivore(randomPosition, Terrarium));
+            //            break;
+            //        case 'H':
+            //            Terrarium.Organisms.Add(new Plant(randomPosition, Terrarium));
+            //            break;
+            //    }
+            }
 
         private void AddPlant()
         {
@@ -138,6 +159,15 @@ namespace TerraLibrary
             //        }
             //    }
             //}
+            foreach (Organism organism in Terrarium.Organisms)
+            {
+                if (organism is Herbivore)
+                {
+                    Herbivore herbivore = organism as Herbivore;
+                    herbivore.Move();
+                }
+            }
+
         }
 
         private Position GenerateRandomEmptyPosition()
