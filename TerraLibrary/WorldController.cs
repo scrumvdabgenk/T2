@@ -22,12 +22,7 @@ namespace TerraLibrary
         /* Methods */
         public void Start()
         {
-            // Print start instructions
-            Console.WriteLine("TERRARIUM");
-            Console.WriteLine("---------");
-            Console.WriteLine();
-            Console.WriteLine("Press enter to show next day, 'stop' to quit.");
-            Console.WriteLine();
+            
 
             // Initial day (different from regular next day)
             FirstDay();
@@ -80,6 +75,13 @@ namespace TerraLibrary
 
         private void DisplayDay()
         {
+            Console.Clear();
+            // Print instructions
+            Console.WriteLine("\n\tTERRARIUM");
+            //Console.WriteLine("\t---------");
+            Console.WriteLine("\tPress enter to show next day, type 'stop' to quit.");
+            Console.WriteLine();
+
             // Display day
             Console.WriteLine("Day " + Day);
             Console.WriteLine("---------");
