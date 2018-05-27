@@ -11,29 +11,26 @@ namespace TerraTeam2
     {
         static void Main(string[] args)
         {
-            // Create new game controller with Terrarium
-            Console.WriteLine(@"
-    ██████╗ ███████╗███╗   ███╗ ██████╗ 
-    ██╔══██╗██╔════╝████╗ ████║██╔═══██╗
-    ██║  ██║█████╗  ██╔████╔██║██║   ██║
-    ██║  ██║██╔══╝  ██║╚██╔╝██║██║   ██║
-    ██████╔╝███████╗██║ ╚═╝ ██║╚██████╔╝
-    ╚═════╝ ╚══════╝╚═╝     ╚═╝ ╚═════╝ 
-                                    ");
-            Console.WriteLine(@"
-  _______                             _                   
- |__   __|                           (_)                  
-    | |  ___  _ __  _ __  __ _  _ __  _  _   _  _ __ ___  
-    | | / _ \| '__|| '__|/ _` || '__|| || | | || '_ ` _ \ 
-    | ||  __/| |   | |  | (_| || |   | || |_| || | | | | |
-    |_| \___||_|   |_|   \__,_||_|   |_| \__,_||_| |_| |_|
-                                                          
-                                                          
-");
-            Console.WriteLine("By Dan, Davy, Marc & Jeff");
+
+
+            var splashScreen = new SplashScreen();
+            splashScreen.PrintTerra(5);
+            splashScreen.PrintDemo(14);
+            splashScreen.PrintCredits(24);
+
+
             Console.ReadLine();
             Console.Clear();
-            WorldController worldController = new WorldController(new Terrarium(6,6));
+
+
+
+
+
+
+
+
+
+            WorldController worldController = new WorldController(new Terrarium(12,12));
             worldController.Start();
         }
     }

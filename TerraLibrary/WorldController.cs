@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TerraLibrary
@@ -171,6 +172,8 @@ namespace TerraLibrary
                         herbivore.Breed(organismsToAdd);
                         // Console.WriteLine("Hebrivore breeds with Herbivore");
                     }
+                    DisplayDay();
+                    Thread.Sleep(500);
                 }
                 else if (organism is Carnivore)
                 {
@@ -194,7 +197,11 @@ namespace TerraLibrary
                     //    herbivore.Breed();
                     //    Console.WriteLine("Breed");
                     //}
+                    // Waits before next move
+                    DisplayDay();
+                    Thread.Sleep(500);
                 }
+                
             }
             if (organismsToDelete.Count > 0)
             {
