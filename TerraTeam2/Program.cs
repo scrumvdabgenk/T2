@@ -27,7 +27,7 @@ namespace TerraTeam2
 
             // Create new game (worldcontroller and its terrarium) (MAX WIDTH/HEIGHT = 20/20)
             WorldController worldController = new WorldController(
-                new Terrarium(8, 8),
+                new Terrarium(24, 16),
                 new TimeController()
                 );
             // Start the game

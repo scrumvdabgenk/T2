@@ -17,6 +17,7 @@ namespace TerraLibrary
         // Props
         public int Health { get; set; }
         public Position Position { get; set; }
+        public Position LastPosition { get; set; }
         public Terrarium Terrarium { get; set; }
         public string DisplayLetter { get; set; }
         public ConsoleColor DisplayColor { get; set; }
@@ -29,6 +30,7 @@ namespace TerraLibrary
             DisplayColor = Color;
             DisplayLetter = Letter;
             Health = 1;
+            LastPosition = new Position(Position.X, Position.Y);
         }
     }
 }

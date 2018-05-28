@@ -24,9 +24,9 @@ namespace TerraLibrary
         public void Start()
         {
             // Scale window size with Terrarium width and height
-            Console.SetWindowSize(Terrarium.Width * 4, Terrarium.Height * 4);
+            Console.SetWindowSize(Terrarium.Width, Terrarium.Height+5);
             // Set buffersize to remove scroll bars from window
-            Console.SetBufferSize(Terrarium.Width * 4, Terrarium.Height * 4);
+            Console.SetBufferSize(Terrarium.Width + 1, Terrarium.Height+5);
 
             // Initial day (different from regular next day)
             FirstDay();
@@ -55,17 +55,28 @@ namespace TerraLibrary
             AddCarnivore();
             AddCarnivore();
             AddCarnivore();
+            AddCarnivore();
+            AddCarnivore();
 
             AddHerbivore();
             AddHerbivore();
             AddHerbivore();
+            AddHerbivore();
+            AddHerbivore();
 
+            AddPlant();
+            AddPlant();
             AddPlant();
             AddPlant();
             AddPlant();
 
             // Print day in console
-            DisplayDay();
+            //DisplayDay();
+
+            // Clear the console
+            Console.Clear();
+            // Print the terrarium to the console using colors
+            Terrarium.CreateEmptyTerrarium();
 
             // Wait for input
             Console.Write("Press 'Enter' to start");
@@ -84,21 +95,10 @@ namespace TerraLibrary
             OrganismActions();
 
             // Print day console
-            DisplayDay();
-
+            // DisplayDay();
+            Terrarium.UpdateTerrarium();
         }
 
-        private void DisplayDay()
-        {
-            // Clear the console
-            Console.Clear();
-
-            // Prints header with instructions + day info
-            PrintInfoHeader();
-
-            // Print the terrarium to the console using colors
-            Terrarium.PrintTerrarium();
-        }
         private void PrintInfoHeader()
         {
             // Display day
@@ -165,7 +165,7 @@ namespace TerraLibrary
                             // Console.WriteLine("Hebrivore breeds with Herbivore");
                         }
                         // After action re-render terrarium
-                        DisplayDay();
+                        Terrarium.UpdateTerrarium();
                         // Wait before rendering next step
                         TimeController.Step();
                     }
@@ -187,7 +187,7 @@ namespace TerraLibrary
                             carnivore.Fight(organismRight, organismsToDelete);
                         }
                         // After action re-render terrarium
-                        DisplayDay();
+                        Terrarium.UpdateTerrarium();
                         // Wait before rendering next step
                         TimeController.Step();
                     }

@@ -11,6 +11,8 @@ namespace TerraLibrary
         /* Properties */
         int Health { get; set; }
         Position Position { get; set; }
+        Position LastPosition { get; set; }
+        
         Terrarium Terrarium { get; set; }
         string DisplayLetter { get; set; }
         ConsoleColor DisplayColor { get; set; }

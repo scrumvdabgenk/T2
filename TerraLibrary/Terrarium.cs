@@ -14,7 +14,7 @@ namespace TerraLibrary
         public int Width { get; set; }
 
         /* Constructor */
-        public Terrarium(int height, int width)
+        public Terrarium(int width, int height)
         {
             Height = height;
             Width = width;
@@ -23,72 +23,49 @@ namespace TerraLibrary
 
         /* Methods */
 
-        // Print the terrarium to console using colors
-        public void PrintTerrarium()
+        public void UpdateTerrarium ()
         {
-            // Creates array filled with dots
-            string[,] terraArray = CreateEmptyTerrarium();
-            // Place organism letters in array
             foreach (IOrganism organism in Organisms)
             {
-                terraArray[organism.Position.X, organism.Position.Y] = organism.DisplayLetter;
-            }
-
-            // Create new colors
-            ConsoleColor brown = ConsoleColor.DarkYellow;
-
-            // Check every terrarium coordinate for a letter
-            for (int y = 0; y < Height; y++)
-            {
-                for (int x = 0; x < Width; x++)
-                {
-                    Console.ResetColor();
-                    //Console.Write(".");
-                    if(terraArray[x,y] == Plant.Letter)
-                    {
-                        Console.ForegroundColor = Plant.Color;
-                    }
-                    else if (terraArray[x, y] == Herbivore.Letter)
-                    {
-                        Console.ForegroundColor = Herbivore.Color;
-                    }
-                    else if (terraArray[x, y] == Carnivore.Letter)
-                    {
-                        Console.ForegroundColor = Carnivore.Color;
-                    } else
-                    {
-                        Console.ForegroundColor = brown;
-                    }
-                    // (string format, string)
-                    Console.Write("{0, 1}", terraArray[x, y]);
-                }
-                Console.WriteLine();
                 
+                // Set previous position to ground tile
+                Console.SetCursorPosition(
+                    organism.LastPosition.X, organism.LastPosition.Y
+                    );
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write(StringManager.GetExtendedAsciiCodeAsString(176));
                 
-            }
-            // Reset colors to default
-            Console.ResetColor();
 
+                // Update current position
+                Console.SetCursorPosition(
+                    organism.Position.X,
+                    organism.Position.Y
+                    );
+                Console.ForegroundColor = organism.DisplayColor;
+                Console.Write(organism.DisplayLetter);
+
+            }
         }
 
-        // Create empty terrarium string filled with dots, for use in other methods
-        private string[,] CreateEmptyTerrarium ()
+        // Create empty terrarium string filled with ground
+        public void CreateEmptyTerrarium ()
         {
             // Create empty string array
-            string[,] terraArray = new string[Width, Height];
-            // Used to get Extended Ascii characters
-            Encoding cp437 = Encoding.GetEncoding(437);
+            StringBuilder s = new StringBuilder();
 
             for (int y = 0; y < Height; y++)
             {
                 for (int x = 0; x < Width; x++)
                 {
-                    // Fill array with ground tile ascii character (code 176)
-                    terraArray[x, y] = StringManager.GetExtendedAsciiCodeAsString(176);
+                    // Fill string with ground tile ascii character (code 176)
+                    s.Append(StringManager.GetExtendedAsciiCodeAsString(176));
                 }
+                s.Append('\n');
             }
-            // Return string filled with empty tiles
-            return terraArray;
+            // Set color of ground
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            // Print the terrarium
+            Console.WriteLine(s.ToString());
         }
 
         // Check if there is any space left in the terrarium

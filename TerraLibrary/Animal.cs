@@ -12,6 +12,7 @@ namespace TerraLibrary
         /* Properties */
         public int Health { get; set; }
         public Position Position { get; set; }
+        public Position LastPosition { get; set; }
         public Terrarium Terrarium { get; set; }
         public string DisplayLetter { get; set; }
         public ConsoleColor DisplayColor { get; set; }
@@ -24,6 +25,7 @@ namespace TerraLibrary
         {
             Position = position;
             Terrarium = terrarium;
+            LastPosition = new Position(Position.X, Position.Y);
         }
 
         /* Methods */
@@ -54,6 +56,10 @@ namespace TerraLibrary
         }
         public void Move(int direction)
         {
+            // Save previous position before updating (for rendering the terrarium)
+            LastPosition.X = Position.X;
+            LastPosition.Y = Position.Y;
+
             switch (direction)
             {
 

@@ -17,7 +17,6 @@ namespace TerraLibrary
             DisplayColor = Color;
             DisplayLetter = Letter;
             Health = 0;
-            
         }
         public void Breed(List<IOrganism> toAdd)
         {

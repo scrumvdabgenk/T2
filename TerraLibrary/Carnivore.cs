@@ -11,6 +11,7 @@ namespace TerraLibrary
         public static string Letter = StringManager.GetExtendedAsciiCodeAsString(206);
         public static ConsoleColor Color = ConsoleColor.Red;
 
+
         /* Constructor */
         public Carnivore(Position position, Terrarium terrarium)
             :base(position, terrarium)
