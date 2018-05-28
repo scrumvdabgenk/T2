@@ -14,6 +14,7 @@ namespace TerraLibrary
         public TimeController(int day = 1)
         {
             Day = day;
+            // Timeout for each step in ms
             StepTimeout = 200;
         }
 

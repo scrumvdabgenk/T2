@@ -24,12 +24,14 @@ namespace TerraLibrary
         public void Start()
         {
             // Scale window size with Terrarium width and height
-            Console.SetWindowSize(Terrarium.Width * 4, Terrarium.Height * 3);
+            Console.SetWindowSize(Terrarium.Width * 4, Terrarium.Height * 4);
             // Set buffersize to remove scroll bars from window
-            Console.SetBufferSize(Terrarium.Width * 4, Terrarium.Height * 3);
+            Console.SetBufferSize(Terrarium.Width * 4, Terrarium.Height * 4);
+
             // Initial day (different from regular next day)
             FirstDay();
             TimeController.Step();
+
             // Game loop (user presses enter to see terrarium)
             GameLoop();
 
@@ -135,11 +137,11 @@ namespace TerraLibrary
         private void OrganismActions()
         {
             // List to save organisms to delete later (cannot modify list while looping through)
-            List<Organism> organismsToDelete = new List<Organism>();
-            List<Organism> organismsToAdd = new List<Organism>();
+            List<IOrganism> organismsToDelete = new List<IOrganism>();
+            List<IOrganism> organismsToAdd = new List<IOrganism>();
 
             // Go through the list of all organisms
-            foreach (Organism organism in Terrarium.Organisms)
+            foreach (IOrganism organism in Terrarium.Organisms)
             {
                 // Only perform organisms action if it is not going to be deleted
                 if(!organismsToDelete.Contains(organism))
@@ -147,7 +149,7 @@ namespace TerraLibrary
                     if (organism is Herbivore)
                     {
                         Herbivore herbivore = organism as Herbivore;
-                        Organism organismRight = herbivore.CheckRight();
+                        IOrganism organismRight = herbivore.CheckRight();
                         if (organismRight == null)
                         {
                             herbivore.Move();
@@ -170,7 +172,7 @@ namespace TerraLibrary
                     else if (organism is Carnivore)
                     {
                         Carnivore carnivore = organism as Carnivore;
-                        Organism organismRight = carnivore.CheckRight();
+                        IOrganism organismRight = carnivore.CheckRight();
                         if (organismRight == null || organismRight is Plant)
                         {
                             carnivore.Move();
@@ -196,7 +198,7 @@ namespace TerraLibrary
             if (organismsToDelete.Count > 0)
             {
                 // Remove all killed organisms from list
-                foreach (Organism organism in organismsToDelete)
+                foreach (IOrganism organism in organismsToDelete)
                 {
                     Terrarium.Organisms.Remove(organism);
                 }
@@ -205,7 +207,7 @@ namespace TerraLibrary
             if (organismsToAdd.Count > 0)
             {
                 // Add organisms to terrarium
-                foreach (Organism organism in organismsToAdd)
+                foreach (IOrganism organism in organismsToAdd)
                 {
                     if (Terrarium.IsEmptySpaceInTerrarium())
                     {

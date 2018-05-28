@@ -9,7 +9,7 @@ namespace TerraLibrary
     public class Terrarium
     {
         /* Properties */
-        public List<Organism> Organisms { get; set; }
+        public List<IOrganism> Organisms { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
 
@@ -18,35 +18,10 @@ namespace TerraLibrary
         {
             Height = height;
             Width = width;
-            Organisms = new List<Organism>();
+            Organisms = new List<IOrganism>();
         }
 
         /* Methods */
-        // Returns the terrarium as a string
-        /* public override string ToString()
-        {
-            // Creates array filled with dots
-            string[,] terraArray = CreateEmptyTerrarium();
-            // Place organism letters in array
-            foreach(Organism organism in Organisms)
-            {
-                terraArray[organism.Position.X, organism.Position.Y] = organism.DisplayLetter.ToString();
-            }
-            // Make new string
-            StringBuilder s = new StringBuilder();
-
-            // Check every terrarium coordinate for a letter
-            for (int y = 0; y < Height; y++)
-            {
-                for (int x = 0; x < Width; x++)
-                {
-                    s.Append(terraArray[x, y]);
-                    s.Append('\t');
-                }
-                s.Append('\n');
-            }
-            return s.ToString();
-        } */
 
         // Print the terrarium to console using colors
         public void PrintTerrarium()
@@ -54,15 +29,12 @@ namespace TerraLibrary
             // Creates array filled with dots
             string[,] terraArray = CreateEmptyTerrarium();
             // Place organism letters in array
-            foreach (Organism organism in Organisms)
+            foreach (IOrganism organism in Organisms)
             {
                 terraArray[organism.Position.X, organism.Position.Y] = organism.DisplayLetter;
             }
 
             // Create new colors
-            ConsoleColor red = ConsoleColor.Red;
-            ConsoleColor blue = ConsoleColor.Cyan;
-            ConsoleColor green = ConsoleColor.Green;
             ConsoleColor brown = ConsoleColor.DarkYellow;
 
             // Check every terrarium coordinate for a letter
@@ -74,24 +46,24 @@ namespace TerraLibrary
                     //Console.Write(".");
                     if(terraArray[x,y] == Plant.Letter)
                     {
-                        Console.ForegroundColor = green;
+                        Console.ForegroundColor = Plant.Color;
                     }
                     else if (terraArray[x, y] == Herbivore.Letter)
                     {
-                        Console.ForegroundColor = blue;
+                        Console.ForegroundColor = Herbivore.Color;
                     }
                     else if (terraArray[x, y] == Carnivore.Letter)
                     {
-                        Console.ForegroundColor = red;
+                        Console.ForegroundColor = Carnivore.Color;
                     } else
                     {
                         Console.ForegroundColor = brown;
                     }
-                    
-                    Console.Write("{0, 3}", terraArray[x, y]);
+                    // (string format, string)
+                    Console.Write("{0, 1}", terraArray[x, y]);
                 }
                 Console.WriteLine();
-                Console.WriteLine();
+                
                 
             }
             // Reset colors to default

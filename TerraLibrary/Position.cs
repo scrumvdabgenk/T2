@@ -38,7 +38,7 @@ namespace TerraLibrary
                 // Generate random position
                 pos = new Position(random.Next(0, terrarium.Width), random.Next(0, terrarium.Height));
                 // Check if position already exists, if so set fals to empty
-                foreach (Organism organism in terrarium.Organisms)
+                foreach (IOrganism organism in terrarium.Organisms)
                 {
                     if (organism.Position.X == pos.X && organism.Position.Y == pos.Y)
                     {
