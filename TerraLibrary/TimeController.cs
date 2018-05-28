@@ -15,7 +15,7 @@ namespace TerraLibrary
         {
             Day = day;
             // Timeout for each step in ms
-            StepTimeout = 200;
+            StepTimeout = 50;
         }
 
         public void Step ()

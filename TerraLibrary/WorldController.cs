@@ -52,23 +52,18 @@ namespace TerraLibrary
         private void FirstDay()
         {
             // Add Organisms to List
-            AddCarnivore();
-            AddCarnivore();
-            AddCarnivore();
-            AddCarnivore();
-            AddCarnivore();
-
-            AddHerbivore();
-            AddHerbivore();
-            AddHerbivore();
-            AddHerbivore();
-            AddHerbivore();
-
-            AddPlant();
-            AddPlant();
-            AddPlant();
-            AddPlant();
-            AddPlant();
+            for (int i = 0; i < 10; i++)
+            {
+                AddCarnivore();
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                AddHerbivore();
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                AddPlant();
+            }
 
             // Print day in console
             //DisplayDay();
@@ -77,16 +72,28 @@ namespace TerraLibrary
             Console.Clear();
             // Print the terrarium to the console using colors
             Terrarium.CreateEmptyTerrarium();
+            Terrarium.UpdateTerrarium();
 
             // Wait for input
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(0, Terrarium.Height + 3);
             Console.Write("Press 'Enter' to start");
+
+            Console.SetCursorPosition(0, Terrarium.Height + 2);
+            Console.Write("Day " + TimeController.Day);
+
             string input = Console.ReadLine();
+            Console.SetCursorPosition(0, Terrarium.Height + 3);
+            Console.WriteLine("                       ");
+
         }
 
         private void NextDay()
         {
-            // Go to next day
-            TimeController.Day++;
+            // Go to next day and print in console
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(4, Terrarium.Height + 2);
+            Console.Write(++TimeController.Day);
 
             // Add organisms
             AddPlant();
@@ -94,8 +101,7 @@ namespace TerraLibrary
             // For every organism, perform its actions
             OrganismActions();
 
-            // Print day console
-            // DisplayDay();
+            // Print Terrarium to console
             Terrarium.UpdateTerrarium();
         }
 
