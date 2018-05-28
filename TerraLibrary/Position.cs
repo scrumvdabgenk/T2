@@ -50,5 +50,10 @@ namespace TerraLibrary
             // Return position
             return pos;
         }
+        public override bool Equals(object obj)
+        {
+            Position temp = (Position)obj;
+            return  temp.X==X&&temp.Y==Y;
+        }
     }
 }
