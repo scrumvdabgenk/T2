@@ -13,11 +13,6 @@ namespace TerraLibraryTests
         {
             testTerrarium = new Terrarium(6, 6);
         }
-        [TestMethod]
-        public void FindRandomEmptyCellInTerrarium()
-        {
-            testTerrarium.IsEmptySpaceInTerrarium();
-            Assert.
-        }
+     
     }
 }
