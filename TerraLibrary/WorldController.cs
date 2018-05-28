@@ -11,13 +11,13 @@ namespace TerraLibrary
     {
         /* Properties*/
         public Terrarium Terrarium { get; set; }
-        public int Day { get; set; }
+        public TimeController TimeController { get; set; }
 
         /* Constructor */
-        public WorldController(Terrarium terrarium)
+        public WorldController(Terrarium terrarium, TimeController timeController)
         {
-            Day = 1;
             Terrarium = terrarium;
+            TimeController = timeController;
         }
 
         /* Methods */
@@ -29,7 +29,7 @@ namespace TerraLibrary
             Console.SetBufferSize(Terrarium.Width * 4, Terrarium.Height * 3);
             // Initial day (different from regular next day)
             FirstDay();
-
+            TimeController.Step();
             // Game loop (user presses enter to see terrarium)
             GameLoop();
 
@@ -39,28 +39,24 @@ namespace TerraLibrary
 
         private void GameLoop()
         {
-            // Wait for input
-            string input = Console.ReadLine();
-
             // Go to next day if user input != stop and there is space left in the terrarium
-            while (input != "stop" && Terrarium.IsEmptySpaceInTerrarium())
+            while (Terrarium.IsEmptySpaceInTerrarium())
             {
                 NextDay();
-                // Wait for new user input
-                input = Console.ReadLine();
+                TimeController.Step();
             }
         }
 
         private void FirstDay()
         {
             // Add Organisms to List
-            AddHerbivore();
-            AddHerbivore();
-            AddHerbivore();
+            AddCarnivore();
+            AddCarnivore();
+            AddCarnivore();
 
-            AddCarnivore();
-            AddCarnivore();
-            AddCarnivore();
+            AddHerbivore();
+            AddHerbivore();
+            AddHerbivore();
 
             AddPlant();
             AddPlant();
@@ -68,12 +64,16 @@ namespace TerraLibrary
 
             // Print day in console
             DisplayDay();
+
+            // Wait for input
+            Console.Write("Press 'Enter' to start");
+            string input = Console.ReadLine();
         }
 
         private void NextDay()
         {
             // Go to next day
-            Day++;
+            TimeController.Day++;
 
             // Add organisms
             AddPlant();
@@ -99,14 +99,9 @@ namespace TerraLibrary
         }
         private void PrintInfoHeader()
         {
-            // Print instructions
-            //Console.WriteLine("\n\tTERRARIUM");
-            //Console.WriteLine("\tPress enter to show next day, type 'stop' to quit.");
-            //Console.WriteLine();
-
             // Display day
             Console.WriteLine();
-            Console.WriteLine("\tDay " + Day);
+            Console.WriteLine("\tDay " + TimeController.Day);
             Console.WriteLine();
         }
 
@@ -146,48 +141,56 @@ namespace TerraLibrary
             // Go through the list of all organisms
             foreach (Organism organism in Terrarium.Organisms)
             {
-                if (organism is Herbivore)
+                // Only perform organisms action if it is not going to be deleted
+                if(!organismsToDelete.Contains(organism))
                 {
-                    Herbivore herbivore = organism as Herbivore;
-                    Organism organismRight = herbivore.CheckRight();
-                    if (organismRight == null)
+                    if (organism is Herbivore)
                     {
-                        herbivore.Move();
+                        Herbivore herbivore = organism as Herbivore;
+                        Organism organismRight = herbivore.CheckRight();
+                        if (organismRight == null)
+                        {
+                            herbivore.Move();
+                        }
+                        else if (organismRight is Plant)
+                        {
+                            herbivore.Eat(organismRight, organismsToDelete);
+                            //Console.WriteLine("Herbivore ate Plant");
+                        }
+                        else if (organismRight is Herbivore)
+                        {
+                            herbivore.Breed(organismsToAdd);
+                            // Console.WriteLine("Hebrivore breeds with Herbivore");
+                        }
+                        // After action re-render terrarium
+                        DisplayDay();
+                        // Wait before rendering next step
+                        TimeController.Step();
                     }
-                    else if (organismRight is Plant)
+                    else if (organism is Carnivore)
                     {
-                        herbivore.Eat(organismRight, organismsToDelete);
-                        //Console.WriteLine("Herbivore ate Plant");
+                        Carnivore carnivore = organism as Carnivore;
+                        Organism organismRight = carnivore.CheckRight();
+                        if (organismRight == null || organismRight is Plant)
+                        {
+                            carnivore.Move();
+                        }
+                        else if (organismRight is Herbivore)
+                        {
+                            carnivore.Eat(organismRight, organismsToDelete);
+                            //Console.WriteLine("Carnivore ate Herbivore");
+                        }
+                        else if (organismRight is Carnivore)
+                        {
+                            carnivore.Fight(organismRight, organismsToDelete);
+                        }
+                        // After action re-render terrarium
+                        DisplayDay();
+                        // Wait before rendering next step
+                        TimeController.Step();
                     }
-                    else if (organismRight is Herbivore)
-                    {
-                        herbivore.Breed(organismsToAdd);
-                        // Console.WriteLine("Hebrivore breeds with Herbivore");
-                    }
-                    // After action re-render terrarium and wait x ms before
-                    DisplayDay();
-                    Thread.Sleep(200);
                 }
-                else if (organism is Carnivore)
-                {
-                    Carnivore carnivore = organism as Carnivore;
-                    Organism organismRight = carnivore.CheckRight();
-                    if (organismRight == null || organismRight is Plant)
-                    {
-                        carnivore.Move();
-                    }
-                    else if (organismRight is Herbivore)
-                    {
-                        carnivore.Eat(organismRight, organismsToDelete);
-                        //Console.WriteLine("Carnivore ate Herbivore");
-                    }
-                    else if (organismRight is Carnivore)
-                    {
-                        carnivore.Fight(organismRight, organismsToDelete);
-                    }
-                    DisplayDay();
-                    Thread.Sleep(200);
-                }
+                
             }
             // If there are organisms to delete
             if (organismsToDelete.Count > 0)

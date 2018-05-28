@@ -45,6 +45,7 @@
     <Compile Include="Organism.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="StringManager.cs" />
+    <Compile Include="TimeController.cs" />
     <Compile Include="WorldController.cs" />
     <Compile Include="Herbivore.cs" />
     <Compile Include="Plant.cs" />
