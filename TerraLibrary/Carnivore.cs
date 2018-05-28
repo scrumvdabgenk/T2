@@ -8,12 +8,12 @@ namespace TerraLibrary
 {
     public class Carnivore : Animal
     {
-
+        public static string Letter = StringManager.GetExtendedAsciiCodeAsString(206);
         /* Constructor */
         public Carnivore(Position position, Terrarium terrarium)
             :base(position, terrarium)
         {
-            DisplayLetter = 'C';
+            DisplayLetter = Letter;
             Health = 0;
         }
         public void Fight(Organism organism, List<Organism> toDelete)
