@@ -55,6 +55,8 @@
     <Compile Include="HerbivoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CarnivoreTests.cs" />
+    <Compile Include="PlantTests.cs" />
+    <Compile Include="TerrariumTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TerraLibrary\TerraLibrary.csproj">
