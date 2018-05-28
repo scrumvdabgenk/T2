@@ -115,6 +115,33 @@ namespace TerraLibraryTests
             Assert.AreEqual(2, testCarnivore2.Health);
             Assert.AreEqual(0,toDelete.Count);
         }
-
+        [TestMethod]
+        public void CanivoreFightStrongMan()
+        {
+            toDelete.Clear();
+            Position carnivorePosition = new Position(1, 1);
+            Position manPosition = new Position(2, 1);
+            Carnivore carnivore = new Carnivore(carnivorePosition, BeginTerrarium);
+            Mens man = new Mens(manPosition, BeginTerrarium);
+            man.Health = 2;
+            carnivore.Health = 1;
+            carnivore.Fight(man, toDelete);
+            Assert.AreEqual(3, man.Health);
+            Assert.IsTrue(toDelete.Contains(carnivore));
+        }
+        [TestMethod]
+        public void CanivoreFightWeakMan()
+        {
+            toDelete.Clear();
+            Position carnivorePosition = new Position(1, 1);
+            Position manPosition = new Position(2, 1);
+            Carnivore carnivore = new Carnivore(carnivorePosition, BeginTerrarium);
+            Mens man = new Mens(manPosition, BeginTerrarium);
+            man.Health = 1;
+            carnivore.Health = 2;
+            carnivore.Fight(man, toDelete);
+            Assert.AreEqual(3, carnivore.Health);
+            Assert.IsTrue(toDelete.Contains(man));
+        }
     }
 }
