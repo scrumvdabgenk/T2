@@ -11,26 +11,23 @@ namespace TerraTeam2
     {
         static void Main(string[] args)
         {
-
-
+            // Splash screen
             var splashScreen = new SplashScreen();
+            // Print "Terrarium" at line 5
             splashScreen.PrintTerra(5);
+            // Print "Demo" at line 14
             splashScreen.PrintDemo(14);
+            // Print credits at line 24
             splashScreen.PrintCredits(24);
 
-
+            // Press Enter to continue
             Console.ReadLine();
+            // Clear console to begin game
             Console.Clear();
 
-
-
-
-
-
-
-
-
-            WorldController worldController = new WorldController(new Terrarium(12,12));
+            // Create new game (worldcontroller and its terrarium) (MAX WIDTH/HEIGHT = 20/20)
+            WorldController worldController = new WorldController(new Terrarium(8,8));
+            // Start the game
             worldController.Start();
         }
     }

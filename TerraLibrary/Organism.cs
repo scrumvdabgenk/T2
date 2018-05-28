@@ -13,7 +13,7 @@ namespace TerraLibrary
         public int Health { get; set; }
         public Position Position { get; set; }
         public Terrarium Terrarium { get; set; }
-        public char DisplayLetter { get; set; }
+        public string DisplayLetter { get; set; }
         
         /* Constructor */
         public Organism (Position position, Terrarium terrarium)

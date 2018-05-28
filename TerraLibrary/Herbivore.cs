@@ -8,11 +8,12 @@ namespace TerraLibrary
 {
     public class Herbivore : Animal
     {
+        public static string Letter = StringManager.GetExtendedAsciiCodeAsString(20);
         /* Constructor */
         public Herbivore (Position position, Terrarium terrarium)
             :base(position, terrarium)
         {
-            DisplayLetter = 'H';
+            DisplayLetter = Letter;
             Health = 0;
         }
         public void Breed(List<Organism> toAdd)

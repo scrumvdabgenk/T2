@@ -20,7 +20,10 @@ namespace TerraLibrary
             Width = width;
             Organisms = new List<Organism>();
         }
-        public override string ToString()
+
+        /* Methods */
+        // Returns the terrarium as a string
+        /* public override string ToString()
         {
             // Creates array filled with dots
             string[,] terraArray = CreateEmptyTerrarium();
@@ -31,12 +34,6 @@ namespace TerraLibrary
             }
             // Make new string
             StringBuilder s = new StringBuilder();
-
-            // Create new colors
-            ConsoleColor red = ConsoleColor.Red;
-            ConsoleColor blue = ConsoleColor.Blue;
-            ConsoleColor green = ConsoleColor.Green;
-            ConsoleColor brown = ConsoleColor.DarkYellow;
 
             // Check every terrarium coordinate for a letter
             for (int y = 0; y < Height; y++)
@@ -49,26 +46,85 @@ namespace TerraLibrary
                 s.Append('\n');
             }
             return s.ToString();
+        } */
 
-        }
-        private string[,] CreateEmptyTerrarium ()
+        // Print the terrarium to console using colors
+        public void PrintTerrarium()
         {
-            string[,] terraArray = new string[Width, Height];
+            // Creates array filled with dots
+            string[,] terraArray = CreateEmptyTerrarium();
+            // Place organism letters in array
+            foreach (Organism organism in Organisms)
+            {
+                terraArray[organism.Position.X, organism.Position.Y] = organism.DisplayLetter;
+            }
+
+            // Create new colors
+            ConsoleColor red = ConsoleColor.Red;
+            ConsoleColor blue = ConsoleColor.Cyan;
+            ConsoleColor green = ConsoleColor.Green;
+            ConsoleColor brown = ConsoleColor.DarkYellow;
+
+            // Check every terrarium coordinate for a letter
             for (int y = 0; y < Height; y++)
             {
                 for (int x = 0; x < Width; x++)
                 {
-                    terraArray[x, y] = ".";
+                    Console.ResetColor();
+                    //Console.Write(".");
+                    if(terraArray[x,y] == Plant.Letter)
+                    {
+                        Console.ForegroundColor = green;
+                    }
+                    else if (terraArray[x, y] == Herbivore.Letter)
+                    {
+                        Console.ForegroundColor = blue;
+                    }
+                    else if (terraArray[x, y] == Carnivore.Letter)
+                    {
+                        Console.ForegroundColor = red;
+                    } else
+                    {
+                        Console.ForegroundColor = brown;
+                    }
+                    
+                    Console.Write("{0, 3}", terraArray[x, y]);
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+                
+            }
+            // Reset colors to default
+            Console.ResetColor();
+
+        }
+
+        // Create empty terrarium string filled with dots, for use in other methods
+        private string[,] CreateEmptyTerrarium ()
+        {
+            // Create empty string array
+            string[,] terraArray = new string[Width, Height];
+            // Used to get Extended Ascii characters
+            Encoding cp437 = Encoding.GetEncoding(437);
+
+            for (int y = 0; y < Height; y++)
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    // Fill array with ground tile ascii character (code 176)
+                    terraArray[x, y] = StringManager.GetExtendedAsciiCodeAsString(176);
                 }
             }
+            // Return string filled with empty tiles
             return terraArray;
         }
 
+        // Check if there is any space left in the terrarium
         public bool IsEmptySpaceInTerrarium()
         {
             if (!(Organisms.Count < (Width * Height)))
             {
-                Console.WriteLine("Field is full, exiting game");
+                Console.WriteLine("Field is full");
             }
             return Organisms.Count < (Width * Height);
         }
