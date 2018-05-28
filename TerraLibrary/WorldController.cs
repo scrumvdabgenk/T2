@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TerraLibrary
@@ -22,10 +23,7 @@ namespace TerraLibrary
         /* Methods */
         public void Start()
         {
-            // Print start instructions
-            Console.WriteLine("TERRARIUM");
-            Console.WriteLine("---------");
-            Console.WriteLine("Press enter to show next day, 'stop' to quit.");
+            
 
             // Initial day (different from regular next day)
             FirstDay();
@@ -37,17 +35,22 @@ namespace TerraLibrary
                 NextDay();
                 input = Console.ReadLine();
             }
-            
+
         }
 
         private void FirstDay()
         {
             AddHerbivore();
             AddHerbivore();
+            AddHerbivore();
+
+            AddCarnivore();
+            AddCarnivore();
+            AddCarnivore();
 
             //AddCarnivore();
- 
 
+            AddPlant();
             AddPlant();
             AddPlant();
 
@@ -68,23 +71,31 @@ namespace TerraLibrary
 
             // Print day console
             DisplayDay();
-            
+
         }
 
         private void DisplayDay()
         {
+            Console.Clear();
+            // Print instructions
+            Console.WriteLine("\n\tTERRARIUM");
+            //Console.WriteLine("\t---------");
+            Console.WriteLine("\tPress enter to show next day, type 'stop' to quit.");
+            Console.WriteLine();
+
             // Display day
             Console.WriteLine("Day " + Day);
             Console.WriteLine("---------");
-            // Display terrarium
-            foreach (Organism organism in Terrarium.Organisms)
-            {
-                Console.WriteLine(organism.DisplayLetter + " - " + organism.Position.ToString());
-            }
+            //Console.WriteLine(Terrarium.Organisms.Count());
+            //// Display terrarium
+            //foreach (Organism organism in Terrarium.Organisms)
+            //{
+            //    Console.WriteLine(organism.DisplayLetter + " - " + organism.Position.ToString());
+            //}
             Console.WriteLine(Terrarium.ToString());
         }
 
-        private void AddOrganism(char t)
+        /*private void AddOrganism(char t)
         {
             //Organism newOrganism = typeof();
             //// Check if there is space left in the terrarium
@@ -103,7 +114,7 @@ namespace TerraLibrary
             //            Terrarium.Organisms.Add(new Plant(randomPosition, Terrarium));
             //            break;
             //    }
-            }
+            }*/
 
         private void AddPlant()
         {
@@ -133,7 +144,7 @@ namespace TerraLibrary
                 Terrarium.Organisms.Add(new Carnivore(Position.GenerateRandomEmptyPosition(Terrarium), Terrarium));
             }
         }
-        
+
 
         private void OrganismActions()
         {
@@ -154,21 +165,68 @@ namespace TerraLibrary
                     else if (organismRight is Plant)
                     {
                         herbivore.Eat(organismRight, organismsToDelete);
-                        Console.WriteLine("eat");
+                        //Console.WriteLine("Herbivore ate Plant");
+                    }
+                    else if (organismRight is Herbivore)
+                    {
+                        herbivore.Breed(organismsToAdd);
+                        // Console.WriteLine("Hebrivore breeds with Herbivore");
+                    }
+                    DisplayDay();
+                    Thread.Sleep(500);
+                }
+                else if (organism is Carnivore)
+                {
+                    Carnivore carnivore = organism as Carnivore;
+                    Organism organismRight = carnivore.CheckRight();
+                    if (organismRight == null || organismRight is Plant)
+                    {
+                        carnivore.Move();
+                    }
+                    else if (organismRight is Herbivore)
+                    {
+                        carnivore.Eat(organismRight, organismsToDelete);
+                        //Console.WriteLine("Carnivore ate Herbivore");
+                    }
+                    else if (organismRight is Carnivore)
+                    {
+                        carnivore.Fight(organismRight, organismsToDelete);
                     }
                     //else if (organismRight is Herbivore)
                     //{
                     //    herbivore.Breed();
                     //    Console.WriteLine("Breed");
                     //}
+                    // Waits before next move
+                    DisplayDay();
+                    Thread.Sleep(500);
+                }
+                
+            }
+            if (organismsToDelete.Count > 0)
+            {
+                // Remove all killed organisms from list
+                foreach (Organism organism in organismsToDelete)
+                {
+                    Terrarium.Organisms.Remove(organism);
+                }
+            }
+            if (organismsToAdd.Count > 0)
+            {
+                // Remove all killed organisms from list
+                foreach (Organism organism in organismsToAdd)
+                {
+                    if (Terrarium.IsEmptySpaceInTerrarium())
+                    {
+                        Terrarium.Organisms.Add(organism);
+                    }
+                    else
+                    {
+                        //Console.WriteLine("No space to breed");
+                    }
                 }
             }
 
-            // Remove all killed organisms from list
-            foreach(Organism organism in organismsToDelete)
-            {
-                Terrarium.Organisms.Remove(organism);
-            }
         }
     }
 }

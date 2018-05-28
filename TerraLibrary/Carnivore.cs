@@ -16,9 +16,26 @@ namespace TerraLibrary
             DisplayLetter = 'C';
             Health = 0;
         }
-        private void Fight ()
+        public void Fight(Organism organism, List<Organism> toDelete)
         {
-            throw new NotImplementedException();
+            //Console.WriteLine("Carnivore fought with Carnivore");
+            if(organism.Health > Health)
+            {
+                toDelete.Add(this);
+                organism.Health += Health;
+                //Console.WriteLine("Defender won");
+            }
+            else if (organism.Health < Health)
+            {
+                toDelete.Add(organism);
+                Health += organism.Health;
+                Move(2);
+                //Console.WriteLine("Attacker won");
+            }
+            else
+            {
+                //Console.WriteLine("No one won");
+            }
         }
     }
 }
