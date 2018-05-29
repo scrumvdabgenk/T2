@@ -15,10 +15,8 @@ namespace TerraLibrary
             Position = position;
         }
 
-        public void ActivateAndKillOrganisms(Terrarium terrarium)
+        public void ActivateAndKillOrganisms(Terrarium terrarium, TimeController timeController)
         {
-            
-
             List<IOrganism> organismsToDelete = new List<IOrganism>();
 
             string vulcChar = StringManager.GetExtendedAsciiCodeAsString(176);
@@ -37,6 +35,7 @@ namespace TerraLibrary
                         Console.Write(vulcChar);
                     }
                 }
+                timeController.Step(50);
             }
 
             foreach (IOrganism organism in terrarium.Organisms)

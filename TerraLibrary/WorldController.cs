@@ -121,7 +121,7 @@ namespace TerraLibrary
         private void SpawnVulcano ()
         {
             Vulcano vulcano = new Vulcano(Position.GenerateRandomEmptyPosition(Terrarium));
-            vulcano.ActivateAndKillOrganisms(Terrarium);
+            vulcano.ActivateAndKillOrganisms(Terrarium, TimeController);
         }
 
         private void ClearLines()

@@ -45,6 +45,11 @@ namespace TerraLibrary
             Thread.Sleep(StepTimeout);
         }
 
+        public void Step(int ms)
+        {
+            Thread.Sleep(ms);
+        }
+
         public void ChangeTimeStep()
         {
             if (Day <= -1000000)
