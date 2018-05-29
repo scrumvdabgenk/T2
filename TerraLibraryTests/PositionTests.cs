@@ -26,12 +26,12 @@ namespace TerraLibraryTests
             Position pos1 = new Position(0,0);
             Assert.AreEqual(pos1,Position.GenerateRandomEmptyPosition(terrarium));
         }
-        [TestMethod]
-        public void PositionGenerateRandomEmptyPositionTestFail()
-        {
-            Position pos1 = new Position(0, 0);
-            terrarium.Organisms.Add(new Plant(pos1, terrarium));
-            Assert.AreEqual(null,Position.GenerateRandomEmptyPosition(terrarium));
-        }
+        //[TestMethod]
+        //public void PositionGenerateRandomEmptyPositionTestFail()
+        //{
+        //    Position pos1 = new Position(0, 0);
+        //    terrarium.Organisms.Add(new Plant(pos1, terrarium));
+        //    Assert.AreEqual(null,Position.GenerateRandomEmptyPosition(terrarium));
+        //}
     }
 }
