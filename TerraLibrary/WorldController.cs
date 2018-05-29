@@ -36,7 +36,9 @@ namespace TerraLibrary
             GameLoop();
 
             // Close game
+            Terrarium.RenderAnimals();
             Console.SetCursorPosition(0, Terrarium.Height + 4);
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Thanks for playing!");
         }
 
@@ -52,6 +54,11 @@ namespace TerraLibrary
 
         private void FirstDay()
         {
+            // Clear the console
+            Console.Clear();
+            // Print the terrarium to the console using colors
+            Terrarium.CreateEmptyTerrarium();
+
             // Add Organisms to List
             for (int i = 0; i < 10; i++)
             {
@@ -66,14 +73,8 @@ namespace TerraLibrary
                 AddPlant();
             }
 
-            // Print day in console
-            //DisplayDay();
-
-            // Clear the console
-            Console.Clear();
-            // Print the terrarium to the console using colors
-            Terrarium.CreateEmptyTerrarium();
-            Terrarium.UpdateTerrarium();
+            // Render the animals
+            Terrarium.RenderAnimals();
 
             // Wait for input
             Console.ForegroundColor = ConsoleColor.White;
@@ -104,7 +105,7 @@ namespace TerraLibrary
             OrganismActions();
 
             // Print Terrarium to console
-            Terrarium.UpdateTerrarium();
+            Terrarium.RenderAnimals();
         }
 
         private void PrintInfoHeader()
@@ -120,8 +121,10 @@ namespace TerraLibrary
             // Check if there is space left in the terrarium
             if (Terrarium.IsEmptySpaceInTerrarium())
             {
-                // Add Plant
-                Terrarium.Organisms.Add(new Plant(Position.GenerateRandomEmptyPosition(Terrarium), Terrarium));
+                Plant plant = new Plant(Position.GenerateRandomEmptyPosition(Terrarium), Terrarium);
+                // Add Plant to list
+                Terrarium.Organisms.Add(plant);
+                
             }
         }
         private void AddHerbivore()
@@ -173,7 +176,7 @@ namespace TerraLibrary
                             // Console.WriteLine("Hebrivore breeds with Herbivore");
                         }
                         // After action re-render terrarium
-                        Terrarium.UpdateTerrarium();
+                        Terrarium.RenderAnimals();
                         // Wait before rendering next step
                         TimeController.Step();
                     }
@@ -195,7 +198,7 @@ namespace TerraLibrary
                             carnivore.Fight(organismRight, organismsToDelete);
                         }
                         // After action re-render terrarium
-                        Terrarium.UpdateTerrarium();
+                        Terrarium.RenderAnimals();
                         // Wait before rendering next step
                         TimeController.Step();
                     }

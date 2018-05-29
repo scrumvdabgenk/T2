@@ -23,28 +23,35 @@ namespace TerraLibrary
 
         /* Methods */
 
-        public void UpdateTerrarium ()
+        public void RenderAnimals ()
         {
-            foreach (IOrganism organism in Organisms)
+            // Get animals from organisms list
+            var animalList = Organisms.Where(o => o is Animal);
+            
+            foreach (Animal animal in animalList)
             {
-                
                 // Set previous position to ground tile
                 Console.SetCursorPosition(
-                    organism.LastPosition.X, organism.LastPosition.Y
+                    animal.LastPosition.X, animal.LastPosition.Y
                     );
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.Write(StringManager.GetExtendedAsciiCodeAsString(176));
-                
 
                 // Update current position
                 Console.SetCursorPosition(
-                    organism.Position.X,
-                    organism.Position.Y
+                    animal.Position.X,
+                    animal.Position.Y
                     );
-                Console.ForegroundColor = organism.DisplayColor;
-                Console.Write(organism.DisplayLetter);
-
+                Console.ForegroundColor = animal.DisplayColor;
+                Console.Write(animal.DisplayLetter);
             }
+        }
+
+        public void RenderPlant (Plant plant)
+        {
+            Console.ForegroundColor = Plant.Color;
+            Console.SetCursorPosition(plant.Position.X, plant.Position.Y);
+            Console.Write(Plant.Letter);
         }
 
         // Create empty terrarium string filled with ground

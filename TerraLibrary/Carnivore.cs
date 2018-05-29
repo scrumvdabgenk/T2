@@ -9,37 +9,67 @@ namespace TerraLibrary
     public class Carnivore : Animal
     {
         public static string Letter = StringManager.GetExtendedAsciiCodeAsString(206);
-        public static ConsoleColor Color = ConsoleColor.Red;
-
+        public static ConsoleColor Color1 = ConsoleColor.DarkRed;
+        public static ConsoleColor Color2 = ConsoleColor.DarkMagenta;
+        public static ConsoleColor Color3 = ConsoleColor.Red;
+        public static ConsoleColor Color4 = ConsoleColor.Magenta;
+        
 
         /* Constructor */
         public Carnivore(Position position, Terrarium terrarium)
             :base(position, terrarium)
         {
-            DisplayColor = Color;
+            DisplayColor = GetHealthColor(Health);
             DisplayLetter = Letter;
-            Health = 0;
         }
         public void Fight(IOrganism organism, List<IOrganism> toDelete)
         {
+            // Cast to animal to use add health
+            Animal animal = (Animal)organism;
             //Console.WriteLine("Carnivore fought with Carnivore");
             if(organism.Health > Health)
             {
                 toDelete.Add(this);
-                organism.Health += Health;
-                //Console.WriteLine("Defender won");
+                animal.AddHealth(Health);
             }
             else if (organism.Health < Health)
             {
                 toDelete.Add(organism);
-                Health += organism.Health;
+                AddHealth(animal.Health);
                 Move(2);
-                //Console.WriteLine("Attacker won");
+            }
+        }
+
+        public override void AddHealth (int amount)
+        {
+            // Add amount to current health
+            Health += amount;
+
+            DisplayColor = GetHealthColor(Health);
+        }
+
+        public override ConsoleColor GetHealthColor (int health)
+        {
+            ConsoleColor color;
+
+            if (health < 3)
+            {
+                color = Color1;
+            }
+            else if (health < 6)
+            {
+                color = Color2;
+            }
+            else if (health < 10)
+            {
+                color = Color3;
             }
             else
             {
-                //Console.WriteLine("No one won");
+                color = Color4;
             }
+
+            return color;
         }
     }
 }

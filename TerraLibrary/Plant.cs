@@ -31,6 +31,8 @@ namespace TerraLibrary
             DisplayLetter = Letter;
             Health = 1;
             LastPosition = new Position(Position.X, Position.Y);
+            // Render plant in terrarium
+            Terrarium.RenderPlant(this);
         }
     }
 }
