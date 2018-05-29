@@ -13,29 +13,17 @@ namespace TerraTeam2
         {
             // Splash screen
             var splashScreen = new SplashScreen();
-            // Print "Terrarium" at line 5
-            splashScreen.MainScreen();
+            if (splashScreen.LoadGame())
+            {
 
-            // Press Enter to continue
-            Console.ReadLine();
-            // Clear console to begin game
-            Console.Clear();
-
-            // Press Enter to continue
-            Console.ReadLine();
-            // Clear console to begin game
-            Console.Clear();
-
-            splashScreen.LoadingScreen(14);
-            Console.Clear();
-
-            // Create new game (worldcontroller and its terrarium)
-            WorldController worldController = new WorldController(
-                new Terrarium(64, 48),
-                new TimeController(-1500000)
-                );
-            // Start the game
-            worldController.Start();
+                // Create new game (worldcontroller and its terrarium)
+                WorldController worldController = new WorldController(
+                    new Terrarium(64, 48),
+                    new TimeController(-1500000)
+                    );
+                // Start the game
+                worldController.Start();
+            }
         }
     }
 }
