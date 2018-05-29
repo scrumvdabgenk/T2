@@ -27,7 +27,7 @@ namespace TerraTeam2
 
             // Create new game (worldcontroller and its terrarium)
             WorldController worldController = new WorldController(
-                new Terrarium(24, 16),
+                new Terrarium(64, 48),
                 new TimeController()
                 );
             // Start the game

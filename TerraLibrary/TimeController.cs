@@ -15,12 +15,12 @@ namespace TerraLibrary
         {
             Day = day;
             // Timeout for each step in ms
-            StepTimeout = 50;
+            StepTimeout = 0;
         }
 
         public void Step ()
         {
-            Thread.Sleep(StepTimeout);
+            // Thread.Sleep(StepTimeout);
         }
     }
 }

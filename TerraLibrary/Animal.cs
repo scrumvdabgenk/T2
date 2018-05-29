@@ -17,8 +17,8 @@ namespace TerraLibrary
         public string DisplayLetter { get; set; }
         public ConsoleColor DisplayColor { get; set; }
 
-        // Object used to generate random numbers
-        private Random random = new Random();
+        // Object used to generate random numbers, static to share same random object between all animals
+        private static Random random = new Random();
 
         /* Constructor */
         public Animal(Position position, Terrarium terrarium)
@@ -26,6 +26,7 @@ namespace TerraLibrary
             Position = position;
             Terrarium = terrarium;
             LastPosition = new Position(Position.X, Position.Y);
+            Health = random.Next(1, 3);
         }
 
         /* Methods */
@@ -163,9 +164,11 @@ namespace TerraLibrary
         }
         public void Eat(IOrganism organism,List<IOrganism> toDelete)
         {
-            Health += organism.Health;
+            AddHealth(organism.Health);
             toDelete.Add(organism);
             Move(2);
         }
+        public abstract void AddHealth(int amount);
+        public abstract ConsoleColor GetHealthColor(int health);
     }
 }
