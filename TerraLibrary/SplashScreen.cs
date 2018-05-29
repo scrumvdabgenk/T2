@@ -46,6 +46,90 @@ namespace TerraLibrary
             }
         };
 
+        public bool LoadGame()
+        {
+            DemoScreen();
+            var selectedItem = MainScreen();
+
+            // Menu actions
+            switch (selectedItem)
+            {
+                case 0:                
+                    LoadingScreen();
+                    return true;
+                case 1:
+                    SettingsScreen();
+                    return true;
+                case 2:
+                    Console.Clear();
+                    return false;
+                default:
+                    return false;
+            }
+        }
+
+        public void DemoScreen()
+        {
+            // Print ASCIIART "Terrarium"
+            PrintASCIIArt(5, ASCIIART["terrarium"]);
+            // Print ASCIIART "Demo"
+            PrintASCIIArt(14, ASCIIART["demo"]);
+            // Print credits
+            PrintCredits(24);
+            // Press Enter to continue
+            Console.ReadLine();
+            // Clear console to begin game
+            Console.Clear();
+        }
+        
+        public int MainScreen()
+        {
+            // Print ASCIIART "Terrarium"
+            PrintASCIIArt(2, ASCIIART["terrarium"]);
+
+            // Create introtext array
+            var intro = new String[]
+            {
+                "Well, the way they make shows is, they make one show.",
+                "That show's called a pilot. Then they show that show to the people who make shows, ",
+                "and on the strength of that one show they decide if they're going to make more shows.",
+                "Some pilots get picked and become television programs.",
+                "Some don't, become nothing. She starred in one of the ones that became nothing."
+            };
+
+            // Print introText
+            var lineCounter = 10;
+            foreach (var line in intro)
+            { 
+                var windowCenter = (Console.WindowWidth - line.Length) / 2;
+                Console.SetCursorPosition(windowCenter, lineCounter);
+                Console.WriteLine(line);
+                lineCounter++;
+            }
+
+            // Print menu buttons
+            int selectedItem = ConsoleHelper.MultipleChoice(45, 21, true, "START GAME", "SETTINGS", "QUIT");
+
+            // Clear console
+            Console.Clear();
+
+            // Return selected menu item
+            return selectedItem;
+        }
+
+        public void SettingsScreen()
+        {
+            // Print ASCIIART "Terrarium"
+            PrintASCIIArt(2, ASCIIART["settings"]);
+
+            // Press Enter to continue
+            Console.ReadLine();
+            // Clear console to begin game
+            Console.Clear();
+        }
+
+
+        // Print ASCIIART from dictionary
         public void PrintASCIIArt(int cursorTop, string[] asciiArt)
         {
             var windowCenter = (Console.WindowWidth - asciiArt[0].Length) / 2;
@@ -60,15 +144,7 @@ namespace TerraLibrary
             }
         }
 
-       public void MainScreen()
-        {
-            PrintASCIIArt(5, ASCIIART["terrarium"]);
-            PrintASCIIArt(14, ASCIIART["demo"]);
-            PrintCredits(24);
-        }
-
-       
-
+        // Print gamecredits
         public void PrintCredits(int cursorTop)
         {
             string credits = "By Dan, Davy, Marc & Jeff";
@@ -83,11 +159,12 @@ namespace TerraLibrary
 
         }
 
-        public void LoadingScreen(int cursorTop)
+        // Displays loadingscreen
+        public void LoadingScreen()
         {
             string loadingStr = "";
             var windowCenter = (Console.WindowWidth - 10) / 2;
-            Console.SetCursorPosition(windowCenter, cursorTop - 1);
+            Console.SetCursorPosition(windowCenter, 13);
             Console.WriteLine("LOADING...");
             for (var i = 0; i < 40; i++)
             {
@@ -96,11 +173,11 @@ namespace TerraLibrary
                 else
                     loadingStr = loadingStr = StringManager.GetExtendedAsciiCodeAsString(178) + loadingStr;
                 windowCenter = (Console.WindowWidth - 40) / 2;
-                Console.SetCursorPosition(windowCenter, cursorTop);
+                Console.SetCursorPosition(windowCenter, 14);
                 Console.WriteLine(loadingStr);
                 Thread.Sleep(40);
             }
-            
+            Console.Clear();
         }
 
         
