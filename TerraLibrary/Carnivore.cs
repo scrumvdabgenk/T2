@@ -9,14 +9,18 @@ namespace TerraLibrary
     public class Carnivore : Animal
     {
         public static string Letter = StringManager.GetExtendedAsciiCodeAsString(206);
+        public static ConsoleColor Color = ConsoleColor.Red;
+
+
         /* Constructor */
         public Carnivore(Position position, Terrarium terrarium)
             :base(position, terrarium)
         {
+            DisplayColor = Color;
             DisplayLetter = Letter;
             Health = 0;
         }
-        public void Fight(Organism organism, List<Organism> toDelete)
+        public void Fight(IOrganism organism, List<IOrganism> toDelete)
         {
             //Console.WriteLine("Carnivore fought with Carnivore");
             if(organism.Health > Health)

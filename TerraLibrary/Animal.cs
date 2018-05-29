@@ -6,13 +6,26 @@ using System.Threading.Tasks;
 
 namespace TerraLibrary
 {
-    public abstract class Animal : Organism
+    public abstract class Animal : IOrganism
     {
+
+        /* Properties */
+        public int Health { get; set; }
+        public Position Position { get; set; }
+        public Position LastPosition { get; set; }
+        public Terrarium Terrarium { get; set; }
+        public string DisplayLetter { get; set; }
+        public ConsoleColor DisplayColor { get; set; }
+
+        // Object used to generate random numbers
         private Random random = new Random();
+
         /* Constructor */
         public Animal(Position position, Terrarium terrarium)
-            : base(position, terrarium)
         {
+            Position = position;
+            Terrarium = terrarium;
+            LastPosition = new Position(Position.X, Position.Y);
         }
 
         /* Methods */
@@ -43,6 +56,10 @@ namespace TerraLibrary
         }
         public void Move(int direction)
         {
+            // Save previous position before updating (for rendering the terrarium)
+            LastPosition.X = Position.X;
+            LastPosition.Y = Position.Y;
+
             switch (direction)
             {
 
@@ -72,9 +89,9 @@ namespace TerraLibrary
 
         }
 
-        public Organism CheckRight()
+        public IOrganism CheckRight()
         {
-            foreach (Organism organism in Terrarium.Organisms)
+            foreach (IOrganism organism in Terrarium.Organisms)
             {
                 if (organism.Position.X == Position.X + 1 && organism.Position.Y == Position.Y)
                 {
@@ -86,7 +103,7 @@ namespace TerraLibrary
 
         private bool CheckRightBool()
         {
-            foreach (Organism organism in Terrarium.Organisms)
+            foreach (IOrganism organism in Terrarium.Organisms)
             {
                 if (organism.Position.X == Position.X + 1 && organism.Position.Y == Position.Y)
                 {
@@ -100,7 +117,7 @@ namespace TerraLibrary
         }
         private bool CheckBelow()
         {
-            foreach (Organism organism in Terrarium.Organisms)
+            foreach (IOrganism organism in Terrarium.Organisms)
             {
                 if (organism.Position.X == Position.X && organism.Position.Y == Position.Y + 1)
                 {
@@ -113,7 +130,7 @@ namespace TerraLibrary
         }
         private bool CheckLeft()
         {
-            foreach (Organism organism in Terrarium.Organisms)
+            foreach (IOrganism organism in Terrarium.Organisms)
             {
                 if (organism.Position.X == Position.X - 1 && organism.Position.Y == Position.Y)
                 {
@@ -128,7 +145,7 @@ namespace TerraLibrary
         }
         private bool CheckAbove()
         {
-            foreach (Organism organism in Terrarium.Organisms)
+            foreach (IOrganism organism in Terrarium.Organisms)
             {
                 if (organism.Position.X == Position.X && organism.Position.Y == Position.Y - 1)
                 {
@@ -144,7 +161,7 @@ namespace TerraLibrary
         {
             return !CheckAbove() || !CheckRightBool() || !CheckBelow() || !CheckLeft();
         }
-        public void Eat(Organism organism,List<Organism>toDelete)
+        public void Eat(IOrganism organism,List<IOrganism> toDelete)
         {
             Health += organism.Health;
             toDelete.Add(organism);

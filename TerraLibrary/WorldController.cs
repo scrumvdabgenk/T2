@@ -11,69 +11,90 @@ namespace TerraLibrary
     {
         /* Properties*/
         public Terrarium Terrarium { get; set; }
-        public int Day { get; set; }
+        public TimeController TimeController { get; set; }
 
         /* Constructor */
-        public WorldController(Terrarium terrarium)
+        public WorldController(Terrarium terrarium, TimeController timeController)
         {
-            Day = 1;
             Terrarium = terrarium;
+            TimeController = timeController;
         }
 
         /* Methods */
         public void Start()
         {
             // Scale window size with Terrarium width and height
-            Console.SetWindowSize(Terrarium.Width * 4, Terrarium.Height * 3);
+            Console.SetWindowSize(Terrarium.Width, Terrarium.Height+5);
             // Set buffersize to remove scroll bars from window
-            Console.SetBufferSize(Terrarium.Width * 4, Terrarium.Height * 3);
+            Console.SetBufferSize(Terrarium.Width + 1, Terrarium.Height+5);
+
             // Initial day (different from regular next day)
             FirstDay();
+            TimeController.Step();
 
             // Game loop (user presses enter to see terrarium)
             GameLoop();
 
             // Close game
+            Console.SetCursorPosition(0, Terrarium.Height + 4);
             Console.WriteLine("Thanks for playing!");
         }
 
         private void GameLoop()
         {
-            // Wait for input
-            string input = Console.ReadLine();
-
             // Go to next day if user input != stop and there is space left in the terrarium
-            while (input != "stop" && Terrarium.IsEmptySpaceInTerrarium())
+            while (Terrarium.IsEmptySpaceInTerrarium())
             {
                 NextDay();
-                // Wait for new user input
-                input = Console.ReadLine();
+                TimeController.Step();
             }
         }
 
         private void FirstDay()
         {
             // Add Organisms to List
-            AddHerbivore();
-            AddHerbivore();
-            AddHerbivore();
-
-            AddCarnivore();
-            AddCarnivore();
-            AddCarnivore();
-
-            AddPlant();
-            AddPlant();
-            AddPlant();
+            for (int i = 0; i < 10; i++)
+            {
+                AddCarnivore();
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                AddHerbivore();
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                AddPlant();
+            }
 
             // Print day in console
-            DisplayDay();
+            //DisplayDay();
+
+            // Clear the console
+            Console.Clear();
+            // Print the terrarium to the console using colors
+            Terrarium.CreateEmptyTerrarium();
+            Terrarium.UpdateTerrarium();
+
+            // Wait for input
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(0, Terrarium.Height + 3);
+            Console.Write("Press 'Enter' to start");
+
+            Console.SetCursorPosition(0, Terrarium.Height + 2);
+            Console.Write("Day " + TimeController.Day);
+
+            string input = Console.ReadLine();
+            Console.SetCursorPosition(0, Terrarium.Height + 3);
+            Console.WriteLine("                       ");
+
         }
 
         private void NextDay()
         {
-            // Go to next day
-            Day++;
+            // Go to next day and print in console
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(4, Terrarium.Height + 2);
+            Console.Write(++TimeController.Day);
 
             // Add organisms
             AddPlant();
@@ -81,32 +102,15 @@ namespace TerraLibrary
             // For every organism, perform its actions
             OrganismActions();
 
-            // Print day console
-            DisplayDay();
-
+            // Print Terrarium to console
+            Terrarium.UpdateTerrarium();
         }
 
-        private void DisplayDay()
-        {
-            // Clear the console
-            Console.Clear();
-
-            // Prints header with instructions + day info
-            PrintInfoHeader();
-
-            // Print the terrarium to the console using colors
-            Terrarium.PrintTerrarium();
-        }
         private void PrintInfoHeader()
         {
-            // Print instructions
-            //Console.WriteLine("\n\tTERRARIUM");
-            //Console.WriteLine("\tPress enter to show next day, type 'stop' to quit.");
-            //Console.WriteLine();
-
             // Display day
             Console.WriteLine();
-            Console.WriteLine("\tDay " + Day);
+            Console.WriteLine("\tDay " + TimeController.Day);
             Console.WriteLine();
         }
 
@@ -140,60 +144,68 @@ namespace TerraLibrary
         private void OrganismActions()
         {
             // List to save organisms to delete later (cannot modify list while looping through)
-            List<Organism> organismsToDelete = new List<Organism>();
-            List<Organism> organismsToAdd = new List<Organism>();
+            List<IOrganism> organismsToDelete = new List<IOrganism>();
+            List<IOrganism> organismsToAdd = new List<IOrganism>();
 
             // Go through the list of all organisms
-            foreach (Organism organism in Terrarium.Organisms)
+            foreach (IOrganism organism in Terrarium.Organisms)
             {
-                if (organism is Herbivore)
+                // Only perform organisms action if it is not going to be deleted
+                if(!organismsToDelete.Contains(organism))
                 {
-                    Herbivore herbivore = organism as Herbivore;
-                    Organism organismRight = herbivore.CheckRight();
-                    if (organismRight == null)
+                    if (organism is Herbivore)
                     {
-                        herbivore.Move();
+                        Herbivore herbivore = organism as Herbivore;
+                        IOrganism organismRight = herbivore.CheckRight();
+                        if (organismRight == null)
+                        {
+                            herbivore.Move();
+                        }
+                        else if (organismRight is Plant)
+                        {
+                            herbivore.Eat(organismRight, organismsToDelete);
+                            //Console.WriteLine("Herbivore ate Plant");
+                        }
+                        else if (organismRight is Herbivore)
+                        {
+                            herbivore.Breed(organismsToAdd);
+                            // Console.WriteLine("Hebrivore breeds with Herbivore");
+                        }
+                        // After action re-render terrarium
+                        Terrarium.UpdateTerrarium();
+                        // Wait before rendering next step
+                        TimeController.Step();
                     }
-                    else if (organismRight is Plant)
+                    else if (organism is Carnivore)
                     {
-                        herbivore.Eat(organismRight, organismsToDelete);
-                        //Console.WriteLine("Herbivore ate Plant");
+                        Carnivore carnivore = organism as Carnivore;
+                        IOrganism organismRight = carnivore.CheckRight();
+                        if (organismRight == null || organismRight is Plant)
+                        {
+                            carnivore.Move();
+                        }
+                        else if (organismRight is Herbivore)
+                        {
+                            carnivore.Eat(organismRight, organismsToDelete);
+                            //Console.WriteLine("Carnivore ate Herbivore");
+                        }
+                        else if (organismRight is Carnivore)
+                        {
+                            carnivore.Fight(organismRight, organismsToDelete);
+                        }
+                        // After action re-render terrarium
+                        Terrarium.UpdateTerrarium();
+                        // Wait before rendering next step
+                        TimeController.Step();
                     }
-                    else if (organismRight is Herbivore)
-                    {
-                        herbivore.Breed(organismsToAdd);
-                        // Console.WriteLine("Hebrivore breeds with Herbivore");
-                    }
-                    // After action re-render terrarium and wait x ms before
-                    DisplayDay();
-                    Thread.Sleep(200);
                 }
-                else if (organism is Carnivore)
-                {
-                    Carnivore carnivore = organism as Carnivore;
-                    Organism organismRight = carnivore.CheckRight();
-                    if (organismRight == null || organismRight is Plant)
-                    {
-                        carnivore.Move();
-                    }
-                    else if (organismRight is Herbivore)
-                    {
-                        carnivore.Eat(organismRight, organismsToDelete);
-                        //Console.WriteLine("Carnivore ate Herbivore");
-                    }
-                    else if (organismRight is Carnivore)
-                    {
-                        carnivore.Fight(organismRight, organismsToDelete);
-                    }
-                    DisplayDay();
-                    Thread.Sleep(200);
-                }
+                
             }
             // If there are organisms to delete
             if (organismsToDelete.Count > 0)
             {
                 // Remove all killed organisms from list
-                foreach (Organism organism in organismsToDelete)
+                foreach (IOrganism organism in organismsToDelete)
                 {
                     Terrarium.Organisms.Remove(organism);
                 }
@@ -202,7 +214,7 @@ namespace TerraLibrary
             if (organismsToAdd.Count > 0)
             {
                 // Add organisms to terrarium
-                foreach (Organism organism in organismsToAdd)
+                foreach (IOrganism organism in organismsToAdd)
                 {
                     if (Terrarium.IsEmptySpaceInTerrarium())
                     {
