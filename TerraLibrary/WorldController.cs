@@ -134,6 +134,12 @@ namespace TerraLibrary
                 Console.Write(" ");
         }
 
+        private void addIOrganism(IOrganism organism)
+        {
+            organism.Position = Position.GenerateRandomEmptyPosition(this.Terrarium);
+            organism.Terrarium = this.Terrarium;
+            this.Terrarium.Organisms.Add(organism);
+        }
         private void AddPlant()
         {
             // Check if there is space left in the terrarium

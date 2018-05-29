@@ -21,6 +21,11 @@ namespace TerraLibrary
             DisplayColor = GetHealthColor(Health);
             DisplayLetter = Letter;
         }
+        public Herbivore()
+        {
+            DisplayColor = GetHealthColor(Health);
+            DisplayLetter = Letter;
+        }
         public void Breed(List<IOrganism> toAdd)
         {
             toAdd.Add(new Herbivore(Position.GenerateRandomEmptyPosition(Terrarium), Terrarium));
