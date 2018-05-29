@@ -9,7 +9,6 @@ namespace TerraLibrary
     public class Vulcano : IDisaster
     {
         public Position Position { get; set; }
-        private int counter = 5;
 
         public Vulcano(Position position)
         {
@@ -19,14 +18,20 @@ namespace TerraLibrary
 
         public void Activate()
         {
-            Console.SetCursorPosition(Position.X, Position.Y);
+            string vulcChar = StringManager.GetExtendedAsciiCodeAsString(176);
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.BackgroundColor = ConsoleColor.Red;
-            for(int i = 0; i < counter; i++)
-            {
-                Console.Write(StringManager.GetExtendedAsciiCodeAsString(176));
-            }
-            
+
+
+            Console.SetCursorPosition(Position.X, Position.Y);
+            Console.Write(vulcChar + vulcChar + vulcChar + vulcChar);
+            Console.SetCursorPosition(Position.X, Position.Y+1);
+            Console.Write(vulcChar + vulcChar + vulcChar + vulcChar + vulcChar + vulcChar);
+            Console.SetCursorPosition(Position.X, Position.Y + 2);
+            Console.Write(vulcChar + vulcChar + vulcChar + vulcChar + vulcChar);
+            Console.SetCursorPosition(Position.X, Position.Y + 3);
+            Console.Write(vulcChar + vulcChar + vulcChar + vulcChar);
+
             Console.ResetColor();
         }
     }
