@@ -9,25 +9,53 @@ namespace TerraLibrary
     public class Vulcano : IDisaster
     {
         public Position Position { get; set; }
-        private int counter = 5;
 
         public Vulcano(Position position)
         {
             Position = position;
-            Activate();
         }
 
-        public void Activate()
+        public void ActivateAndKillOrganisms(Terrarium terrarium, TimeController timeController)
         {
-            Console.SetCursorPosition(Position.X, Position.Y);
+            List<IOrganism> organismsToDelete = new List<IOrganism>();
+
+            string vulcChar = StringManager.GetExtendedAsciiCodeAsString(176);
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.BackgroundColor = ConsoleColor.Red;
-            for(int i = 0; i < counter; i++)
+
+            int size = 12;
+
+            for (int i = 0; i < size; i++)
             {
-                Console.Write(StringManager.GetExtendedAsciiCodeAsString(176));
+                for (int j = 0; j < size; j++)
+                {
+                    if(Position.X + i < terrarium.Width && Position.Y + j < terrarium.Height)
+                    {
+                        Console.SetCursorPosition(Position.X + i, Position.Y + j);
+                        Console.Write(vulcChar);
+                    }
+                }
+                timeController.Step(50);
             }
-            
+
+            foreach (IOrganism organism in terrarium.Organisms)
+            {
+                if( organism.Position.X > Position.X &&
+                    organism.Position.X < Position.X + size &&
+                    organism.Position.Y > Position.Y &&
+                    organism.Position.Y < Position.Y + size)
+                {
+                    organismsToDelete.Add(organism);
+                }
+            }
+
+            foreach(IOrganism organism in organismsToDelete)
+            {
+                terrarium.Organisms.Remove(organism);
+            }
+
             Console.ResetColor();
+
         }
     }
 }

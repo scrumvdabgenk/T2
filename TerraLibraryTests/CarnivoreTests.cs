@@ -12,7 +12,7 @@ namespace TerraLibraryTests
         private Terrarium EindTerrarium;
         private Carnivore carnivore;
         private Plant plant;
-        private List<Organism> toDelete = new List<Organism>();
+        private List<IOrganism> toDelete = new List<IOrganism>();
 
         [TestInitialize]
         public void Initialize()
@@ -122,7 +122,7 @@ namespace TerraLibraryTests
             Position carnivorePosition = new Position(1, 1);
             Position manPosition = new Position(2, 1);
             Carnivore carnivore = new Carnivore(carnivorePosition, BeginTerrarium);
-            Mens man = new Mens(manPosition, BeginTerrarium);
+            Human man = new Human(manPosition, BeginTerrarium);
             man.Health = 2;
             carnivore.Health = 1;
             carnivore.Fight(man, toDelete);
@@ -136,7 +136,7 @@ namespace TerraLibraryTests
             Position carnivorePosition = new Position(1, 1);
             Position manPosition = new Position(2, 1);
             Carnivore carnivore = new Carnivore(carnivorePosition, BeginTerrarium);
-            Mens man = new Mens(manPosition, BeginTerrarium);
+            Human man = new Human(manPosition, BeginTerrarium);
             man.Health = 1;
             carnivore.Health = 2;
             carnivore.Fight(man, toDelete);

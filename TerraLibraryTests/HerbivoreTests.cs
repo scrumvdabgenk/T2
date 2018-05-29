@@ -13,10 +13,10 @@ namespace TerraLibraryTests
         private Herbivore herbivore;
         private Carnivore carnivore;
         private Plant testPlant;
-        private List<Organism> TestList = new List<Organism>();
-        private List<Organism> EindList = new List<Organism>();
-        private List<Organism> toDelete = new List<Organism>();
-        private List<Organism> toAdd = new List<Organism>();
+        private List<IOrganism> TestList = new List<IOrganism>();
+        private List<IOrganism> EindList = new List<IOrganism>();
+        private List<IOrganism> toDelete = new List<IOrganism>();
+        private List<IOrganism> toAdd = new List<IOrganism>();
 
         [TestInitialize]
         public void Initialize()

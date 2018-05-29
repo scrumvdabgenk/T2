@@ -28,7 +28,10 @@ namespace TerraLibrary
             LastPosition = new Position(Position.X, Position.Y);
             Health = random.Next(1, 3);
         }
+        public Animal() : base()
+        {
 
+        }
         /* Methods */
         public void Move()
         {

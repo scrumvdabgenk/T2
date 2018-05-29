@@ -50,13 +50,16 @@ namespace TerraLibrary
             {
                 do
                 {
+                    // As long as there is no input keep looping
                     while (!Console.KeyAvailable)
                     {
                         NextDay();
                         TimeController.Step();
                     }
                 } while (Console.ReadKey(true).Key != ConsoleKey.Spacebar);
-                Vulcano vulcano = new Vulcano(Position.GenerateRandomEmptyPosition(Terrarium));
+                
+                // When users presses space spawn a vulcano
+                SpawnVulcano();
             }
         }
 
@@ -115,6 +118,12 @@ namespace TerraLibrary
             Terrarium.RenderAnimals();
         }
 
+        private void SpawnVulcano ()
+        {
+            Vulcano vulcano = new Vulcano(Position.GenerateRandomEmptyPosition(Terrarium));
+            vulcano.ActivateAndKillOrganisms(Terrarium, TimeController);
+        }
+
         private void ClearLines()
         {
             Console.SetCursorPosition(0, Terrarium.Height + 2);
@@ -125,6 +134,12 @@ namespace TerraLibrary
                 Console.Write(" ");
         }
 
+        private void addIOrganism(IOrganism organism)
+        {
+            organism.Position = Position.GenerateRandomEmptyPosition(this.Terrarium);
+            organism.Terrarium = this.Terrarium;
+            this.Terrarium.Organisms.Add(organism);
+        }
         private void AddPlant()
         {
             // Check if there is space left in the terrarium

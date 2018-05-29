@@ -9,7 +9,7 @@ namespace TerraLibrary
     public interface IDisaster
     {
         Position Position { get; set; }
-        void Activate();
+        void ActivateAndKillOrganisms(Terrarium terrarium, TimeController timeController);
         
     }
 }

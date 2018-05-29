@@ -37,12 +37,17 @@ namespace TerraLibrary
 
             Day = startTime;
             ChangeTimeStep();
-            StepTimeout = 50;
+            StepTimeout = 10;
         }
 
         public void Step()
         {
             Thread.Sleep(StepTimeout);
+        }
+
+        public void Step(int ms)
+        {
+            Thread.Sleep(ms);
         }
 
         public void ChangeTimeStep()
@@ -76,11 +81,11 @@ namespace TerraLibrary
             if (EventsDict.ContainsKey(Day))
             {
                 output.AppendLine().Append(EventsDict[Day]);
-                StepTimeout = 200;
+                StepTimeout = 20;
             }
             else
             {
-                StepTimeout = 50;
+                StepTimeout = 10;
             };
             return output.ToString();
         }

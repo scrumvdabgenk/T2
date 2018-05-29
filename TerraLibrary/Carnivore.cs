@@ -22,6 +22,11 @@ namespace TerraLibrary
             DisplayColor = GetHealthColor(Health);
             DisplayLetter = Letter;
         }
+        public Carnivore()
+        {
+            DisplayColor = GetHealthColor(Health);
+            DisplayLetter = Letter;
+        }
         public void Fight(IOrganism organism, List<IOrganism> toDelete)
         {
             // Cast to animal to use add health
