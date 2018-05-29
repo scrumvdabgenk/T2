@@ -16,6 +16,11 @@ namespace TerraLibrary
             DisplayLetter = Letter;
             Health = 0;
         }
+        public Carnivore():base()
+        {
+            DisplayLetter = Letter;
+            Health = 0;
+        }
         public void Fight(Organism organism, List<Organism> toDelete)
         {
             //Console.WriteLine("Carnivore fought with Carnivore");

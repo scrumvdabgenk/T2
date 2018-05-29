@@ -14,7 +14,10 @@ namespace TerraLibrary
             : base(position, terrarium)
         {
         }
+        public Animal() : base()
+        {
 
+        }
         /* Methods */
         public void Move()
         {

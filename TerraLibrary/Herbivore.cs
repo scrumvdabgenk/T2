@@ -16,6 +16,11 @@ namespace TerraLibrary
             DisplayLetter = Letter;
             Health = 0;
         }
+        public Herbivore()
+        {
+            DisplayLetter = Letter;
+            Health = 0;
+        }
         public void Breed(List<Organism> toAdd)
         {
             toAdd.Add(new Herbivore(Position.GenerateRandomEmptyPosition(Terrarium), Terrarium));

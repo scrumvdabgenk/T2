@@ -54,17 +54,26 @@ namespace TerraLibrary
         private void FirstDay()
         {
             // Add Organisms to List
-            AddHerbivore();
-            AddHerbivore();
-            AddHerbivore();
+            addOrganism(new Herbivore());
+            addOrganism(new Herbivore());
+            addOrganism(new Herbivore());
+            //AddHerbivore();
+            //AddHerbivore();
+            //AddHerbivore();
 
-            AddCarnivore();
-            AddCarnivore();
-            AddCarnivore();
+            addOrganism(new Carnivore());
+            addOrganism(new Carnivore());
+            addOrganism(new Carnivore());
+            //AddCarnivore();
+            //AddCarnivore();
+            //AddCarnivore();
 
-            AddPlant();
-            AddPlant();
-            AddPlant();
+            addOrganism(new Plant());
+            addOrganism(new Plant());
+            addOrganism(new Plant());
+            //AddPlant();
+            //AddPlant();
+            //AddPlant();
 
             // Print day in console
             DisplayDay();
@@ -136,6 +145,12 @@ namespace TerraLibrary
                 // Add Plant
                 Terrarium.Organisms.Add(new Carnivore(Position.GenerateRandomEmptyPosition(Terrarium), Terrarium));
             }
+        }
+        private void addOrganism(Organism organism)
+        {
+            organism.Terrarium = this.Terrarium;
+            organism.Position = Position.GenerateRandomEmptyPosition(this.Terrarium);
+            Terrarium.Organisms.Add(organism);
         }
         private void OrganismActions()
         {

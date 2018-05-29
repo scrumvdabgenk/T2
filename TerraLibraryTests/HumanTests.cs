@@ -6,26 +6,30 @@ using System.Collections.Generic;
 namespace TerraLibraryTests
 {
     [TestClass]
-    public class MensTesten
+    public class HumanTests
     {
-        private Terrarium BeginTerrarium = new Terrarium(6, 6);
-        private Terrarium EindTerrarium;
-        private Mens mens;
-       
-        private List<Organism> toDelete = new List<Organism>();
+        private Terrarium Terrarium;
+        private Human mens;
+        private Position begin;
+        private Position end;
+        private List<Organism> toDelete;
 
         [TestInitialize]
         public void Initialize()
         {
-            BeginTerrarium = new Terrarium(3, 3);
-            EindTerrarium = BeginTerrarium;
+            Terrarium = new Terrarium(6, 6);
+            begin= new Position(1, 1);
+            end= new Position(2, 1);
+            Terrarium = new Terrarium(3, 3);
+            mens = new Human(begin, Terrarium);
+            toDelete = new List<Organism>();
         }
         [TestMethod]
         public void MenMoveRight()
         {
             Position begin = new Position(1, 1);
             Position end = new Position(2, 1);
-            mens = new Mens(begin, BeginTerrarium);
+            mens = new Human(begin, Terrarium);
             mens.Move(2);
             Assert.AreEqual(end, mens.Position);
         }
@@ -34,7 +38,6 @@ namespace TerraLibraryTests
         {
             Position begin = new Position(1, 1);
             Position end = new Position(0, 1);
-            mens = new Mens(begin, BeginTerrarium);
             mens.Move(4);
             Assert.AreEqual(end, mens.Position);
         }
@@ -43,7 +46,6 @@ namespace TerraLibraryTests
         {
             Position begin = new Position(1, 1);
             Position end = new Position(1, 0);
-            mens = new Mens(begin, BeginTerrarium);
             mens.Move(1);
             Assert.AreEqual(end, mens.Position);
         }
@@ -52,20 +54,17 @@ namespace TerraLibraryTests
         {
             Position begin = new Position(1, 1);
             Position end = new Position(1, 2);
-            mens = new Mens(begin, BeginTerrarium);
             mens.Move(3);
             Assert.AreEqual(end, mens.Position);
         }
         [TestMethod]
         public void ManFightStrongCarnivore()
         {
-            Position ManPosition = new Position(1, 1);
             Position CarnivorePosition = new Position(2, 1);
-            Mens Man = new Mens(ManPosition, BeginTerrarium);
-            Carnivore Carnivore = new Carnivore(CarnivorePosition, BeginTerrarium);
+            Carnivore Carnivore = new Carnivore(CarnivorePosition, Terrarium);
             Carnivore.Health = 2;
-            mens.Health = 1;
-            Man.Fight(Carnivore,toDelete);
+            mens.Health = 1
+;            mens.Fight(Carnivore,toDelete);
             Assert.AreEqual(3, Carnivore.Health);
             Assert.IsTrue(toDelete.Contains(mens));
 
@@ -73,14 +72,24 @@ namespace TerraLibraryTests
         [TestMethod]
         public void ManFightWeakCarnivore()
         {
-            Position ManPosition = new Position(1, 1);
             Position CarnivorePosition = new Position(2, 1);
-            Mens Man = new Mens(ManPosition, BeginTerrarium);
-            Carnivore Carnivore = new Carnivore(CarnivorePosition, BeginTerrarium);
+            Carnivore Carnivore = new Carnivore(CarnivorePosition, Terrarium);
             Carnivore.Health = 1;
             mens.Health = 2;
-            Man.Fight(Carnivore, toDelete);
-            Assert.AreEqual(3, Man.Health);
+            mens.Fight(Carnivore, toDelete);
+            Assert.AreEqual(3, mens.Health);
+            Assert.IsTrue(toDelete.Contains(Carnivore));
+
+        }
+        [TestMethod]
+        public void ManFightEqualCarnivore()
+        {
+            Position CarnivorePosition = new Position(2, 1);
+            Carnivore Carnivore = new Carnivore(CarnivorePosition, Terrarium);
+            Carnivore.Health = 2;
+            mens.Health = 2;
+            mens.Fight(Carnivore, toDelete);
+            Assert.AreEqual(4, mens.Health);
             Assert.IsTrue(toDelete.Contains(Carnivore));
 
         }

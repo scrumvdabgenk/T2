@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Animal.cs" />
     <Compile Include="Carnivore.cs" />
-    <Compile Include="Mens.cs" />
+    <Compile Include="Human.cs" />
     <Compile Include="Organism.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="StringManager.cs" />

@@ -21,5 +21,9 @@ namespace TerraLibrary
             Position = position;
             Terrarium = terrarium;
         }
+        public Organism()
+        {
+
+        }
     }
 }

@@ -17,5 +17,10 @@ namespace TerraLibrary
             Health = 1;
             DisplayLetter = Letter;
         }
+        public Plant()
+        {
+            Health = 1;
+            DisplayLetter = Letter;
+        }
     }
 }
