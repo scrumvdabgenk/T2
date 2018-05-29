@@ -34,5 +34,10 @@ namespace TerraLibrary
             // Render plant in terrarium
             Terrarium.RenderPlant(this);
         }
+        public Plant()
+        {
+            Health = 1;
+            DisplayLetter = Letter;
+        }
     }
 }
