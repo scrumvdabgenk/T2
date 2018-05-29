@@ -43,6 +43,7 @@
     <Compile Include="Animal.cs" />
     <Compile Include="Carnivore.cs" />
     <Compile Include="IOrganism.cs" />
+    <Compile Include="Mens.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="StringManager.cs" />
     <Compile Include="TimeController.cs" />
