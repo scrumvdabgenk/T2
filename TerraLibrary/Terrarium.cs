@@ -71,10 +71,6 @@ namespace TerraLibrary
         // Check if there is any space left in the terrarium
         public bool IsEmptySpaceInTerrarium()
         {
-            if (!(Organisms.Count < (Width * Height)))
-            {
-                Console.WriteLine("Field is full");
-            }
             return Organisms.Count < (Width * Height);
         }
 

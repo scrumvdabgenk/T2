@@ -25,7 +25,7 @@ namespace TerraTeam2
             // Clear console to begin game
             Console.Clear();
 
-            // Create new game (worldcontroller and its terrarium) (MAX WIDTH/HEIGHT = 20/20)
+            // Create new game (worldcontroller and its terrarium)
             WorldController worldController = new WorldController(
                 new Terrarium(24, 16),
                 new TimeController()

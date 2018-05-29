@@ -36,6 +36,7 @@ namespace TerraLibrary
             GameLoop();
 
             // Close game
+            Console.SetCursorPosition(0, Terrarium.Height + 4);
             Console.WriteLine("Thanks for playing!");
         }
 
