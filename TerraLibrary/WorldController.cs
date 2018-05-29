@@ -73,15 +73,15 @@ namespace TerraLibrary
             // Add Organisms to List
             for (int i = 0; i < 10; i++)
             {
-                AddCarnivore();
+                addIOrganism(new Carnivore());
             }
             for (int i = 0; i < 10; i++)
             {
-                AddHerbivore();
+                addIOrganism(new Herbivore());
             }
             for (int i = 0; i < 10; i++)
             {
-                AddPlant();
+                addIOrganism(new Plant());
             }
 
             // Render the animals
@@ -109,7 +109,7 @@ namespace TerraLibrary
             TimeController.ChangeTimeStep();
 
             // Add organisms
-            AddPlant();
+            addIOrganism(new Plant());
 
             // For every organism, perform its actions
             OrganismActions();
@@ -137,38 +137,16 @@ namespace TerraLibrary
         private void addIOrganism(IOrganism organism)
         {
             organism.Position = Position.GenerateRandomEmptyPosition(this.Terrarium);
+            organism.LastPosition = new Position(organism.Position.X, organism.Position.Y);
             organism.Terrarium = this.Terrarium;
+            if(organism is Plant)
+            {
+                Plant plant = (Plant)organism;
+                Terrarium.RenderPlant(plant);
+            }
             this.Terrarium.Organisms.Add(organism);
         }
-        private void AddPlant()
-        {
-            // Check if there is space left in the terrarium
-            if (Terrarium.IsEmptySpaceInTerrarium())
-            {
-                Plant plant = new Plant(Position.GenerateRandomEmptyPosition(Terrarium), Terrarium);
-                // Add Plant to list
-                Terrarium.Organisms.Add(plant);
-                
-            }
-        }
-        private void AddHerbivore()
-        {
-            // Check if there is space left in the terrarium
-            if (Terrarium.IsEmptySpaceInTerrarium())
-            {
-                // Add Plant
-                Terrarium.Organisms.Add(new Herbivore(Position.GenerateRandomEmptyPosition(Terrarium), Terrarium));
-            }
-        }
-        private void AddCarnivore()
-        {
-            // Check if there is space left in the terrarium
-            if (Terrarium.IsEmptySpaceInTerrarium())
-            {
-                // Add Plant
-                Terrarium.Organisms.Add(new Carnivore(Position.GenerateRandomEmptyPosition(Terrarium), Terrarium));
-            }
-        }
+
         private void OrganismActions()
         {
             // List to save organisms to delete later (cannot modify list while looping through)

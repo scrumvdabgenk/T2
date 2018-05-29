@@ -23,21 +23,20 @@ namespace TerraLibrary
         public ConsoleColor DisplayColor { get; set; }
 
         /* Constructor */
-        public Plant (Position position, Terrarium terrarium)
+        //public Plant (Position position, Terrarium terrarium)
+        //{
+        //    Position = position;
+        //    Terrarium = terrarium;
+        //    DisplayColor = Color;
+        //    DisplayLetter = Letter;
+        //    Health = 1;
+        //    LastPosition = new Position(Position.X, Position.Y);
+        //}
+        public Plant()
         {
-            Position = position;
-            Terrarium = terrarium;
             DisplayColor = Color;
             DisplayLetter = Letter;
             Health = 1;
-            LastPosition = new Position(Position.X, Position.Y);
-            // Render plant in terrarium
-            Terrarium.RenderPlant(this);
-        }
-        public Plant()
-        {
-            Health = 1;
-            DisplayLetter = Letter;
         }
     }
 }
