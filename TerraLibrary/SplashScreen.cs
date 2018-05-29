@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TerraLibrary
@@ -64,6 +65,26 @@ namespace TerraLibrary
             Console.SetCursorPosition(windowCenter, cursorTop + 2);
             Console.WriteLine(startGame);
 
+        }
+
+        public void LoadingScreen(int cursorTop)
+        {
+            string loadingStr = "";
+            var windowCenter = (Console.WindowWidth - 10) / 2;
+            Console.SetCursorPosition(windowCenter, cursorTop - 1);
+            Console.WriteLine("LOADING...");
+            for (var i = 0; i < 40; i++)
+            {
+                if (i == 1)
+                    loadingStr = StringManager.GetExtendedAsciiCodeAsString(177);
+                else
+                    loadingStr = loadingStr = StringManager.GetExtendedAsciiCodeAsString(178) + loadingStr;
+                windowCenter = (Console.WindowWidth - 40) / 2;
+                Console.SetCursorPosition(windowCenter, cursorTop);
+                Console.WriteLine(loadingStr);
+                Thread.Sleep(40);
+            }
+            
         }
 
         

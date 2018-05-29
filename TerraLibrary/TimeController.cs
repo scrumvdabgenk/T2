@@ -8,19 +8,10 @@ namespace TerraLibrary
 {
     public class TimeController
     {
-        public int StepTimeout { get; set; }
- 
-
-
-
-        public void Step ()
-        {
-            Thread.Sleep(StepTimeout);
-        }
-
         public int Day { get; set; }
         public int TimeStep { get; set; }
         public Dictionary<int, string> EventsDict { get; set; }
+        public int StepTimeout { get; set; }
 
 
         public TimeController(int startTime)
@@ -32,31 +23,36 @@ namespace TerraLibrary
                 { -500000, "Phasellus tortor nibh" },
                 { -300000, "Laoreet at metus id, fringilla tincidunt ex." },
                 { -50000,  "Morbi sollicitudin hendrerit consectetur." },
-                { -10000, "Suspendisse pulvinar nunc in sapien interdum, ut eleifend ipsum ultricies." },
-                { -2000,  "Cras rutrum diam quis massa feugiat, nec rutrum ante sollicitudin." },
+                { -10000, "Suspendisse pulvinar nunc in sapien interdum, ut eleifend ip" },
+                { -2000,  "Cras rutrum diam quis massa feugiat, nec rutrum ante sollicitu" },
                 { 0,  "Ut maximus ligula sit amet enim posuere tristique." },
-                { 1000, "Praesent a felis odio. Curabitur pretium massa quis ipsum pharetra" },
+                { 1000, "Praesent a felis odio. Curabitur pretium massa quis ipsum phar" },
                 { 1300, "at pulvinar justo mollis." },
                 { 1600, "Pellentesque pharetra, eros id luctus posuere" },
                 { 1700, "mi felis pellentesque orci, eu tincidunt nunc lacus vel sapien." },
-                { 1850, "Vestibulum elementum lobortis elit, vitae hendrerit dui efficitur nec." },
-                { 1940, "Cras non laoreet leo. Integer nec venenatis felis, sed cursus erat." },
+                { 1850, "Vestibulum elementum lobortis elit, vitae hendrerit dui effici" },
+                { 1940, "Cras non laoreet leo. Integer nec venenatis felis, sed cursus." },
                 { 2016, "Sed quis placerat nulla. Maecenas fringilla dignissim est. " }
             };
 
             Day = startTime;
             ChangeTimeStep();
-            StepTimeout = 0;
+            StepTimeout = 50;
+        }
+
+        public void Step()
+        {
+            Thread.Sleep(StepTimeout);
         }
 
         public void ChangeTimeStep()
         {
-            if (Day >= -1000000)
-                TimeStep = 50000;
+            if (Day <= -1000000)
+                TimeStep = 500000;
             else if (Day < -100000)
-                TimeStep = 5000;
+                TimeStep = 50000;
             else if (Day < -10000)
-                TimeStep = 1000;
+                TimeStep = 10000;
             else if (Day < -1000)
                 TimeStep = 500;
             else if (Day < 0)
@@ -75,11 +71,16 @@ namespace TerraLibrary
             output.Append(Math.Abs(Day));
             if (Day < 0)
             {
-                output.Append(" BC").AppendLine();
-            }
+                output.Append(" BC");
+            };
             if (EventsDict.ContainsKey(Day))
             {
-                output.Append(EventsDict[Day]);
+                output.AppendLine().Append(EventsDict[Day]);
+                StepTimeout = 200;
+            }
+            else
+            {
+                StepTimeout = 50;
             };
             return output.ToString();
         }

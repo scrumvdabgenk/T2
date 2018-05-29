@@ -25,10 +25,13 @@ namespace TerraTeam2
             // Clear console to begin game
             Console.Clear();
 
+            splashScreen.LoadingScreen(14);
+            Console.Clear();
+
             // Create new game (worldcontroller and its terrarium)
             WorldController worldController = new WorldController(
                 new Terrarium(64, 48),
-                new TimeController()
+                new TimeController(-1000000)
                 );
             // Start the game
             worldController.Start();

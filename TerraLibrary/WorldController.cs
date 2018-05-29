@@ -44,6 +44,7 @@ namespace TerraLibrary
 
         private void GameLoop()
         {
+
             // Go to next day if user input != stop and there is space left in the terrarium
             while (Terrarium.IsEmptySpaceInTerrarium())
             {
@@ -81,8 +82,6 @@ namespace TerraLibrary
             Console.SetCursorPosition(0, Terrarium.Height + 3);
             Console.Write("Press 'Enter' to start");
 
-            Console.SetCursorPosition(0, Terrarium.Height + 2);
-            Console.Write(TimeController);
 
             string input = Console.ReadLine();
             Console.SetCursorPosition(0, Terrarium.Height + 3);
@@ -92,11 +91,12 @@ namespace TerraLibrary
 
         private void NextDay()
         {
-            TimeController.ChangeTimeStep();
+            ClearLines();
             // Go to next day and print in console
             Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(0, Terrarium.Height + 2);
             Console.Write(TimeController);
+            TimeController.ChangeTimeStep();
 
             // Add organisms
             AddPlant();
@@ -108,12 +108,14 @@ namespace TerraLibrary
             Terrarium.RenderAnimals();
         }
 
-        private void PrintInfoHeader()
+        private void ClearLines()
         {
-            // Display day
-            Console.WriteLine();
-            Console.WriteLine("\tDay " + TimeController.Day);
-            Console.WriteLine();
+            Console.SetCursorPosition(0, Terrarium.Height + 2);
+            for (var i = 0; i < Terrarium.Width; i++)
+                Console.Write(" ");
+            Console.SetCursorPosition(0, Terrarium.Height + 3);
+            for (var i = 0; i < Terrarium.Width; i++)
+                Console.Write(" ");
         }
 
         private void AddPlant()
