@@ -81,7 +81,7 @@ namespace TerraLibrary
             Console.Write("Press 'Enter' to start");
 
             Console.SetCursorPosition(0, Terrarium.Height + 2);
-            Console.Write("Day " + TimeController.Day);
+            Console.Write(TimeController);
 
             string input = Console.ReadLine();
             Console.SetCursorPosition(0, Terrarium.Height + 3);
@@ -91,10 +91,11 @@ namespace TerraLibrary
 
         private void NextDay()
         {
+            TimeController.ChangeTimeStep();
             // Go to next day and print in console
             Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(4, Terrarium.Height + 2);
-            Console.Write(++TimeController.Day);
+            Console.SetCursorPosition(0, Terrarium.Height + 2);
+            Console.Write(TimeController);
 
             // Add organisms
             AddPlant();

@@ -3,27 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace TerraLibrary
 {
-    public class TimeController
+    public class TimeLine
     {
-        public int StepTimeout { get; set; }
- 
-
-
-
-        public void Step ()
-        {
-            Thread.Sleep(StepTimeout);
-        }
-
-        public int Day { get; set; }
+        public int CurrentTime { get; set; }
         public int TimeStep { get; set; }
         public Dictionary<int, string> EventsDict { get; set; }
 
 
-        public TimeController(int startTime)
+        public TimeLine(int startTime)
         {
             EventsDict = new Dictionary<int, string>()
             {
@@ -44,44 +35,44 @@ namespace TerraLibrary
                 { 2016, "Sed quis placerat nulla. Maecenas fringilla dignissim est. " }
             };
 
-            Day = startTime;
+            CurrentTime = startTime;
             ChangeTimeStep();
-            StepTimeout = 0;
         }
 
         public void ChangeTimeStep()
         {
-            if (Day >= -1000000)
+            if (CurrentTime > -1000000)
                 TimeStep = 50000;
-            else if (Day < -100000)
+            else if (CurrentTime > -100000)
                 TimeStep = 5000;
-            else if (Day < -10000)
+            else if (CurrentTime > -10000)
                 TimeStep = 1000;
-            else if (Day < -1000)
+            else if (CurrentTime > -1000)
                 TimeStep = 500;
-            else if (Day < 0)
+            else if (CurrentTime > 0)
                 TimeStep = 50;
-            else if (Day < 1000)
+            else if (CurrentTime > 1000)
                 TimeStep = 10;
-            else if (Day < 200)
+            else if (CurrentTime > 200)
                 TimeStep = 1;
-            Day += TimeStep;
         }
 
 
         public override string ToString()
         {
             var output = new StringBuilder();
-            output.Append(Math.Abs(Day));
-            if (Day < 0)
+            output.Append(CurrentTime);
+            if (CurrentTime < 0)
             {
                 output.Append(" BC").AppendLine();
             }
-            if (EventsDict.ContainsKey(Day))
+            if (EventsDict.ContainsKey(CurrentTime))
             {
-                output.Append(EventsDict[Day]);
+                output.Append(EventsDict[CurrentTime]);
             };
             return output.ToString();
         }
+
     }
+
 }
