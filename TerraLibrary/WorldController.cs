@@ -48,8 +48,15 @@ namespace TerraLibrary
             // Go to next day if user input != stop and there is space left in the terrarium
             while (Terrarium.IsEmptySpaceInTerrarium())
             {
-                NextDay();
-                TimeController.Step();
+                do
+                {
+                    while (!Console.KeyAvailable)
+                    {
+                        NextDay();
+                        TimeController.Step();
+                    }
+                } while (Console.ReadKey(true).Key != ConsoleKey.Spacebar);
+                Vulcano vulcano = new Vulcano(Position.GenerateRandomEmptyPosition(Terrarium));
             }
         }
 
