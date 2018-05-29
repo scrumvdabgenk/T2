@@ -12,7 +12,7 @@ namespace TerraLibraryTests
         private Human mens;
         private Position begin;
         private Position end;
-        private List<Organism> toDelete;
+        private List<IOrganism> toDelete;
 
         [TestInitialize]
         public void Initialize()
@@ -22,7 +22,7 @@ namespace TerraLibraryTests
             end= new Position(2, 1);
             Terrarium = new Terrarium(3, 3);
             mens = new Human(begin, Terrarium);
-            toDelete = new List<Organism>();
+            toDelete = new List<IOrganism>();
         }
         [TestMethod]
         public void MenMoveRight()

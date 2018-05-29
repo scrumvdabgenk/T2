@@ -15,22 +15,32 @@ namespace TerraLibrary
         {
             Health = rng.Next(4);
         }
-        public void Fight(Organism organism, List<Organism> toDelete)
+        public void Fight(IOrganism organism, List<IOrganism> toDelete)
         {
             //Console.WriteLine("Carnivore fought with Carnivore");
             if (organism.Health > Health)
             {
                 toDelete.Add(this);
-                organism.Health += Health;
+                ((Animal)organism).AddHealth(Health);
                 //Console.WriteLine("Defender won");
             }
             else if (organism.Health <= Health)
             {
                 toDelete.Add(organism);
-                Health += organism.Health;
+                AddHealth(organism.Health);
                 Move(2);
                 //Console.WriteLine("Attacker won");
             }
+        }
+
+        public override void AddHealth(int amount)
+        {
+            Health += amount;
+        }
+
+        public override ConsoleColor GetHealthColor(int health)
+        {
+            throw new NotImplementedException();
         }
     }
 }

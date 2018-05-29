@@ -12,7 +12,7 @@ namespace TerraLibraryTests
         private Terrarium EindTerrarium;
         private Carnivore carnivore;
         private Plant plant;
-        private List<Organism> toDelete = new List<Organism>();
+        private List<IOrganism> toDelete = new List<IOrganism>();
 
         [TestInitialize]
         public void Initialize()
