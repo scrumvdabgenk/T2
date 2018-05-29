@@ -8,6 +8,7 @@ namespace TerraLibrary
 {
     public class Position
     {
+        private static Random random = new Random();
         /* Properties */
         public int X { get; set; }
         public int Y { get; set; }
@@ -24,9 +25,6 @@ namespace TerraLibrary
         }
         public static Position GenerateRandomEmptyPosition(Terrarium terrarium)
         {
-            // Random number generator
-            Random random = new Random();
-
             // To check if position is empty
             bool empty;
             // Position container

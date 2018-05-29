@@ -9,9 +9,6 @@ namespace TerraLibrary
     public class TimeController
     {
         public int StepTimeout { get; set; }
- 
-
-
 
         public void Step ()
         {
@@ -46,12 +43,12 @@ namespace TerraLibrary
 
             Day = startTime;
             ChangeTimeStep();
-            StepTimeout = 0;
+            StepTimeout = 50;
         }
 
         public void ChangeTimeStep()
         {
-            if (Day >= -1000000)
+            if (Day <= -1000000)
                 TimeStep = 50000;
             else if (Day < -100000)
                 TimeStep = 5000;

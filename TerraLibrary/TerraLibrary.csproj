@@ -42,12 +42,14 @@
   <ItemGroup>
     <Compile Include="Animal.cs" />
     <Compile Include="Carnivore.cs" />
+    <Compile Include="IDisaster.cs" />
     <Compile Include="IOrganism.cs" />
     <Compile Include="Mens.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="StringManager.cs" />
     <Compile Include="TimeController.cs" />
     <Compile Include="TimeLine.cs" />
+    <Compile Include="Vulcano.cs" />
     <Compile Include="WorldController.cs" />
     <Compile Include="Herbivore.cs" />
     <Compile Include="Plant.cs" />
