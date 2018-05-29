@@ -13,26 +13,50 @@ namespace TerraLibrary
         public Vulcano(Position position)
         {
             Position = position;
-            Activate();
         }
 
-        public void Activate()
+        public void ActivateAndKillOrganisms(Terrarium terrarium)
         {
+            
+
+            List<IOrganism> organismsToDelete = new List<IOrganism>();
+
             string vulcChar = StringManager.GetExtendedAsciiCodeAsString(176);
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.BackgroundColor = ConsoleColor.Red;
 
+            int size = 12;
 
-            Console.SetCursorPosition(Position.X, Position.Y);
-            Console.Write(vulcChar + vulcChar + vulcChar + vulcChar);
-            Console.SetCursorPosition(Position.X, Position.Y+1);
-            Console.Write(vulcChar + vulcChar + vulcChar + vulcChar + vulcChar + vulcChar);
-            Console.SetCursorPosition(Position.X, Position.Y + 2);
-            Console.Write(vulcChar + vulcChar + vulcChar + vulcChar + vulcChar);
-            Console.SetCursorPosition(Position.X, Position.Y + 3);
-            Console.Write(vulcChar + vulcChar + vulcChar + vulcChar);
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    if(Position.X + i < terrarium.Width && Position.Y + j < terrarium.Height)
+                    {
+                        Console.SetCursorPosition(Position.X + i, Position.Y + j);
+                        Console.Write(vulcChar);
+                    }
+                }
+            }
+
+            foreach (IOrganism organism in terrarium.Organisms)
+            {
+                if( organism.Position.X > Position.X &&
+                    organism.Position.X < Position.X + size &&
+                    organism.Position.Y > Position.Y &&
+                    organism.Position.Y < Position.Y + size)
+                {
+                    organismsToDelete.Add(organism);
+                }
+            }
+
+            foreach(IOrganism organism in organismsToDelete)
+            {
+                terrarium.Organisms.Remove(organism);
+            }
 
             Console.ResetColor();
+
         }
     }
 }

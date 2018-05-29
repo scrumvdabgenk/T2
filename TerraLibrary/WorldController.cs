@@ -50,13 +50,16 @@ namespace TerraLibrary
             {
                 do
                 {
+                    // As long as there is no input keep looping
                     while (!Console.KeyAvailable)
                     {
                         NextDay();
                         TimeController.Step();
                     }
                 } while (Console.ReadKey(true).Key != ConsoleKey.Spacebar);
-                Vulcano vulcano = new Vulcano(Position.GenerateRandomEmptyPosition(Terrarium));
+                
+                // When users presses space spawn a vulcano
+                SpawnVulcano();
             }
         }
 
@@ -113,6 +116,12 @@ namespace TerraLibrary
 
             // Print Terrarium to console
             Terrarium.RenderAnimals();
+        }
+
+        private void SpawnVulcano ()
+        {
+            Vulcano vulcano = new Vulcano(Position.GenerateRandomEmptyPosition(Terrarium));
+            vulcano.ActivateAndKillOrganisms(Terrarium);
         }
 
         private void ClearLines()
