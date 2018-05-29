@@ -169,6 +169,6 @@ namespace TerraLibrary
             Move(2);
         }
         public abstract void AddHealth(int amount);
-        public abstract ConsoleColor GetHealthColor(int health);
+        public abstract ConsoleColor GetHealthColor(int health) ;
     }
 }

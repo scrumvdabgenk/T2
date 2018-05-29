@@ -31,7 +31,7 @@ namespace TerraLibrary
             // Add amount to current health
             Health += amount;
 
-            DisplayColor = GetHealthColor(Health);
+            DisplayColor = GetHealthColor(Health) ;
         }
 
         public override ConsoleColor GetHealthColor(int health)
