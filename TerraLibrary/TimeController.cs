@@ -19,20 +19,20 @@ namespace TerraLibrary
             EventsDict = new Dictionary<int, string>()
             {
                 { -1000000, "Big Bang"},
-                { -750000, "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
+                { -750000, "Lorem ipsum dolor sit amet" },
                 { -500000, "Phasellus tortor nibh" },
-                { -300000, "Laoreet at metus id, fringilla tincidunt ex." },
+                { -300000, "Laoreet at metus id" },
                 { -50000,  "Morbi sollicitudin hendrerit consectetur." },
-                { -10000, "Suspendisse pulvinar nunc in sapien interdum, ut eleifend ip" },
-                { -2000,  "Cras rutrum diam quis massa feugiat, nec rutrum ante sollicitu" },
+                { -10000, "Suspendisse pulvinar nunc" },
+                { -2000,  "Cras rutrum diam quis massa feugiat" },
                 { 0,  "Ut maximus ligula sit amet enim posuere tristique." },
-                { 1000, "Praesent a felis odio. Curabitur pretium massa quis ipsum phar" },
+                { 1000, "Praesent a felis odior" },
                 { 1300, "at pulvinar justo mollis." },
                 { 1600, "Pellentesque pharetra, eros id luctus posuere" },
-                { 1700, "mi felis pellentesque orci, eu tincidunt nunc lacus vel sapien." },
-                { 1850, "Vestibulum elementum lobortis elit, vitae hendrerit dui effici" },
-                { 1940, "Cras non laoreet leo. Integer nec venenatis felis, sed cursus." },
-                { 2016, "Sed quis placerat nulla. Maecenas fringilla dignissim est. " }
+                { 1700, "mi felis pellentesque orci" },
+                { 1850, "Vestibulum elementum lobortis elit" },
+                { 1940, "Cras non laoreet leo. Integer nec" },
+                { 2016, "Sed quis placerat nulla." }
             };
 
             Day = startTime;
