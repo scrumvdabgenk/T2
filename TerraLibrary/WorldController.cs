@@ -30,7 +30,13 @@ namespace TerraLibrary
             TimeController = new TimeController(-1000000, Terrarium);
             ScreenController = screenController;
         }
-        
+
+        public WorldController(Terrarium terrarium, TimeController timecontroller)
+        {
+            Terrarium = terrarium;
+            TimeController = timecontroller;
+        }
+
 
         /* Methods */
         public void Start()
@@ -45,6 +51,32 @@ namespace TerraLibrary
             // Initial day (different from regular next day)
             FirstDay();
             TimeController.Step();
+
+            // Game loop (user presses enter to see terrarium)
+            GameLoop();
+
+            // Close game
+            Terrarium.RenderAnimals();
+            Console.SetCursorPosition(0, Terrarium.Height + 4);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Thanks for playing!");
+        }
+
+        public void LoadGame()
+        {
+            int width = Terrarium.Width + 1;
+            int height = Terrarium.Height + 5;
+            // Scale window size with Terrarium width and height
+            Console.SetWindowSize(width, height);
+            // Set buffersize to remove scroll bars from window
+            Console.SetBufferSize(width, height);
+
+
+            // Initial day (different from regular next day)
+            Terrarium.RenderAnimals();
+            Terrarium.RenderPlants();
+            TimeController.Step();
+
 
             // Game loop (user presses enter to see terrarium)
             GameLoop();
@@ -152,6 +184,7 @@ namespace TerraLibrary
 
         private void NextDay()
         {
+            Console.CursorVisible = false;
             ClearLines();
             // Go to next day and print in console
             Console.ForegroundColor = ConsoleColor.White;
