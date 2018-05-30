@@ -33,10 +33,17 @@ namespace TerraLibrary
             SaveObject Save = new SaveObject(WorldController.Terrarium, WorldController.TimeController, TerrariumSettings);
             try
             {
-                using(var bestand = File.Open(Path, FileMode.OpenOrCreate))
+                using (StreamWriter file = new StreamWriter(Path))
                 {
-                    var schrijver = new BinaryFormatter();
-                    schrijver.Serialize(bestand, Save);
+                    file.WriteLine(WorldController.Terrarium.Height);
+                    file.WriteLine(WorldController.Terrarium.Width);
+                    file.WriteLine(WorldController.Terrarium.Organisms.Count);
+                    foreach (var Organism in WorldController.Terrarium.Organisms)
+                    {
+                        file.WriteLine(Organism.Position + " " + Organism.GetType().ToString());
+                           
+                    }
+                    file.WriteLine(WorldController.TimeController.Day);
                 }
                 return true;
             }
@@ -52,21 +59,67 @@ namespace TerraLibrary
         }
         public void LoadGame(string path)
         {
+            int height;
+            int width;
+
+            List<IOrganism> organisms = new List<IOrganism>();
+            int day;
+
+            Terrarium terrarium;
             try
             {
-                using (var bestand = File.Open(path, FileMode.Open, FileAccess.Read))
+                using (StreamReader file = new StreamReader(path))
                 {
-                    var lezer = new BinaryFormatter();
-                    SaveObject Load = (SaveObject)lezer.Deserialize(bestand);
-                    WorldController world = new WorldController(Load.Terrarium, Load.TimeController, Load.TerrariumSettings);
-                    WorldController = world;
-                    TerrariumSettings = world.TerrariumSettings;
-                    WorldController.Start();
+                    height = int.Parse(file.ReadLine());
+                    width = int.Parse(file.ReadLine());
+                    var counter = int.Parse(file.ReadLine());
+                    for (var i = 0; i < counter; i++)
+                    {
+                        var line = file.ReadLine().Split(' ');
+                        var xPos = int.Parse(line[1]);
+                        var yPos = int.Parse(line[3]);
+                        var type = line[5];
+
+                        if (line[5] == "TerraLibrary.Carnivore")
+                        {
+                            var organism = new Carnivore();
+                            organism.Position.X = xPos;
+                            organism.Position.Y = yPos;
+                            organisms.Add(organism);
+                        }
+                        else if (line[5] == "TerraLibrary.Herbivore")
+                        {
+                            var organism = new Herbivore();
+                            organism.Position.X = xPos;
+                            organism.Position.Y = yPos;
+                            organisms.Add(organism);
+                        }
+                        else if (line[5] == "TerraLibrary.Plant")
+                        {
+                            var organism = new Plant();
+                            organism.Position.X = xPos;
+                            organism.Position.Y = yPos;
+                            organisms.Add(organism);
+                        }
+                        else if(line[5] == "TerraLibrary.Human")
+                        {
+                            var organism = new Human();
+                            organism.Position.X = xPos;
+                            organism.Position.Y = yPos;
+                            organisms.Add(organism);
+                        }
+                    }
+                    day = int.Parse(file.ReadLine());
+
                 }
+                terrarium = new Terrarium(width, height);
+                terrarium.Organisms = organisms;
+                var WorldController = new WorldController(terrarium, new TimeController(day, terrarium));
+                WorldController.LoadGame();
             }
-            catch
+            catch (Exception ex)
             {
-                ScreenController.GameScreen(new TerrariumSettings(), "LOAD FAILED");
+                ScreenController.GameScreen(new TerrariumSettings(), ex.Message);
             }
             
             

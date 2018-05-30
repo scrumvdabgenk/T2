@@ -59,6 +59,19 @@ namespace TerraLibrary
             }
         }
 
+        public void RenderAnimalsTest()
+        {
+            // Get animals from organisms list
+            var plantList = Organisms.Where(o => o is Animal);
+
+            foreach (Animal plant in plantList)
+            {
+                Console.ForegroundColor = Animal.Color;
+                Console.SetCursorPosition(plant.Position.X, plant.Position.Y);
+                Console.Write(Animal.Letter);
+            }
+        }
+
         public void RenderPlant (Plant plant)
         {
             Console.ForegroundColor = Plant.Color;
