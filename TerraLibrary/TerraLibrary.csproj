@@ -46,8 +46,10 @@
     <Compile Include="Human.cs" />
     <Compile Include="IDisaster.cs" />
     <Compile Include="IOrganism.cs" />
-    <Compile Include="SplashScreen.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="ScreenController.cs" />
     <Compile Include="StringManager.cs" />
+    <Compile Include="TerrariumSettings.cs" />
     <Compile Include="TimeController.cs" />
     <Compile Include="Vulcano.cs" />
     <Compile Include="WorldController.cs" />
