@@ -54,11 +54,12 @@ namespace TerraLibrary
             // Set buffersize to remove scroll bars from window
             Console.SetBufferSize(120, 30);
             StartScreen();
-            GameScreen(terrariumSettings);
+            GameScreen(terrariumSettings, "");
         }
 
         public void StartScreen()
         {
+            Console.CursorVisible = false;
             // Print ASCIIART "Terrarium"
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             PrintASCIIArt(5, ASCIIART["terrarium"]);
@@ -73,7 +74,7 @@ namespace TerraLibrary
             Console.Clear();
         }
 
-        public void GameScreen(TerrariumSettings terrariumSettings)
+        public void GameScreen(TerrariumSettings terrariumSettings, string statusUpdate)
         {
             // Print ASCIIART "Terrarium"
             Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -99,6 +100,13 @@ namespace TerraLibrary
                 Console.WriteLine(line);
                 lineCounter++;
             }
+
+            // Print status
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            var wCenter = (Console.WindowWidth - statusUpdate.Length) / 2;
+            Console.SetCursorPosition(wCenter, lineCounter + 2);
+            Console.WriteLine(statusUpdate);
+            Console.ForegroundColor = ConsoleColor.White;
 
             // Print menu buttons
             int selectedItem = Menu.MultipleChoice(42, 21, true, "START GAME", "LOAD GAME", "SETTINGS", "QUIT");
@@ -141,12 +149,12 @@ namespace TerraLibrary
             {
                 case 0:
                     Console.Clear();
-                    GameScreen(terrariumSettings);
+                    GameScreen(terrariumSettings, "SETTTINGS CHANGED");
                     break;
                 case 1:
                     Console.Clear();
                     terrariumSettings.ResetSettings();
-                    GameScreen(terrariumSettings);
+                    GameScreen(terrariumSettings, "DEFAULT SETTINGS");
                     break;
 
             }
@@ -155,25 +163,27 @@ namespace TerraLibrary
         public void LoadScreen()
         {
             string[] filePaths = Directory.GetFiles(@"c:\dir");
+            List<string> files = new List<string>();
+
             for (int i = 0; i < filePaths.Length; ++i)
             {
                 string path = filePaths[i];
-                Console.WriteLine(System.IO.Path.GetFileName(path));
+                files.Add(System.IO.Path.GetFileName(path).ToUpper());
             }
+            files.Add("CANCEL");
 
             // Print menu buttons
-            int selectedItem = Menu.MultipleChoice(14, 25, true, "SAVE CHANGES", "BACK (without saving)");
+            int selectedItem = Menu.ShowFiles(14, 5, true, files);
 
             // Menu actions
-            switch (selectedItem)
+            if (selectedItem == files.Count -1)
             {
-                case 0:
-                    Console.Clear();                  
-                   break;
-                case 1:
-                    Console.Clear();
-                    break;
-
+                Console.Clear();
+                GameScreen(new TerrariumSettings(), "LOAD GAME CANCELLED");
+            }
+            else
+            {
+                GameController.LoadGame(filePaths[selectedItem]);
             }
         }
 

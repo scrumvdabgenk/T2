@@ -18,7 +18,7 @@ namespace TerraLibrary
         public ConsoleColor DisplayColor { get; set; }
 
         // Object used to generate random numbers, static to share same random object between all animals
-        private static Random random = new Random();
+        public static Random random = new Random();
 
         /* Constructor */
         public Animal(Position position, Terrarium terrarium)
@@ -26,7 +26,7 @@ namespace TerraLibrary
             Position = position;
             Terrarium = terrarium;
             LastPosition = new Position(Position.X, Position.Y);
-            Health = random.Next(1, 3);
+            Health = random.Next(1, 4);
         }
         public Animal() : base()
         {
