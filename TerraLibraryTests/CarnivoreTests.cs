@@ -11,7 +11,6 @@ namespace TerraLibraryTests
         private Terrarium BeginTerrarium = new Terrarium(6, 6);
         private Terrarium EindTerrarium;
         private Carnivore carnivore;
-        private Plant plant;
         private List<IOrganism> toDelete = new List<IOrganism>();
 
         [TestInitialize]

@@ -15,39 +15,92 @@ namespace TerraLibrary
             Position = position;
         }
 
+        public Vulcano()
+        {
+
+        }
+
         public void ActivateAndKillOrganisms(Terrarium terrarium, TimeController timeController)
         {
+            List<Position> vulcanoPositions = new List<Position>();
             List<IOrganism> organismsToDelete = new List<IOrganism>();
 
             string vulcChar = StringManager.GetExtendedAsciiCodeAsString(176);
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.BackgroundColor = ConsoleColor.Red;
 
-            int size = 12;
+            int size = 5;
 
             for (int i = 0; i < size; i++)
             {
-                for (int j = 0; j < size; j++)
+                
+                if(Position.X + i < terrarium.Width && Position.Y + i < terrarium.Height)
                 {
-                    if(Position.X + i < terrarium.Width && Position.Y + j < terrarium.Height)
+                    Console.SetCursorPosition(Position.X + i, Position.Y + i);
+                    vulcanoPositions.Add(new Position(Position.X + i, Position.Y + i));
+                    Console.Write(vulcChar);
+                }
+                if (Position.X - i >= 0 && Position.Y + i < terrarium.Height)
+                {
+                    Console.SetCursorPosition(Position.X - i, Position.Y + i);
+                    vulcanoPositions.Add(new Position(Position.X - i, Position.Y + i));
+                    Console.Write(vulcChar);
+                }
+                if (Position.X - i >= 0 && Position.Y - i >= 0)
+                {
+                    Console.SetCursorPosition(Position.X - i, Position.Y - i);
+                    vulcanoPositions.Add(new Position(Position.X - i, Position.Y - i));
+                    Console.Write(vulcChar);
+                }
+                if (Position.X + i < terrarium.Width && Position.Y - i >= 0)
+                {
+                    Console.SetCursorPosition(Position.X + i, Position.Y - i);
+                    vulcanoPositions.Add(new Position(Position.X + i, Position.Y - i));
+                    Console.Write(vulcChar);
+                }
+
+                for(int j = 0; j < size - 3; j++)
+                {
+                    if (Position.X + i < terrarium.Width && Position.Y + j < terrarium.Height)
                     {
                         Console.SetCursorPosition(Position.X + i, Position.Y + j);
+                        vulcanoPositions.Add(new Position(Position.X + i, Position.Y + j));
+                        Console.Write(vulcChar);
+                    }
+                    if (Position.X - j >= 0 && Position.Y + i < terrarium.Height)
+                    {
+                        Console.SetCursorPosition(Position.X - j, Position.Y + i);
+                        vulcanoPositions.Add(new Position(Position.X - j, Position.Y + i));
+                        Console.Write(vulcChar);
+                    }
+                    if (Position.X - i >= 0 && Position.Y - j >= 0)
+                    {
+                        Console.SetCursorPosition(Position.X - i, Position.Y - j);
+                        vulcanoPositions.Add(new Position(Position.X - i, Position.Y - j));
+                        Console.Write(vulcChar);
+                    }
+                    if (Position.X + j < terrarium.Width && Position.Y - i >= 0)
+                    {
+                        Console.SetCursorPosition(Position.X + j, Position.Y - i);
+                        vulcanoPositions.Add(new Position(Position.X + j, Position.Y - i));
                         Console.Write(vulcChar);
                     }
                 }
+                
                 timeController.Step(50);
             }
 
             foreach (IOrganism organism in terrarium.Organisms)
             {
-                if( organism.Position.X > Position.X &&
-                    organism.Position.X < Position.X + size &&
-                    organism.Position.Y > Position.Y &&
-                    organism.Position.Y < Position.Y + size)
+                foreach(Position pos in vulcanoPositions)
                 {
-                    organismsToDelete.Add(organism);
+                    if (organism.Position.Equals(pos) && !organismsToDelete.Contains(organism))
+                    {
+                        organismsToDelete.Add(organism);
+                    }
                 }
             }
+           
 
             foreach(IOrganism organism in organismsToDelete)
             {
