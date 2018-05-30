@@ -58,7 +58,7 @@ namespace TerraLibrary
         private void GameLoop()
         {
             bool isNotPaused = true;
-            
+            ConsoleKey pressedKey;
             // Go to next day if user input != stop and there is space left in the terrarium
             do
             {
@@ -70,10 +70,20 @@ namespace TerraLibrary
                         NextDay();
                         TimeController.Step();
                     }
-                } while (Console.ReadKey(true).Key != ConsoleKey.Spacebar && isNotPaused);
+                    pressedKey = Console.ReadKey(true).Key;
+                } while (pressedKey != ConsoleKey.V && pressedKey!= ConsoleKey.E && isNotPaused);
 
-                    PauseGame(isNotPaused);
-
+                if (pressedKey == ConsoleKey.V)
+                {
+                    SpawnVulcano();
+                }
+                if (pressedKey == ConsoleKey.E)
+                {
+                    SpawnEarthquake();
+                }
+                //PauseGame(isNotPaused);
+                
+               
 
             } while (Terrarium.IsEmptySpaceInTerrarium() && isNotPaused);
         }
@@ -161,8 +171,14 @@ namespace TerraLibrary
 
         private void SpawnVulcano ()
         {
-            EarthQuake vulcano = new EarthQuake(Position.GenerateRandomEmptyPosition(Terrarium));
+            Vulcano vulcano = new Vulcano(Position.GenerateRandomEmptyPosition(Terrarium));
             vulcano.Activate(Terrarium, TimeController);
+        }
+
+        private void SpawnEarthquake()
+        {
+            EarthQuake earthQuake = new EarthQuake(Position.GenerateRandomEmptyPosition(Terrarium));
+            earthQuake.Activate(Terrarium, TimeController);
         }
 
         private void ClearLines()

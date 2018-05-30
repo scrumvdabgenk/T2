@@ -17,7 +17,7 @@ namespace TerraLibraryTests
         [TestInitialize]
         public void Initialize()
         {
-            testTerrarium = new Terrarium(5, 5);
+            testTerrarium = new Terrarium(10, 10);
             plant = new Plant();
             herbivore = new Herbivore();
             carnivore = new Carnivore();
@@ -48,15 +48,19 @@ namespace TerraLibraryTests
             herbivore.Position = pos2;
             carnivore.Position = pos3;
             human.Position = pos4;
+            plant.LastPosition = pos1;
+            herbivore.LastPosition = pos2;
+            carnivore.LastPosition = pos3;
+            human.LastPosition = pos4;
             testTerrarium.Organisms.Add(plant);
             testTerrarium.Organisms.Add(herbivore);
             testTerrarium.Organisms.Add(carnivore);
             testTerrarium.Organisms.Add(human);
             earthquake.Activate(testTerrarium, time);
-            Assert.AreNotEqual(pos1, plant.Position);
-            Assert.AreNotEqual(pos2, herbivore.Position);
-            Assert.AreNotEqual(pos3, carnivore.Position);
-            Assert.AreNotEqual(pos4, human.Position);
+            Assert.AreNotEqual(new Position(1, 2), plant.Position);
+            Assert.AreNotEqual(new Position(3, 2), herbivore.Position);
+            Assert.AreNotEqual(new Position(2, 1), carnivore.Position);
+            Assert.AreNotEqual(new Position(2,3), human.Position);
         }
     }
 }
