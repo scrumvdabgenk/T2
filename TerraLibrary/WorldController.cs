@@ -143,7 +143,7 @@ namespace TerraLibrary
 
         private void SpawnVulcano ()
         {
-            Vulcano vulcano = new Vulcano(Position.GenerateRandomEmptyPosition(Terrarium));
+            EarthQuake vulcano = new EarthQuake(Position.GenerateRandomEmptyPosition(Terrarium));
             vulcano.Activate(Terrarium, TimeController);
         }
 

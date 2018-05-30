@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animal.cs" />
+    <Compile Include="AudioController.cs" />
     <Compile Include="Carnivore.cs" />
     <Compile Include="ConsoleHelper.cs" />
     <Compile Include="EarthQuake.cs" />
