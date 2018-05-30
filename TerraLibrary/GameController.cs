@@ -60,7 +60,7 @@ namespace TerraLibrary
                     var lezer = new BinaryFormatter();
                     SaveObject Load;
                         Load=(SaveObject)lezer.Deserialize(bestand);
-                    WorldController world = new WorldController(Load.Terrarium, Load.TimeController, Load.TerrariumSettings);
+                    WorldController world = new WorldController(Load.Terrarium, Load.TimeController, Load.TerrariumSettings, true);
                     WorldController = world;
                     TerrariumSettings = world.TerrariumSettings;
                     WorldController.Start();
