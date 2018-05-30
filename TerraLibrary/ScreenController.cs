@@ -47,7 +47,7 @@ namespace TerraLibrary
             }
         };
 
-        public void LoadGame(TerrariumSettings terrariumSettings)
+        public void LoadScreens(TerrariumSettings terrariumSettings)
         {
             // Scale window size with Terrarium width and height
             Console.SetWindowSize(120, 30);
@@ -109,7 +109,7 @@ namespace TerraLibrary
             Console.ForegroundColor = ConsoleColor.White;
 
             // Print menu buttons
-            int selectedItem = Menu.MultipleChoice(42, 21, true, "START GAME", "LOAD GAME", "SETTINGS", "QUIT");
+            int selectedItem = Menu.MultipleChoice(37, 21, true, "START GAME", "LOAD GAME", "SETTINGS", "QUIT");
 
             // Menu actions
             switch (selectedItem)
@@ -120,7 +120,7 @@ namespace TerraLibrary
                     break;
                 case 1:
                     Console.Clear();
-                    LoadScreen();
+                    LoadGameScreen();
                     break;
                 case 2:
                     Console.Clear();
@@ -160,7 +160,8 @@ namespace TerraLibrary
             }
         }
 
-        public void LoadScreen()
+        // LOAD GAME
+        public void LoadGameScreen()
         {
             string[] filePaths = Directory.GetFiles(@"c:\dir");
             List<string> files = new List<string>();
@@ -183,7 +184,9 @@ namespace TerraLibrary
             }
             else
             {
-                GameController.LoadGame(filePaths[selectedItem]);
+                Console.Clear();
+                GameScreen(new TerrariumSettings(), filePaths[selectedItem].ToUpper());
+                //GameController.LoadGame(filePaths[selectedItem].ToString());
             }
         }
 
