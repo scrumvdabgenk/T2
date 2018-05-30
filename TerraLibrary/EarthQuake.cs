@@ -27,12 +27,12 @@ namespace TerraLibrary
             List<Position> earthQuakePositions = new List<Position>();
             List<IOrganism> organismsToShuffle = new List<IOrganism>();
 
-            string quakeChar = StringManager.GetExtendedAsciiCodeAsString(196);
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
+            string quakeChar = StringManager.GetExtendedAsciiCodeAsString(176);
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.BackgroundColor = ConsoleColor.DarkRed;
             
 
-            int size = 10;
+            int size = 7;
 
             for (int i = 0; i < size; i++)
             {
@@ -62,7 +62,7 @@ namespace TerraLibrary
                     Console.Write(quakeChar);
                 }
 
-                for (int j = 0; j < size - 3; j++)
+                for (int j = 0; j < size - 2; j++)
                 {
                     if (Position.X + i < terrarium.Width && Position.Y + j < terrarium.Height)
                     {
@@ -112,7 +112,10 @@ namespace TerraLibrary
                 
                 organism.Position.X = earthQuakePositions[random.Next(earthQuakePositions.Count)].X;
                 organism.Position.Y = earthQuakePositions[random.Next(earthQuakePositions.Count)].Y;
+
             }
+            terrarium.RenderPlants();
+            terrarium.RenderAnimals();
 
             Console.ResetColor();
         }        
