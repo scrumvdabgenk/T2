@@ -8,6 +8,7 @@ namespace TerraLibrary
 {
     public class Vulcano : IDisaster
     {
+        
         public Position Position { get; set; }
 
         public Vulcano(Position position)
@@ -22,6 +23,9 @@ namespace TerraLibrary
 
         public void Activate(Terrarium terrarium, TimeController timeController)
         {
+
+            AudioController.PlayVulcano();
+
             List<Position> vulcanoPositions = new List<Position>();
             List<IOrganism> organismsToDelete = new List<IOrganism>();
 

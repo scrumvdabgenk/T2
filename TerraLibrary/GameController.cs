@@ -49,11 +49,26 @@ namespace TerraLibrary
                 return false;
             }
         }
-        public bool LoadGame(string Path)
+        public void LoadGame(string Path)
         {
-
-            WorldController.Start();
-            return false;
+            try
+            {
+                using (var bestand = File.Open(Path, FileMode.Open, FileAccess.Read))
+                {
+                    var lezer = new BinaryFormatter();
+                    SaveObject Load = (SaveObject)lezer.Deserialize(bestand);
+                    WorldController world = new WorldController(Load.Terrarium, Load.TimeController, Load.TerrariumSettings);
+                    WorldController = world;
+                    TerrariumSettings = world.TerrariumSettings;
+                    WorldController.Start();
+                }
+            }
+            catch
+            {
+                Console.WriteLine("pech");
+            }
+            
+            
         }
 
         
