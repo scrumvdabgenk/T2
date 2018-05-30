@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TerraLibrary;
 
-namespace TerraTeam2
+namespace TerraLibrary
 {
-    class EarthQuake : IDisaster
+    public class EarthQuake : IDisaster
     {
         Position IDisaster.Position
         {

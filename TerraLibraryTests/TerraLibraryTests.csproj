@@ -59,6 +59,7 @@
     <Compile Include="TerrariumTests.cs" />
     <Compile Include="HumanTests.cs" />
     <Compile Include="PositionTests.cs" />
+    <Compile Include="EarthquakeTests.cs" />
     <Compile Include="VulcanoTests.cs" />
   </ItemGroup>
   <ItemGroup>
