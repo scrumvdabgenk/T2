@@ -113,10 +113,9 @@ namespace TerraLibrary
                     Console.Clear();
                     SettingsScreen(terrariumSettings);
                     break;
-                case 2:
-                    Console.Clear();
-                    break;
                 default:
+                    Console.Clear();
+                    Environment.Exit(0);
                     break;
             }
         }

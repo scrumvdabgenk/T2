@@ -7,13 +7,13 @@ namespace TerraLibraryTests
     [TestClass]
     public class VulcanoTests
     {
-        Terrarium testTerrarium;
-        Plant plant;
-        Herbivore herbivore;
-        Carnivore carnivore;
-        Human human;
-        Vulcano vulcano;
-        TimeController time;
+        private Terrarium testTerrarium;
+        private Plant plant;
+        private Herbivore herbivore;
+        private Carnivore carnivore;
+        private Human human;
+        private Vulcano vulcano;
+        private TimeController time;
         [TestInitialize]
         public void Initialize()
         {
@@ -23,7 +23,7 @@ namespace TerraLibraryTests
             carnivore = new Carnivore();
             human = new Human();
             vulcano = new Vulcano();
-            time = new TimeController(0); 
+            time = new TimeController(0,testTerrarium); 
         }
         [TestMethod]
         public void VulcanoConstructorTest()

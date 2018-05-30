@@ -25,10 +25,12 @@ namespace TerraLibrary
         /* Methods */
         public void Start()
         {
+            int width = Terrarium.Width > 120 ? Terrarium.Width + 1 : 121;
+            int height = Terrarium.Height > 30 ? Terrarium.Height + 5 : 35;
             // Scale window size with Terrarium width and height
-            Console.SetWindowSize(Terrarium.Width, Terrarium.Height+5);
+            Console.SetWindowSize(width, height);
             // Set buffersize to remove scroll bars from window
-            Console.SetBufferSize(Terrarium.Width + 1, Terrarium.Height+5);
+            Console.SetBufferSize(width, height);
 
             // Initial day (different from regular next day)
             FirstDay();
