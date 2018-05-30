@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TerraLibrary
-{
+{[Serializable]
     public static class AudioController
     {
         private static Random random = new Random();

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TerraLibrary
 {
-
+    [Serializable]
     public class ScreenController
     {
         public GameController GameController { get; set; }

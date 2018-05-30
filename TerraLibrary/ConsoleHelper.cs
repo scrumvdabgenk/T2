@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TerraLibrary
-{
+{[Serializable]
     public class ConsoleHelper
     {
         public static int MultipleChoice(int x, int y, bool canCancel, params string[] options)

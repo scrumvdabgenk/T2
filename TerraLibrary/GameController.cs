@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TerraLibrary
-{
+{[Serializable]
     public class GameController
     {
         public WorldController WorldController { get; set; }
@@ -55,10 +55,11 @@ namespace TerraLibrary
         {
             try
             {
-                using (var bestand = File.Open(path, FileMode.Open, FileAccess.Read))
+                using ( var bestand = File.Open(path, FileMode.Open, FileAccess.Read))
                 {
                     var lezer = new BinaryFormatter();
-                    SaveObject Load = (SaveObject)lezer.Deserialize(bestand);
+                    SaveObject Load;
+                        Load=(SaveObject)lezer.Deserialize(bestand);
                     WorldController world = new WorldController(Load.Terrarium, Load.TimeController, Load.TerrariumSettings);
                     WorldController = world;
                     TerrariumSettings = world.TerrariumSettings;

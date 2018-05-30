@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace TerraLibrary
-{
+{[Serializable]
     public class WorldController
     {
         /* Properties*/

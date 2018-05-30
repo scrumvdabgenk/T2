@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TerraLibrary
-{
+{[Serializable]
     public interface IDisaster
     {
         Position Position { get; set; }

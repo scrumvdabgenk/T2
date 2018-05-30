@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TerraLibrary
-{
+{[Serializable]
     public class Carnivore : Animal
     {
         public static string Letter = StringManager.GetExtendedAsciiCodeAsString(206);

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TerraLibrary
-{
+{[Serializable]
     public class StringManager
     {
         public static string GetExtendedAsciiCodeAsString(byte code)

@@ -3,7 +3,7 @@ using TerraLibrary;
 using System.Collections.Generic;
 
 namespace TerraLibrary
-{
+{[Serializable]
     public class Human:Animal
     {
         public static string Letter = StringManager.GetExtendedAsciiCodeAsString(219);

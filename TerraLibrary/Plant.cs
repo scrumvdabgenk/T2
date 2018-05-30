@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TerraLibrary;
 
 namespace TerraLibrary
-{
+{[Serializable]
     public class Plant : IOrganism
     {
         /* Properties */
