@@ -29,7 +29,9 @@ namespace TerraLibrary
         }
         public bool SaveGame()
         {
-            string Path = @"c:\dir\testfile.terra";
+            string[] filePaths = Directory.GetFiles(@"c:\dir");
+            int fileCount = filePaths.Count();
+            string Path = @"c:\dir\Save" + fileCount + ".terra";
             SaveObject Save = new SaveObject(WorldController.Terrarium, WorldController.TimeController, TerrariumSettings);
             try
             {

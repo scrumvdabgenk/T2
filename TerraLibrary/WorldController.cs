@@ -104,7 +104,7 @@ namespace TerraLibrary
                         TimeController.Step();
                     }
                     pressedKey = Console.ReadKey(true).Key;
-                } while (pressedKey != ConsoleKey.V && pressedKey!= ConsoleKey.E && pressedKey != ConsoleKey.Spacebar && isNotPaused);
+                } while (pressedKey != ConsoleKey.V && pressedKey!= ConsoleKey.E && pressedKey != ConsoleKey.Escape && isNotPaused);
 
                 if (pressedKey == ConsoleKey.V)
                 {
@@ -114,7 +114,7 @@ namespace TerraLibrary
                 {
                     SpawnEarthquake();
                 }
-                if (pressedKey == ConsoleKey.Spacebar)
+                if (pressedKey == ConsoleKey.Escape)
                 {
                     PauseGame(isNotPaused);
                 }
