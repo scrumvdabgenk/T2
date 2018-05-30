@@ -113,7 +113,7 @@ namespace TerraLibrary
                 Position randomPositionInQuake = earthQuakePositions[random.Next(earthQuakePositions.Count)];
                 organism.Position.X = randomPositionInQuake.X;
                 organism.Position.Y = randomPositionInQuake.Y;
-
+                
             }
 
             Console.ResetColor();
