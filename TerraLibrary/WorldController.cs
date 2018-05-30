@@ -15,12 +15,19 @@ namespace TerraLibrary
         public TerrariumSettings TerrariumSettings { get; set; }
 
         /* Constructor */
+        public WorldController(Terrarium terrarium,TimeController timecontroller,TerrariumSettings terrariumSettings)
+        {
+            TerrariumSettings = terrariumSettings;
+            Terrarium = terrarium;
+            TimeController = timecontroller;
+        }
         public WorldController(TerrariumSettings terrariumSettings)
         {
             TerrariumSettings = terrariumSettings;
             Terrarium = new Terrarium(TerrariumSettings.Width, TerrariumSettings.Height);
             TimeController = new TimeController(-1000000, Terrarium);
         }
+        
 
         /* Methods */
         public void Start()

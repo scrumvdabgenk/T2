@@ -6,6 +6,7 @@ using System.Threading;
 
 namespace TerraLibrary
 {
+    [Serializable]
     public class TimeController
     {
         public int Day { get; set; }

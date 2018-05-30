@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TerraLibrary
 {
+    [Serializable]
     public class TerrariumSettings
     {
         // Properties
