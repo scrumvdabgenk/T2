@@ -114,10 +114,13 @@ namespace TerraLibrary
                 organism.Position.Y = earthQuakePositions[random.Next(earthQuakePositions.Count)].Y;
 
             }
+
+            Console.ResetColor();
+
             terrarium.RenderPlants();
             terrarium.RenderAnimals();
 
-            Console.ResetColor();
+            
         }        
     }
 }

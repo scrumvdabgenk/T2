@@ -72,7 +72,8 @@ namespace TerraLibrary
                 } while (Console.ReadKey(true).Key != ConsoleKey.Spacebar&& isNotPaused);
 
                 //if (Console.ReadKey(true).Key == ConsoleKey.Spacebar)
-                    PauseGame(isNotPaused);
+                //PauseGame(isNotPaused);
+                SpawnVulcano();
                
 
             } while (Terrarium.IsEmptySpaceInTerrarium() && isNotPaused);
