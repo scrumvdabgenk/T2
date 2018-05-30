@@ -23,7 +23,7 @@ namespace TerraLibraryTests
             carnivore = new Carnivore();
             human = new Human();
             vulcano = new Vulcano();
-            time = new TimeController(0); 
+            time = new TimeController(0,testTerrarium); 
         }
         [TestMethod]
         public void VulcanoConstructorTest()
