@@ -100,6 +100,7 @@ namespace TerraLibrary
                     }
                 }
             }
+           
 
             foreach(IOrganism organism in organismsToDelete)
             {
