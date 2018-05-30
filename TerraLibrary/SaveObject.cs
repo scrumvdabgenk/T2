@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TerraLibrary;
 
-namespace TerraTeam2
+namespace TerraLibrary
 {
     [Serializable]
     public class SaveObject

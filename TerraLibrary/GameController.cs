@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,6 +25,33 @@ namespace TerraLibrary
         {
             ScreenController.LoadGame(TerrariumSettings);
             WorldController = new WorldController(TerrariumSettings);
+            WorldController.Start();
+        }
+        public bool SaveGame(string Path)
+        {
+            SaveObject Save = new SaveObject(WorldController.Terrarium, WorldController.TimeController, TerrariumSettings);
+            try
+            {
+                using(var bestand = File.Open(Path, FileMode.OpenOrCreate))
+                {
+                    var schrijver = new BinaryFormatter();
+                    schrijver.Serialize(bestand, Save);
+                }
+                return true;
+            }
+            catch(SerializationException)
+            {
+                throw new Exception("Fout bij het serializeren");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        public bool LoadGame(string Path)
+        {
+
             WorldController.Start();
         }
 
