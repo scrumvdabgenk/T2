@@ -23,7 +23,7 @@ namespace TerraLibrary
 
         public void StartGame()
         {
-            ScreenController.LoadGame(TerrariumSettings);
+            ScreenController.LoadScreens(TerrariumSettings);
             WorldController = new WorldController(TerrariumSettings);
             WorldController.Start();
         }
@@ -53,6 +53,7 @@ namespace TerraLibrary
         {
 
             WorldController.Start();
+            return false;
         }
 
         
