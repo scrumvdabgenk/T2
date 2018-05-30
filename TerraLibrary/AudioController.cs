@@ -55,7 +55,7 @@ namespace TerraLibrary
             //Console.Beep(notes["Bb5"], 100);
             //Console.Beep(notes["G5"], 400);
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
                 Console.Beep(random.Next(700, 1200), 50);
             }
