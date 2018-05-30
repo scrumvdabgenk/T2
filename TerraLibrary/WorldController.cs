@@ -58,6 +58,7 @@ namespace TerraLibrary
         private void GameLoop()
         {
             bool isNotPaused = true;
+            
             // Go to next day if user input != stop and there is space left in the terrarium
             do
             {
@@ -69,12 +70,10 @@ namespace TerraLibrary
                         NextDay();
                         TimeController.Step();
                     }
-                } while (Console.ReadKey(true).Key != ConsoleKey.Spacebar&& isNotPaused);
+                } while (Console.ReadKey(true).Key != ConsoleKey.Spacebar && isNotPaused);
 
-                //if (Console.ReadKey(true).Key == ConsoleKey.Spacebar)
-                //PauseGame(isNotPaused);
-                SpawnVulcano();
-               
+                    PauseGame(isNotPaused);
+
 
             } while (Terrarium.IsEmptySpaceInTerrarium() && isNotPaused);
         }

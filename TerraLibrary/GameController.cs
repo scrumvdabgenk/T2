@@ -27,8 +27,9 @@ namespace TerraLibrary
             WorldController = new WorldController(TerrariumSettings);
             WorldController.Start();
         }
-        public bool SaveGame(string Path)
+        public bool SaveGame()
         {
+            string Path = @"c:\dir\testfile.terra";
             SaveObject Save = new SaveObject(WorldController.Terrarium, WorldController.TimeController, TerrariumSettings);
             try
             {
@@ -49,11 +50,11 @@ namespace TerraLibrary
                 return false;
             }
         }
-        public void LoadGame(string Path)
+        public void LoadGame(string path)
         {
             try
             {
-                using (var bestand = File.Open(Path, FileMode.Open, FileAccess.Read))
+                using (var bestand = File.Open(path, FileMode.Open, FileAccess.Read))
                 {
                     var lezer = new BinaryFormatter();
                     SaveObject Load = (SaveObject)lezer.Deserialize(bestand);
@@ -65,7 +66,7 @@ namespace TerraLibrary
             }
             catch
             {
-                Console.WriteLine("pech");
+                ScreenController.GameScreen(new TerrariumSettings(), "LOAD FAILED");
             }
             
             
