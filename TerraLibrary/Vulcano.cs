@@ -20,7 +20,7 @@ namespace TerraLibrary
 
         }
 
-        public void ActivateAndKillOrganisms(Terrarium terrarium, TimeController timeController)
+        public void Activate(Terrarium terrarium, TimeController timeController)
         {
             List<Position> vulcanoPositions = new List<Position>();
             List<IOrganism> organismsToDelete = new List<IOrganism>();

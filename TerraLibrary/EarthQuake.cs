@@ -5,26 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using TerraLibrary;
 
-namespace TerraTeam2
+namespace TerraLibrary
 {
-    class EarthQuake : IDisaster
+    public class EarthQuake : IDisaster
     {
-        Position IDisaster.Position
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public Position Position { get; set; }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
+        public EarthQuake()
+        {
+        }
+        public EarthQuake(Position position)
+        {
+            Position = position;
         }
 
-        void IDisaster.ActivateAndKillOrganisms(Terrarium terrarium, TimeController timeController)
+        public void Activate(Terrarium terrarium, TimeController timeController)
         {
             throw new NotImplementedException();
-        }
+        }        
     }
 }

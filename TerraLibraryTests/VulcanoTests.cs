@@ -7,13 +7,13 @@ namespace TerraLibraryTests
     [TestClass]
     public class VulcanoTests
     {
-        Terrarium testTerrarium;
-        Plant plant;
-        Herbivore herbivore;
-        Carnivore carnivore;
-        Human human;
-        Vulcano vulcano;
-        TimeController time;
+        private Terrarium testTerrarium;
+        private Plant plant;
+        private Herbivore herbivore;
+        private Carnivore carnivore;
+        private Human human;
+        private Vulcano vulcano;
+        private TimeController time;
         [TestInitialize]
         public void Initialize()
         {
@@ -23,7 +23,7 @@ namespace TerraLibraryTests
             carnivore = new Carnivore();
             human = new Human();
             vulcano = new Vulcano();
-            time = new TimeController(0); 
+            time = new TimeController(0,testTerrarium); 
         }
         [TestMethod]
         public void VulcanoConstructorTest()
@@ -33,7 +33,7 @@ namespace TerraLibraryTests
             Assert.AreEqual(2, vulcano.Position.Y);
         }
         [TestMethod]
-        public void ActivateAndKillOrganismsTest()
+        public void VulcanoActivateTest()
         {
 
             plant.Terrarium = testTerrarium;
@@ -50,7 +50,7 @@ namespace TerraLibraryTests
             testTerrarium.Organisms.Add(carnivore);
             testTerrarium.Organisms.Add(human);
             Assert.AreEqual(4, testTerrarium.Organisms.Count);
-            vulcano.ActivateAndKillOrganisms(testTerrarium, time);
+            vulcano.Activate(testTerrarium, time);
             Assert.AreEqual(0, testTerrarium.Organisms.Count);
         }
     }
