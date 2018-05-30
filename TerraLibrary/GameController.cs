@@ -40,9 +40,10 @@ namespace TerraLibrary
                 }
                 return true;
             }
-            catch(SerializationException)
+            catch(SerializationException ex)
             {
-                throw new Exception("Fout bij het serializeren");
+                Console.WriteLine(ex.Message);
+                return false;
             }
             catch (Exception ex)
             {
@@ -63,10 +64,11 @@ namespace TerraLibrary
                     TerrariumSettings = world.TerrariumSettings;
                     WorldController.Start();
                 }
+                
             }
-            catch
+            catch (Exception ex)
             {
-                ScreenController.GameScreen(new TerrariumSettings(), "LOAD FAILED");
+                ScreenController.GameScreen(new TerrariumSettings(), ex.Message);
             }
             
             
