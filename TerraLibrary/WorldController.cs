@@ -14,7 +14,7 @@ namespace TerraLibrary
         public TimeController TimeController { get; set; }
         public TerrariumSettings TerrariumSettings { get; set; }
 
-        private ScreenController ScreenController = new ScreenController();
+        private ScreenController ScreenController { get; set; }
 
         /* Constructor */
         public WorldController(Terrarium terrarium,TimeController timecontroller,TerrariumSettings terrariumSettings)
@@ -23,11 +23,12 @@ namespace TerraLibrary
             Terrarium = terrarium;
             TimeController = timecontroller;
         }
-        public WorldController(TerrariumSettings terrariumSettings)
+        public WorldController(TerrariumSettings terrariumSettings, ScreenController screenController)
         {
             TerrariumSettings = terrariumSettings;
             Terrarium = new Terrarium(TerrariumSettings.Width, TerrariumSettings.Height);
             TimeController = new TimeController(-1000000, Terrarium);
+            ScreenController = screenController;
         }
         
 

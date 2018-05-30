@@ -12,6 +12,10 @@ namespace TerraLibrary
     public class ScreenController
     {
         public GameController GameController { get; set; }
+        public ScreenController(GameController gameController)
+        {
+            GameController = gameController;
+        }
         private static Dictionary<string, String[]> ASCIIART = new Dictionary<string, String[]>()
         {
             { "demo", new string[]
@@ -45,7 +49,18 @@ namespace TerraLibrary
                     @"                           __/ |    ",
                     @"                          |___/     "
                 }
+            },
+            { "pause", new String[]
+                {
+                    @" _____                     ",
+                    @"|  __ \                    ",                 
+                    @"| |__) |_ _ _   _ ___  ___ ",
+                    @"|  ___/ _` | | | / __|/ _ \",
+                    @"| |  | (_| | |_| \__ \  __/",
+                    @"|_|   \__,_|\__,_|___/\___|"
+                }
             }
+
         };
 
         public void LoadScreens(TerrariumSettings terrariumSettings)
@@ -189,6 +204,8 @@ namespace TerraLibrary
             else
             {
                 Console.Clear();
+                Console.WriteLine(filePaths[selectedItem].ToString());
+                Console.ReadLine();
                 GameController.LoadGame(filePaths[selectedItem].ToString());
             }
         }
@@ -203,6 +220,8 @@ namespace TerraLibrary
             Console.SetWindowSize(120, 30);
             // Set buffersize to remove scroll bars from window
             Console.SetBufferSize(120, 30);
+            // Print ASCIIART "Terrarium"
+            PrintASCIIArt(2, ASCIIART["pause"]);
             // Print menu buttons
             int selectedItem = Menu.MultipleChoice(37, 21, true, "SAVE GAME", "CONTINUE", "QUIT");
 
