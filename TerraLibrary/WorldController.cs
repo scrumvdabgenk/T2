@@ -12,12 +12,14 @@ namespace TerraLibrary
         /* Properties*/
         public Terrarium Terrarium { get; set; }
         public TimeController TimeController { get; set; }
+        public TerrariumSettings TerrariumSettings { get; set; }
 
         /* Constructor */
-        public WorldController(Terrarium terrarium, TimeController timeController)
+        public WorldController(TerrariumSettings terrariumSettings)
         {
-            Terrarium = terrarium;
-            TimeController = timeController;
+            TerrariumSettings = terrariumSettings;
+            Terrarium = new Terrarium(TerrariumSettings.Width, TerrariumSettings.Height);
+            TimeController = new TimeController(-1000000);
         }
 
         /* Methods */

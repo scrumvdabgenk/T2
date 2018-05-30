@@ -12,15 +12,13 @@ namespace TerraTeam2
         static void Main(string[] args)
         {
             // Splash screen
-            var splashScreen = new SplashScreen();
-            if (splashScreen.LoadGame())
+            var screenController = new ScreenController();
+            var terrariumSettings = new TerrariumSettings();
+            screenController.LoadGame(terrariumSettings);
             {
 
                 // Create new game (worldcontroller and its terrarium)
-                WorldController worldController = new WorldController(
-                    new Terrarium(64, 48),
-                    new TimeController(-1500000)
-                    );
+                WorldController worldController = new WorldController(terrariumSettings);
                 // Start the game
                 worldController.Start();
             }

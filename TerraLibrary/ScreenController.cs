@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace TerraLibrary
 {
-    
-    public class SplashScreen
+
+    public class ScreenController
     {
         private static Dictionary<string, String[]> ASCIIART = new Dictionary<string, String[]>()
         {
@@ -46,33 +46,19 @@ namespace TerraLibrary
             }
         };
 
-        public bool LoadGame()
+        public void LoadGame(TerrariumSettings terrariumSettings)
         {
-            DemoScreen();
-            var selectedItem = MainScreen();
-
-            // Menu actions
-            switch (selectedItem)
-            {
-                case 0:                
-                    LoadingScreen();
-                    return true;
-                case 1:
-                    SettingsScreen();
-                    return true;
-                case 2:
-                    Console.Clear();
-                    return false;
-                default:
-                    return false;
-            }
+            StartScreen();
+            GameScreen(terrariumSettings);
         }
 
-        public void DemoScreen()
+        public void StartScreen()
         {
             // Print ASCIIART "Terrarium"
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             PrintASCIIArt(5, ASCIIART["terrarium"]);
             // Print ASCIIART "Demo"
+            Console.ForegroundColor = ConsoleColor.White;
             PrintASCIIArt(14, ASCIIART["demo"]);
             // Print credits
             PrintCredits(24);
@@ -81,10 +67,11 @@ namespace TerraLibrary
             // Clear console to begin game
             Console.Clear();
         }
-        
-        public int MainScreen()
+
+        public void GameScreen(TerrariumSettings terrariumSettings)
         {
             // Print ASCIIART "Terrarium"
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             PrintASCIIArt(2, ASCIIART["terrarium"]);
 
             // Create introtext array
@@ -98,9 +85,10 @@ namespace TerraLibrary
             };
 
             // Print introText
+            Console.ForegroundColor = ConsoleColor.White;
             var lineCounter = 10;
             foreach (var line in intro)
-            { 
+            {
                 var windowCenter = (Console.WindowWidth - line.Length) / 2;
                 Console.SetCursorPosition(windowCenter, lineCounter);
                 Console.WriteLine(line);
@@ -108,24 +96,52 @@ namespace TerraLibrary
             }
 
             // Print menu buttons
-            int selectedItem = ConsoleHelper.MultipleChoice(45, 21, true, "START GAME", "SETTINGS", "QUIT");
+            int selectedItem = Menu.MultipleChoice(42, 21, true, "START GAME", "SETTINGS", "QUIT");
 
-            // Clear console
-            Console.Clear();
-
-            // Return selected menu item
-            return selectedItem;
+            // Menu actions
+            switch (selectedItem)
+            {
+                case 0:
+                    Console.Clear();
+                    LoadingScreen();
+                    break;
+                case 1:
+                    Console.Clear();
+                    SettingsScreen(terrariumSettings);
+                    break;
+                case 2:
+                    Console.Clear();
+                    break;
+                default:
+                    break;
+            }
         }
 
-        public void SettingsScreen()
+        public void SettingsScreen(TerrariumSettings terrariumSettings)
         {
             // Print ASCIIART "Terrarium"
             PrintASCIIArt(2, ASCIIART["settings"]);
 
-            // Press Enter to continue
-            Console.ReadLine();
-            // Clear console to begin game
-            Console.Clear();
+            // Loop through props to change settings
+            terrariumSettings.ChangeSettings();
+
+            // Print menu buttons
+            int selectedItem = Menu.MultipleChoice(14, 25, true, "SAVE CHANGES", "BACK (without saving)");
+
+            // Menu actions
+            switch (selectedItem)
+            {
+                case 0:
+                    Console.Clear();
+                    GameScreen(terrariumSettings);
+                    break;
+                case 1:
+                    Console.Clear();
+                    terrariumSettings.ResetSettings();
+                    GameScreen(terrariumSettings);
+                    break;
+
+            }
         }
 
 
@@ -164,10 +180,11 @@ namespace TerraLibrary
         {
             string loadingStr = "";
             var windowCenter = (Console.WindowWidth - 10) / 2;
-            Console.SetCursorPosition(windowCenter, 13);
+            Console.SetCursorPosition(windowCenter, 12);
             Console.WriteLine("LOADING...");
             for (var i = 0; i < 40; i++)
             {
+                Console.CursorVisible = false;
                 if (i == 1)
                     loadingStr = StringManager.GetExtendedAsciiCodeAsString(177);
                 else
@@ -179,13 +196,6 @@ namespace TerraLibrary
             }
             Console.Clear();
         }
-
-        
-
-
- 
-
-
 
 
     }
