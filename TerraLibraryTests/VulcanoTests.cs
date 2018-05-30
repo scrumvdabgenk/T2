@@ -33,7 +33,7 @@ namespace TerraLibraryTests
             Assert.AreEqual(2, vulcano.Position.Y);
         }
         [TestMethod]
-        public void ActivateAndKillOrganismsTest()
+        public void VulcanoActivateTest()
         {
 
             plant.Terrarium = testTerrarium;
