@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -100,7 +101,7 @@ namespace TerraLibrary
             }
 
             // Print menu buttons
-            int selectedItem = Menu.MultipleChoice(42, 21, true, "START GAME", "SETTINGS", "QUIT");
+            int selectedItem = Menu.MultipleChoice(42, 21, true, "START GAME", "LOAD GAME", "SETTINGS", "QUIT");
 
             // Menu actions
             switch (selectedItem)
@@ -110,6 +111,10 @@ namespace TerraLibrary
                     LoadingScreen();
                     break;
                 case 1:
+                    Console.Clear();
+                    LoadScreen();
+                    break;
+                case 2:
                     Console.Clear();
                     SettingsScreen(terrariumSettings);
                     break;
@@ -142,6 +147,31 @@ namespace TerraLibrary
                     Console.Clear();
                     terrariumSettings.ResetSettings();
                     GameScreen(terrariumSettings);
+                    break;
+
+            }
+        }
+
+        public void LoadScreen()
+        {
+            string[] filePaths = Directory.GetFiles(@"c:\dir");
+            for (int i = 0; i < filePaths.Length; ++i)
+            {
+                string path = filePaths[i];
+                Console.WriteLine(System.IO.Path.GetFileName(path));
+            }
+
+            // Print menu buttons
+            int selectedItem = Menu.MultipleChoice(14, 25, true, "SAVE CHANGES", "BACK (without saving)");
+
+            // Menu actions
+            switch (selectedItem)
+            {
+                case 0:
+                    Console.Clear();                  
+                   break;
+                case 1:
+                    Console.Clear();
                     break;
 
             }
