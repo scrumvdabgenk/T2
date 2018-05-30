@@ -48,6 +48,10 @@ namespace TerraLibrary
 
         public void LoadGame(TerrariumSettings terrariumSettings)
         {
+            // Scale window size with Terrarium width and height
+            Console.SetWindowSize(120, 30);
+            // Set buffersize to remove scroll bars from window
+            Console.SetBufferSize(120, 30);
             StartScreen();
             GameScreen(terrariumSettings);
         }
