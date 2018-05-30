@@ -25,8 +25,8 @@ namespace TerraLibrary
         /* Methods */
         public void Start()
         {
-            int width = Terrarium.Width > 120 ? Terrarium.Width + 1 : 121;
-            int height = Terrarium.Height > 30 ? Terrarium.Height + 5 : 35;
+            int width = Terrarium.Width + 1;
+            int height = Terrarium.Height + 5;
             // Scale window size with Terrarium width and height
             Console.SetWindowSize(width, height);
             // Set buffersize to remove scroll bars from window
@@ -75,15 +75,15 @@ namespace TerraLibrary
             Terrarium.CreateEmptyTerrarium();
 
             // Add Organisms to List
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < TerrariumSettings.Carnivores; i++)
             {
                 addIOrganism(new Carnivore());
             }
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < TerrariumSettings.Herbivores; i++)
             {
                 addIOrganism(new Herbivore());
             }
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < TerrariumSettings.Plants; i++)
             {
                 addIOrganism(new Plant());
             }

@@ -8,18 +8,91 @@ namespace TerraLibrary
 {
     public class TerrariumSettings
     {
+        // Properties
+        private Dictionary<string, Tuple<string, int, int>> PropErrors = new Dictionary<string, Tuple<string, int, int>>();
         private int height;
+        private int width;
+        private int plants;
+        private int herbivores;
+        private int carnivores;
+        private int humans;
 
-        public int Height { get; set; }
-        public int Width { get; set; }
-        public int Plants { get; set; }
-        public int Herbivores { get; set; }
-        public int Carnivores { get; set; }
-        public int Humans { get; set; }
-        public Frame DictionaryFrame { get; set; }
+        // Getters and Setters for properties
+        public int Height
+        {
+            get { return height; }
+            set
+            {              
+                height = value;
 
-        private static Dictionary<string, string> PropErrors { get; set; }
+                // Set the PropErrors
+                PropErrors["Height"] = new Tuple<string, int, int>("Height must be between 15 and ", 15, Console.LargestWindowHeight - 5);
+                ChangeTupples(Width, Height);
+            }
+        }
+        
+        public int Width
+        {
+            get { return width; }
+            set
+            {
+                width = value;
+                ChangeTupples(Width, Height);
 
+                // Set the PropErrors
+                PropErrors["Width"] = new Tuple<string, int, int>("Height must be between 15 and ", 15, Console.LargestWindowWidth - 1);
+            }
+        }
+
+        public int Plants
+        {
+            get { return plants; }
+            set
+            {              
+                plants = value;
+
+                // Set PropError
+                PropErrors["Plants"] = new Tuple<string, int, int>("Plants can be max ", 0, (Height * Width / 4));
+            }
+        }
+
+        public int Herbivores
+        {
+            get { return herbivores; }
+            set
+            {
+                herbivores = value;
+
+                // Set PropError
+                PropErrors["Herbivores"] = new Tuple<string, int, int>("Herbivores can be max ", 0, (Height * Width / 4));
+            }
+        }
+
+        public int Carnivores
+        {
+            get { return carnivores; }
+            set
+            {
+                carnivores = value;
+
+                // Set PropError
+                PropErrors["Carnivores"] = new Tuple<string, int, int>("Carnivores can be max ", 0, (Height * Width / 4));
+            }
+        }
+
+        public int Humans
+        {
+            get { return humans; }
+            set
+            {  
+                humans = value;
+
+                // Set PropError
+                PropErrors["Humans"] = new Tuple<string, int, int>("Humans can be max ", 0, (Height * Width / 4));
+            }
+        }
+
+        // Constructor
         public TerrariumSettings()
         {
             Height = 20;
@@ -27,19 +100,11 @@ namespace TerraLibrary
             Plants = 10;
             Herbivores = 10;
             Carnivores = 10;
-            Humans = 10;
-
-            PropErrors = new Dictionary<string, string>()
-            {
-                { "Height" , "Height must be between 15 and " + (Console.LargestWindowHeight - 5) },
-                { "Width" , "Width must be between 15 and " + (Console.LargestWindowWidth -1) },
-                { "Plants" , "Plants can be max " + (this.Height* this.Width / 4) },
-                { "Herbivores" , "Herbivores can be max " + (this.Height* this.Width / 4) },
-                { "Carnivores" , "Carnivores can be max " + (this.Height* this.Width / 4) },
-                { "Humans" , "Humans can be max " + (this.Height* this.Width / 4) }
-            };
+            Humans = 10;      
         }
 
+
+        // Methods
         public void ResetSettings()
         {
             Height = 20;
@@ -69,21 +134,20 @@ namespace TerraLibrary
         {
             int number;
             bool isNotAcceptableNumber = true;
-            
-
+           
             do
             {
-                
                 Console.SetCursorPosition(14, cursorPosition);
                 Console.Write(prop + ": ");
                 if (int.TryParse(Console.ReadLine(), out number))
                 {
-                    isNotAcceptableNumber = false;
+                    if (number >= PropErrors[prop].Item2 && number <= PropErrors[prop].Item3 )
+                        isNotAcceptableNumber = false;
                 }
-                else
+                if (isNotAcceptableNumber)
                 {
                     Console.SetCursorPosition(14, cursorPosition + 1);
-                    Console.Write(PropErrors[prop]);
+                    Console.Write(PropErrors[prop].Item1 + PropErrors[prop].Item3);
                 }
             } while (isNotAcceptableNumber);
 
@@ -93,19 +157,20 @@ namespace TerraLibrary
 
             return number;
         }
-    }
 
-    public class Frame
-    {
-        public string Name { get; set; }
-        public int Min { get; set; }
-        public int Max { get; set; }
 
-        public Frame(string name, int min, int max)
+        // Change the organism tupples when Height or Width are changed
+        public void ChangeTupples(int width, int height)
         {
-            Name = name;
-            Min = min;
-            Max = max;
+            PropErrors.Remove("Plants");
+            PropErrors.Remove("Herbivores");
+            PropErrors.Remove("Carnivores");
+            PropErrors.Remove("Humans");
+            int max = (height * width) / 4;
+            PropErrors["Plants"] = new Tuple<string, int, int>("Plants can be max ", 0, max);
+            PropErrors["Herbivores"] = new Tuple<string, int, int>("Herbivores can be max ", 0, max);
+            PropErrors["Carnivores"] = new Tuple<string, int, int>("Carnivores can be max ", 0, max);
+            PropErrors["Humans"] = new Tuple<string, int, int>("Humans can be max ", 0, max);
         }
     }
 }

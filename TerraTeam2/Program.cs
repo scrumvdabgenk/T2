@@ -15,13 +15,11 @@ namespace TerraTeam2
             var screenController = new ScreenController();
             var terrariumSettings = new TerrariumSettings();
             screenController.LoadGame(terrariumSettings);
-            {
 
-                // Create new game (worldcontroller and its terrarium)
-                WorldController worldController = new WorldController(terrariumSettings);
-                // Start the game
-                worldController.Start();
-            }
+            // Create new game (worldcontroller and its terrarium)
+            WorldController worldController = new WorldController(terrariumSettings);
+            // Start the game
+            worldController.Start();
         }
     }
 }
