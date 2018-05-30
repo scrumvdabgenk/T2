@@ -23,7 +23,6 @@ namespace TerraLibrary
 
             do
             {
-
                 for (int i = 0; i < options.Length; i++)
                 {
                     Console.SetCursorPosition(startX + (i % optionsPerLine) * spacingPerLine, startY + i / optionsPerLine);

@@ -14,6 +14,8 @@ namespace TerraLibrary
         public TimeController TimeController { get; set; }
         public TerrariumSettings TerrariumSettings { get; set; }
 
+        private ScreenController ScreenController = new ScreenController();
+
         /* Constructor */
         public WorldController(Terrarium terrarium,TimeController timecontroller,TerrariumSettings terrariumSettings)
         {
@@ -55,9 +57,9 @@ namespace TerraLibrary
 
         private void GameLoop()
         {
-
+            bool isNotPaused = true;
             // Go to next day if user input != stop and there is space left in the terrarium
-            while (Terrarium.IsEmptySpaceInTerrarium())
+            do
             {
                 do
                 {
@@ -67,11 +69,27 @@ namespace TerraLibrary
                         NextDay();
                         TimeController.Step();
                     }
-                } while (Console.ReadKey(true).Key != ConsoleKey.Spacebar);
-                
-                // When users presses space spawn a vulcano
-                SpawnVulcano();
-            }
+                } while (Console.ReadKey(true).Key != ConsoleKey.Spacebar&& isNotPaused);
+
+                //if (Console.ReadKey(true).Key == ConsoleKey.Spacebar)
+                    PauseGame(isNotPaused);
+               
+
+            } while (Terrarium.IsEmptySpaceInTerrarium() && isNotPaused);
+        }
+
+        private void PauseGame(bool isNotPaused)
+        {
+            isNotPaused = false;
+            isNotPaused = ScreenController.PauseGame(this);
+            int width = Terrarium.Width + 1;
+            int height = Terrarium.Height + 5;        
+            Console.SetWindowSize(width, height);
+            Console.SetBufferSize(width, height);
+            Console.Clear();
+            Terrarium.CreateEmptyTerrarium();
+            Terrarium.RenderAnimals();
+            Terrarium.RenderPlants();
         }
 
         private void FirstDay()

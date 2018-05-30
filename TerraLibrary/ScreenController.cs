@@ -57,6 +57,7 @@ namespace TerraLibrary
             GameScreen(terrariumSettings, "");
         }
 
+        // START SCREEN
         public void StartScreen()
         {
             Console.CursorVisible = false;
@@ -74,6 +75,7 @@ namespace TerraLibrary
             Console.Clear();
         }
 
+        // MAIN SCREEN
         public void GameScreen(TerrariumSettings terrariumSettings, string statusUpdate)
         {
             // Print ASCIIART "Terrarium"
@@ -133,6 +135,7 @@ namespace TerraLibrary
             }
         }
 
+        // SETTINGS
         public void SettingsScreen(TerrariumSettings terrariumSettings)
         {
             // Print ASCIIART "Terrarium"
@@ -189,6 +192,22 @@ namespace TerraLibrary
                 //GameController.LoadGame(filePaths[selectedItem].ToString());
             }
         }
+
+
+
+        // PAUSE GAME SCREEN
+        public bool PauseGame(WorldController worldController)
+        {
+            Console.Clear();
+            // Scale window size with Terrarium width and height
+            Console.SetWindowSize(120, 30);
+            // Set buffersize to remove scroll bars from window
+            Console.SetBufferSize(120, 30);
+            Console.WriteLine(worldController.Terrarium.Organisms.Count);
+            Console.ReadLine();
+            return true;
+        }
+
 
 
         // Print ASCIIART from dictionary
