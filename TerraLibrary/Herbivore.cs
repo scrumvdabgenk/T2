@@ -20,11 +20,13 @@ namespace TerraLibrary
         {
             DisplayColor = GetHealthColor(Health);
             DisplayLetter = Letter;
+            Health = random.Next(1, 4);
         }
         public Herbivore()
         {
             DisplayColor = GetHealthColor(Health);
             DisplayLetter = Letter;
+            Health = random.Next(1, 4);
         }
         public void Breed(List<IOrganism> toAdd)
         {
@@ -51,7 +53,7 @@ namespace TerraLibrary
             {
                 color = Color2;
             }
-            else if (health < 10)
+            else if (health < 9)
             {
                 color = Color3;
             }

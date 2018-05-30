@@ -49,6 +49,7 @@
     <Compile Include="IDisaster.cs" />
     <Compile Include="IOrganism.cs" />
     <Compile Include="Menu.cs" />
+    <Compile Include="SaveObject.cs" />
     <Compile Include="ScreenController.cs" />
     <Compile Include="StringManager.cs" />
     <Compile Include="TerrariumSettings.cs" />
