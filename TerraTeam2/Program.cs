@@ -11,15 +11,8 @@ namespace TerraTeam2
     {
         static void Main(string[] args)
         {
-            // Splash screen
-            var screenController = new ScreenController();
-            var terrariumSettings = new TerrariumSettings();
-            screenController.LoadGame(terrariumSettings);
-
-            // Create new game (worldcontroller and its terrarium)
-            WorldController worldController = new WorldController(terrariumSettings);
-            // Start the game
-            worldController.Start();
+            var GameController = new GameController();
+            GameController.StartGame();
         }
     }
 }
