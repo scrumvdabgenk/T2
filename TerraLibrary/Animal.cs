@@ -167,6 +167,7 @@ namespace TerraLibrary
         }
         public void Eat(IOrganism organism,List<IOrganism> toDelete)
         {
+            AudioController.PlayEat();
             AddHealth(organism.Health);
             toDelete.Add(organism);
             Move(2);

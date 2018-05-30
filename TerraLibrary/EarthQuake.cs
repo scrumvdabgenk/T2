@@ -22,7 +22,7 @@ namespace TerraLibrary
 
         public void Activate(Terrarium terrarium, TimeController timeController)
         {
-            AudioController.PlayVulcano();
+            AudioController.PlayEarthquake();
 
             List<Position> earthQuakePositions = new List<Position>();
             List<IOrganism> organismsToShuffle = new List<IOrganism>();

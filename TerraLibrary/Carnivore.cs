@@ -47,7 +47,7 @@ namespace TerraLibrary
                     Move(2);
                 }
             }
-            else
+            else // If other carnivore
             {
                 if (organism.Health > Health)
                 {
@@ -61,6 +61,8 @@ namespace TerraLibrary
                     Move(2);
                 }
             }
+
+            AudioController.PlayFight();
             
         }
 
