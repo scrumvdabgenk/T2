@@ -109,9 +109,10 @@ namespace TerraLibrary
             {
                 organism.LastPosition.X = organism.Position.X;
                 organism.LastPosition.Y = organism.Position.Y;
-                
-                organism.Position.X = earthQuakePositions[random.Next(earthQuakePositions.Count)].X;
-                organism.Position.Y = earthQuakePositions[random.Next(earthQuakePositions.Count)].Y;
+
+                Position randomPositionInQuake = earthQuakePositions[random.Next(earthQuakePositions.Count)];
+                organism.Position.X = randomPositionInQuake.X;
+                organism.Position.Y = randomPositionInQuake.Y;
 
             }
 
