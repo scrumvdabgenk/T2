@@ -18,13 +18,13 @@ namespace TerraLibrary
         public GameController()
         {
             TerrariumSettings = new TerrariumSettings();
-            ScreenController = new ScreenController();
+            ScreenController = new ScreenController(this);
         }
 
         public void StartGame()
         {
             ScreenController.LoadScreens(TerrariumSettings);
-            WorldController = new WorldController(TerrariumSettings);
+            WorldController = new WorldController(TerrariumSettings, ScreenController);
             WorldController.Start();
         }
         public bool SaveGame()
