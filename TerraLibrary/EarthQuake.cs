@@ -9,6 +9,17 @@ namespace TerraLibrary
 {
     public class EarthQuake : IDisaster
     {
+        private Position position;
+
+        public EarthQuake()
+        {
+        }
+
+        public EarthQuake(Position position)
+        {
+            this.position = position;
+        }
+
         Position IDisaster.Position
         {
             get
@@ -21,7 +32,7 @@ namespace TerraLibrary
                 throw new NotImplementedException();
             }
         }
-
+        
         void IDisaster.ActivateAndKillOrganisms(Terrarium terrarium, TimeController timeController)
         {
             throw new NotImplementedException();
