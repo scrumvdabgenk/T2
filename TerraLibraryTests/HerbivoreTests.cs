@@ -68,7 +68,9 @@ namespace TerraLibraryTests
             Position herbivorePosition = new Position(1, 1);
             Position plantPosition = new Position(2, 1);
             herbivore = new Herbivore(herbivorePosition, BeginTerrarium);
-            testPlant = new Plant(plantPosition, BeginTerrarium);
+            testPlant = new Plant();
+            testPlant.Position = plantPosition;
+            testPlant.Terrarium = BeginTerrarium;
             var health = herbivore.Health;
             herbivore.Eat(testPlant, toDelete);
             // health moet met één verhogen als plant wordt gegeten

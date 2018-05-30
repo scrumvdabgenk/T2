@@ -12,7 +12,10 @@ namespace TerraLibraryTests
         public void NieuwePlantHeeftLevenskrachtEen()
         {
             Terrarium testTerrarium = new Terrarium(3,3);
-            Assert.AreEqual(1, new Plant(new Position(1,1),testTerrarium).Health);
+            Plant plant = new Plant();
+            plant.Position = new Position(1, 1);
+            plant.Terrarium = testTerrarium;
+            Assert.AreEqual(1, plant.Health);
         }
     }
    

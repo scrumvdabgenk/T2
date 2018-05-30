@@ -13,6 +13,12 @@ namespace TerraLibraryTests
         {
             testTerrarium = new Terrarium(6, 6);
         }
-     
+        [TestMethod]
+        public void TerrariumConstructortest()
+        {
+            testTerrarium = new Terrarium(4, 5);
+            Assert.AreEqual(4, testTerrarium.Width);
+            Assert.AreEqual(5, testTerrarium.Height);
+        }
     }
 }
