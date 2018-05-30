@@ -50,7 +50,7 @@ namespace TerraLibraryTests
             testTerrarium.Organisms.Add(carnivore);
             testTerrarium.Organisms.Add(human);
             Assert.AreEqual(4, testTerrarium.Organisms.Count);
-            vulcano.ActivateAndKillOrganisms(testTerrarium, time);
+            vulcano.Activate(testTerrarium, time);
             Assert.AreEqual(0, testTerrarium.Organisms.Count);
         }
     }
