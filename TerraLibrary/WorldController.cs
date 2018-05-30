@@ -19,7 +19,7 @@ namespace TerraLibrary
         {
             TerrariumSettings = terrariumSettings;
             Terrarium = new Terrarium(TerrariumSettings.Width, TerrariumSettings.Height);
-            TimeController = new TimeController(-1000000);
+            TimeController = new TimeController(-1000000, Terrarium);
         }
 
         /* Methods */
@@ -89,6 +89,10 @@ namespace TerraLibrary
             // Render the animals
             Terrarium.RenderAnimals();
 
+            // Update timestep according to n organisms (1000 / animals)
+            // This way turns always last 1000 ms
+            TimeController.SetStepTimeout(1000);
+
             // Wait for input
             Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(0, Terrarium.Height + 3);
@@ -118,6 +122,10 @@ namespace TerraLibrary
 
             // Print Terrarium to console
             Terrarium.RenderAnimals();
+
+            // Update timestep according to n organisms (1000 / animals)
+            // This way turns always last 1000 ms
+            TimeController.SetStepTimeout(1000);
         }
 
         private void SpawnVulcano ()
