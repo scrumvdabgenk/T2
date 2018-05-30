@@ -31,6 +31,7 @@ namespace TerraLibrary
         public void Breed(List<IOrganism> toAdd)
         {
             toAdd.Add(new Herbivore(Position.GenerateRandomEmptyPosition(Terrarium), Terrarium));
+            AudioController.PlayBreed();
         }
 
         public override void AddHealth(int amount)

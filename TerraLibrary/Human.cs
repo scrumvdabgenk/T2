@@ -40,6 +40,7 @@ namespace TerraLibrary
                 AddHealth(animal.Health);
                 Move(2);
             }
+            AudioController.PlayFight();
         }
 
         public override void AddHealth(int amount)
