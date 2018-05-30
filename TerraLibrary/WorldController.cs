@@ -16,12 +16,21 @@ namespace TerraLibrary
 
         private ScreenController ScreenController { get; set; }
 
+        private bool loadedGame = false;
+
         /* Constructor */
         public WorldController(Terrarium terrarium,TimeController timecontroller,TerrariumSettings terrariumSettings)
         {
             TerrariumSettings = terrariumSettings;
             Terrarium = terrarium;
             TimeController = timecontroller;
+        }
+        public WorldController(Terrarium terrarium, TimeController timecontroller, TerrariumSettings terrariumSettings, bool loaded)
+        {
+            TerrariumSettings = terrariumSettings;
+            Terrarium = terrarium;
+            TimeController = timecontroller;
+            loadedGame = loaded;
         }
         public WorldController(TerrariumSettings terrariumSettings, ScreenController screenController)
         {
@@ -51,32 +60,6 @@ namespace TerraLibrary
             // Initial day (different from regular next day)
             FirstDay();
             TimeController.Step();
-
-            // Game loop (user presses enter to see terrarium)
-            GameLoop();
-
-            // Close game
-            Terrarium.RenderAnimals();
-            Console.SetCursorPosition(0, Terrarium.Height + 4);
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Thanks for playing!");
-        }
-
-        public void LoadGame()
-        {
-            int width = Terrarium.Width + 1;
-            int height = Terrarium.Height + 5;
-            // Scale window size with Terrarium width and height
-            Console.SetWindowSize(width, height);
-            // Set buffersize to remove scroll bars from window
-            Console.SetBufferSize(width, height);
-
-
-            // Initial day (different from regular next day)
-            Terrarium.RenderAnimals();
-            Terrarium.RenderPlants();
-            TimeController.Step();
-
 
             // Game loop (user presses enter to see terrarium)
             GameLoop();
@@ -145,26 +128,32 @@ namespace TerraLibrary
             // Print the terrarium to the console using colors
             Terrarium.CreateEmptyTerrarium();
 
-            // Add Organisms to List
-            for (int i = 0; i < TerrariumSettings.Carnivores; i++)
+            if(!loadedGame)
             {
-                addIOrganism(new Carnivore());
+                // Add Organisms to List
+                for (int i = 0; i < TerrariumSettings.Carnivores; i++)
+                {
+                    addIOrganism(new Carnivore());
+                }
+                for (int i = 0; i < TerrariumSettings.Herbivores; i++)
+                {
+                    addIOrganism(new Herbivore());
+                }
+                for (int i = 0; i < TerrariumSettings.Plants; i++)
+                {
+                    addIOrganism(new Plant());
+                }
+                for (int i = 0; i < TerrariumSettings.Humans; i++)
+                {
+                    addIOrganism(new Human());
+                }
             }
-            for (int i = 0; i < TerrariumSettings.Herbivores; i++)
-            {
-                addIOrganism(new Herbivore());
-            }
-            for (int i = 0; i < TerrariumSettings.Plants; i++)
-            {
-                addIOrganism(new Plant());
-            }
-            for (int i = 0; i < TerrariumSettings.Humans; i++)
-            {
-                addIOrganism(new Human());
-            }
+
+            
 
             // Render the animals
             Terrarium.RenderAnimals();
+            Terrarium.RenderPlants();
 
             // Update timestep according to n organisms (n / animals)
             // This way turns always last n ms
