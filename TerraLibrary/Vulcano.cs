@@ -48,6 +48,7 @@ namespace TerraLibrary
                     organismsToDelete.Add(organism);
                 }
             }
+           
 
             foreach(IOrganism organism in organismsToDelete)
             {
