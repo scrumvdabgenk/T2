@@ -204,8 +204,7 @@ namespace TerraLibrary
             else
             {
                 Console.Clear();
-                Console.WriteLine(filePaths[selectedItem].ToString());
-                Console.ReadLine();
+                LoadingScreen();
                 GameController.LoadGame(filePaths[selectedItem].ToString());
             }
         }
@@ -221,6 +220,7 @@ namespace TerraLibrary
             // Set buffersize to remove scroll bars from window
             Console.SetBufferSize(120, 30);
             // Print ASCIIART "Terrarium"
+            Console.ForegroundColor = ConsoleColor.White;
             PrintASCIIArt(2, ASCIIART["pause"]);
             // Print menu buttons
             int selectedItem = Menu.MultipleChoice(37, 21, true, "SAVE GAME", "CONTINUE", "QUIT");

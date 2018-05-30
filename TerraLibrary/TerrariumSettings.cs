@@ -96,8 +96,8 @@ namespace TerraLibrary
         // Constructor
         public TerrariumSettings()
         {
-            Height = 20;
-            Width = 50;
+            Height = 25;
+            Width = 119;
             Plants = 10;
             Herbivores = 10;
             Carnivores = 10;
