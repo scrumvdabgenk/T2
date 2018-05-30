@@ -87,13 +87,17 @@ namespace TerraLibrary
             {
                 addIOrganism(new Plant());
             }
+            for (int i = 0; i < TerrariumSettings.Humans; i++)
+            {
+                addIOrganism(new Human());
+            }
 
             // Render the animals
             Terrarium.RenderAnimals();
 
-            // Update timestep according to n organisms (1000 / animals)
-            // This way turns always last 1000 ms
-            TimeController.SetStepTimeout(1000);
+            // Update timestep according to n organisms (n / animals)
+            // This way turns always last n ms
+            TimeController.SetStepTimeout();
 
             // Wait for input
             Console.ForegroundColor = ConsoleColor.White;
@@ -125,9 +129,9 @@ namespace TerraLibrary
             // Print Terrarium to console
             Terrarium.RenderAnimals();
 
-            // Update timestep according to n organisms (1000 / animals)
-            // This way turns always last 1000 ms
-            TimeController.SetStepTimeout(1000);
+            // Update timestep according to n organisms (n / animals)
+            // This way turns always last n ms
+            TimeController.SetStepTimeout();
         }
 
         private void SpawnVulcano ()
@@ -210,6 +214,27 @@ namespace TerraLibrary
                         else if (organismRight is Carnivore)
                         {
                             carnivore.Fight(organismRight, organismsToDelete);
+                        }
+                        else if (organismRight is Human)
+                        {
+                            carnivore.Fight(organismRight, organismsToDelete);
+                        }
+                        // After action re-render terrarium
+                        Terrarium.RenderAnimals();
+                        // Wait before rendering next step
+                        TimeController.Step();
+                    }
+                    else if (organism is Human)
+                    {
+                        Human human = organism as Human;
+                        IOrganism organismRight = human.CheckRight();
+                        if (organismRight == null || organismRight is Plant || organismRight is Herbivore)
+                        {
+                            human.Move();
+                        }
+                        else if (organismRight is Carnivore)
+                        {
+                            human.Fight(organismRight, organismsToDelete);
                         }
                         // After action re-render terrarium
                         Terrarium.RenderAnimals();

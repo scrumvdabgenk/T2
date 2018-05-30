@@ -12,6 +12,7 @@ namespace TerraLibrary
         public int TimeStep { get; set; }
         public Dictionary<int, string> EventsDict { get; set; }
         public int StepTimeout { get; set; }
+        public int StepTimeoutBase { get; set; }
         public Terrarium Terrarium { get; set; }
 
 
@@ -38,6 +39,9 @@ namespace TerraLibrary
 
             Day = startTime;
             ChangeTimeStep();
+            // Milliseconds per day
+            StepTimeoutBase = 500;
+            // Start step time, gets changed later according to amount of animals in list
             StepTimeout = 100;
             Terrarium = terrarium;
         }
@@ -52,15 +56,15 @@ namespace TerraLibrary
             Thread.Sleep(ms);
         }
 
-        public void SetStepTimeout(int dayTimeMs)
+        public void SetStepTimeout()
         {
             var animalList = Terrarium.Organisms.Where(o => o is Animal);
             if(animalList.Count() > 0)
             {
-                StepTimeout = dayTimeMs / animalList.Count();
+                StepTimeout = StepTimeoutBase / animalList.Count();
             } else
             {
-                StepTimeout = 100;
+                StepTimeout = StepTimeoutBase / 10;
             }
             
         }
