@@ -43,17 +43,17 @@ namespace TerraLibrary
 
         public static void PlayVulcano()
         {
-            //Console.Beep(notes["G5"], 400);
-            //Console.Beep(notes["G5"], 400);
-            //Console.Beep(notes["G5"], 400);
+            Console.Beep(notes["G5"], 400);
+            Console.Beep(notes["G5"], 400);
+            Console.Beep(notes["G5"], 400);
 
-            //Console.Beep(notes["Eb5"], 300);
-            //Console.Beep(notes["Bb5"], 100);
-            //Console.Beep(notes["G5"], 400);
+            Console.Beep(notes["Eb5"], 300);
+            Console.Beep(notes["Bb5"], 100);
+            Console.Beep(notes["G5"], 400);
 
-            //Console.Beep(notes["Eb5"], 300);
-            //Console.Beep(notes["Bb5"], 100);
-            //Console.Beep(notes["G5"], 400);
+            Console.Beep(notes["Eb5"], 300);
+            Console.Beep(notes["Bb5"], 100);
+            Console.Beep(notes["G5"], 400);
 
             for (int i = 0; i < 4; i++)
             {
@@ -63,19 +63,19 @@ namespace TerraLibrary
 
         public static void PlayEarthquake()
         {
-            //Console.Beep(notes["Bb5"], 150);
-            //Console.Beep(notes["C6"], 150);
+            Console.Beep(notes["Bb5"], 150);
+            Console.Beep(notes["C6"], 150);
 
-            //Console.Beep(notes["Bb5"], 75);
-            //Console.Beep(notes["A5"], 75);
-            //Console.Beep(notes["G5"], 150);
+            Console.Beep(notes["Bb5"], 75);
+            Console.Beep(notes["A5"], 75);
+            Console.Beep(notes["G5"], 150);
 
-            //Console.Beep(notes["Bb5"], 150);
-            //Console.Beep(notes["C6"], 150);
+            Console.Beep(notes["Bb5"], 150);
+            Console.Beep(notes["C6"], 150);
 
-            //Console.Beep(notes["Bb5"], 75);
-            //Console.Beep(notes["A5"], 75);
-            //Console.Beep(notes["G5"], 150);
+            Console.Beep(notes["Bb5"], 75);
+            Console.Beep(notes["A5"], 75);
+            Console.Beep(notes["G5"], 150);
 
             for (int i = 0; i < 5; i++)
             {

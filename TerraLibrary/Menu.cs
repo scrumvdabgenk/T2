@@ -12,7 +12,7 @@ namespace TerraLibrary
         {
             int startX = x;
             int startY = y;
-            const int optionsPerLine = 4;
+            const int optionsPerLine = 3;
             const int spacingPerLine = 14;
 
             int currentSelection = 0;

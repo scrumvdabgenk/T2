@@ -53,11 +53,21 @@ namespace TerraLibrary
             { "pause", new String[]
                 {
                     @" _____                     ",
-                    @"|  __ \                    ",                 
+                    @"|  __ \                    ",
                     @"| |__) |_ _ _   _ ___  ___ ",
                     @"|  ___/ _` | | | / __|/ _ \",
                     @"| |  | (_| | |_| \__ \  __/",
                     @"|_|   \__,_|\__,_|___/\___|"
+                }
+            },
+            { "howto", new String[]
+                {
+                    @" _    _            _______    ",
+                    @"| |  | |          |__   __|   ",
+                    @"| |__| | _____      _| | ___  ",
+                    @"|  __  |/ _ \ \ /\ / / |/ _ \ ",
+                    @"| |  | | (_) \ V  V /| | (_) |",
+                    @"|_|  |_|\___/ \_/\_/ |_|\___/ "
                 }
             }
 
@@ -76,6 +86,13 @@ namespace TerraLibrary
         // START SCREEN
         public void StartScreen()
         {
+
+            Thread beepThread = new Thread(new ThreadStart(song));
+            beepThread.IsBackground = true;
+
+                beepThread.Start();
+
+            //playMusic();
             Console.CursorVisible = false;
             // Print ASCIIART "Terrarium"
             Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -85,10 +102,26 @@ namespace TerraLibrary
             PrintASCIIArt(14, ASCIIART["demo"]);
             // Print credits
             PrintCredits(24);
+
+
+           
+
+
+
+
             // Press Enter to continue
             Console.ReadLine();
             // Clear console to begin game
             Console.Clear();
+            beepThread.Abort();
+        }
+
+       
+
+        public void song()
+        {
+            Console.Beep(659, 125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(523, 125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(784, 125); Thread.Sleep(375); Console.Beep(392, 125); Thread.Sleep(375); Console.Beep(523, 125); Thread.Sleep(250); Console.Beep(392, 125); Thread.Sleep(250); Console.Beep(330, 125); Thread.Sleep(250); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(494, 125); Thread.Sleep(125); Console.Beep(466, 125); Thread.Sleep(42); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(392, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(880, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(587, 125); Console.Beep(494, 125); Thread.Sleep(125); Console.Beep(523, 125); Thread.Sleep(250); Console.Beep(392, 125); Thread.Sleep(250); Console.Beep(330, 125); Thread.Sleep(250); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(494, 125); Thread.Sleep(125); Console.Beep(466, 125); Thread.Sleep(42); Console.Beep(440, 125); Thread.Sleep(125); Console.Beep(392, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(880, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(784, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(587, 125); Console.Beep(494, 125); Thread.Sleep(375); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(698, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(698, 125); Thread.Sleep(625); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(622, 125); Thread.Sleep(250); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(523, 125); Thread.Sleep(1125); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(698, 125); Thread.Sleep(125); Console.Beep(698, 125); Console.Beep(698, 125); Thread.Sleep(625); Console.Beep(784, 125); Console.Beep(740, 125); Console.Beep(698, 125); Thread.Sleep(42); Console.Beep(622, 125); Thread.Sleep(125); Console.Beep(659, 125); Thread.Sleep(167); Console.Beep(415, 125); Console.Beep(440, 125); Console.Beep(523, 125); Thread.Sleep(125); Console.Beep(440, 125); Console.Beep(523, 125); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(622, 125); Thread.Sleep(250); Console.Beep(587, 125); Thread.Sleep(250); Console.Beep(523, 125);
+
         }
 
         // MAIN SCREEN
@@ -127,7 +160,7 @@ namespace TerraLibrary
             Console.ForegroundColor = ConsoleColor.White;
 
             // Print menu buttons
-            int selectedItem = Menu.MultipleChoice(37, 21, true, "START GAME", "LOAD GAME", "SETTINGS", "QUIT");
+            int selectedItem = Menu.MultipleChoice(42, 21, true, "START GAME", "LOAD GAME", "HOW TO", "SETTINGS", "QUIT");
 
             // Menu actions
             switch (selectedItem)
@@ -142,6 +175,10 @@ namespace TerraLibrary
                     break;
                 case 2:
                     Console.Clear();
+                    HowToScreen();
+                    break;
+                case 3:
+                    Console.Clear();
                     SettingsScreen(terrariumSettings);
                     break;
                 default:
@@ -155,7 +192,9 @@ namespace TerraLibrary
         public void SettingsScreen(TerrariumSettings terrariumSettings)
         {
             // Print ASCIIART "Terrarium"
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             PrintASCIIArt(2, ASCIIART["settings"]);
+            Console.ForegroundColor = ConsoleColor.White;
 
             // Loop through props to change settings
             terrariumSettings.ChangeSettings();
@@ -220,10 +259,12 @@ namespace TerraLibrary
             // Set buffersize to remove scroll bars from window
             Console.SetBufferSize(120, 30);
             // Print ASCIIART "Terrarium"
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             PrintASCIIArt(2, ASCIIART["pause"]);
+            Console.ForegroundColor = ConsoleColor.White;
+            printHowTo(14, 10);
             // Print menu buttons
-            int selectedItem = Menu.MultipleChoice(37, 21, true, "SAVE GAME", "CONTINUE", "QUIT");
+            int selectedItem = Menu.MultipleChoice(32, 21, true, "SAVE GAME", "CONTINUE", "QUIT");
 
             // Menu actions
             switch (selectedItem)
@@ -254,6 +295,25 @@ namespace TerraLibrary
                 Console.SetCursorPosition(windowCenter, cursorTop);
                 Console.WriteLine(line);
                 cursorTop++;
+            }
+        }
+
+        public void HowToScreen()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            PrintASCIIArt(2, ASCIIART["howto"]);
+            Console.ForegroundColor = ConsoleColor.White;
+            printHowTo(14, 12);
+
+            int selectedItem = Menu.MultipleChoice(14, 25, true, "BACK");
+
+            // Menu actions
+            switch (selectedItem)
+            {
+                default:
+                    Console.Clear();
+                    GameScreen(new TerrariumSettings(), "");
+                    break;
             }
         }
 
@@ -294,6 +354,88 @@ namespace TerraLibrary
             Console.Clear();
         }
 
+
+        // Print HowTo
+        public void printHowTo(int x, int y)
+        {
+            var output = new StringBuilder();
+            var herbivore = StringManager.GetExtendedAsciiCodeAsString(20);
+            var carnivore = StringManager.GetExtendedAsciiCodeAsString(206);
+            var human = StringManager.GetExtendedAsciiCodeAsString(219);
+            var plant = StringManager.GetExtendedAsciiCodeAsString(157);
+
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.Write(herbivore  + " ");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.Write(herbivore + " ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write(herbivore + " ");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write(herbivore + " ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(": Icon for herbivores with color for health");
+
+
+            y++;
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.Write(carnivore + " ");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.Write(carnivore + " ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(carnivore + " ");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write(carnivore + " ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(": Icon for carnivores with color for health");
+
+            y++;
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.Write(human + " ");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write(human + " ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(human + " ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(human + " ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(": Icon for humans with color for health");
+
+            y++;
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(plant + " ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(": Icon for plants");
+
+
+            y++;
+            y++;
+            y++;
+            Console.SetCursorPosition(x, y);
+            Console.Write("Press ");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.Write("V");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(" to spawn a volcano eruptions at a random position");
+            
+            y++;
+            Console.SetCursorPosition(x, y);
+            Console.Write("Press ");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.Write("E");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(" to create an earthquake at a random position");
+            y++;
+            Console.SetCursorPosition(x, y);
+            Console.Write("Press ");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.Write("ESC");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(" to pause and save the game");
+        }
 
     }
 }
