@@ -98,22 +98,22 @@ namespace TerraLibrary
         {
             Height = 25;
             Width = 119;
-            Plants = 10;
-            Herbivores = 10;
-            Carnivores = 10;
-            Humans = 10;      
+            Plants = 60;
+            Herbivores = 30;
+            Carnivores = 30;
+            Humans = 30;      
         }
 
 
         // Methods
         public void ResetSettings()
         {
-            Height = 20;
-            Width = 50;
-            Plants = 10;
-            Herbivores = 10;
-            Carnivores = 10;
-            Humans = 10;
+            Height = 25;
+            Width = 119;
+            Plants = 60;
+            Herbivores = 30;
+            Carnivores = 30;
+            Humans = 30;
         }
 
         public void ChangeSettings()

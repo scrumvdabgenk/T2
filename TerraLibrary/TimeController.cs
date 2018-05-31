@@ -41,7 +41,7 @@ namespace TerraLibrary
             Day = startTime;
             ChangeTimeStep();
             // Milliseconds per day
-            StepTimeoutBase = 500;
+            StepTimeoutBase = 1;
             // Start step time, gets changed later according to amount of animals in list
             StepTimeout = 100;
             Terrarium = terrarium;
