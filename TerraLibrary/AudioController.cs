@@ -43,17 +43,17 @@ namespace TerraLibrary
 
         public static void PlayVulcano()
         {
-            Console.Beep(notes["G5"], 400);
-            Console.Beep(notes["G5"], 400);
-            Console.Beep(notes["G5"], 400);
+            Console.Beep(notes["G4"], 500);
+            Console.Beep(notes["G4"], 500);
+            Console.Beep(notes["G4"], 500);
 
-            Console.Beep(notes["Eb5"], 300);
-            Console.Beep(notes["Bb5"], 100);
-            Console.Beep(notes["G5"], 400);
+            Console.Beep(notes["Eb4"], 375);
+            Console.Beep(notes["Bb4"], 125);
+            Console.Beep(notes["G4"], 500);
 
-            Console.Beep(notes["Eb5"], 300);
-            Console.Beep(notes["Bb5"], 100);
-            Console.Beep(notes["G5"], 400);
+            Console.Beep(notes["Eb4"], 375);
+            Console.Beep(notes["Bb4"], 125);
+            Console.Beep(notes["G4"], 500);
 
             for (int i = 0; i < 4; i++)
             {
