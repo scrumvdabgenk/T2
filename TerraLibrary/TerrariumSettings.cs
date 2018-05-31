@@ -41,7 +41,7 @@ namespace TerraLibrary
                 ChangeTupples(Width, Height);
 
                 // Set the PropErrors
-                PropErrors["Width"] = new Tuple<string, int, int>("Height must be between 15 and ", 15, Console.LargestWindowWidth - 1);
+                PropErrors["Width"] = new Tuple<string, int, int>("Height must be between 30 and ", 30, Console.LargestWindowWidth - 1);
             }
         }
 
@@ -98,10 +98,10 @@ namespace TerraLibrary
         {
             Height = 25;
             Width = 119;
-            Plants = 60;
-            Herbivores = 30;
-            Carnivores = 30;
-            Humans = 30;      
+            Plants = 40;
+            Herbivores = 20;
+            Carnivores = 20;
+            Humans = 20;      
         }
 
 
@@ -110,10 +110,10 @@ namespace TerraLibrary
         {
             Height = 25;
             Width = 119;
-            Plants = 60;
-            Herbivores = 30;
-            Carnivores = 30;
-            Humans = 30;
+            Plants = 40;
+            Herbivores = 20;
+            Carnivores = 20;
+            Humans = 20;
         }
 
         public void ChangeSettings()

@@ -175,7 +175,7 @@ namespace TerraLibrary
                     break;
                 case 2:
                     Console.Clear();
-                    HowToScreen();
+                    HowToScreen(terrariumSettings);
                     break;
                 case 3:
                     Console.Clear();
@@ -298,7 +298,7 @@ namespace TerraLibrary
             }
         }
 
-        public void HowToScreen()
+        public void HowToScreen(TerrariumSettings terrariumSettings)
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             PrintASCIIArt(2, ASCIIART["howto"]);
@@ -312,7 +312,7 @@ namespace TerraLibrary
             {
                 default:
                     Console.Clear();
-                    GameScreen(new TerrariumSettings(), "");
+                    GameScreen(terrariumSettings, "");
                     break;
             }
         }
