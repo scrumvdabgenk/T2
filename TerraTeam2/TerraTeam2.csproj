@@ -43,19 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animal.cs" />
-    <Compile Include="GameController.cs" />
-    <Compile Include="Herbivore.cs" />
-    <Compile Include="IAnimalBehaviour.cs" />
-    <Compile Include="Plant.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Terrarium.cs" />
-    <Compile Include="Position.cs" />
-    <Compile Include="ITerrariumItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TerraLibrary\TerraLibrary.csproj">
+      <Project>{c6a0a9d0-988d-4e64-a712-57f490547fb9}</Project>
+      <Name>TerraLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

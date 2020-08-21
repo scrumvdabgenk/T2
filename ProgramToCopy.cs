@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,14 +43,7 @@ namespace TerraTeam2
         static void Main(string[] args)
         {
 
-            // Scale window size with Terrarium width and height
-            Console.SetWindowSize(120, 30);
-            // Set buffersize to remove scroll bars from window
-            Console.SetBufferSize(120, 30);
-
             Console.CursorVisible = false;
-
-            Thread.Sleep(5000);
 
             var arr = new[]
             {
@@ -103,3 +96,4 @@ namespace TerraTeam2
         }
     }
 }
+

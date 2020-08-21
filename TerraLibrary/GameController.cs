@@ -1,69 +1,82 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TerraLibrary
-{
+{[Serializable]
     public class GameController
     {
-        // Properties
-        public Terrarium Terrarium { get; set; }
-        public int Day { get; set; }
+        public WorldController WorldController { get; set; }
+        public ScreenController ScreenController { get; set; }
+        public TerrariumSettings TerrariumSettings { get; set; }
 
-        // Constructor
-        public GameController(Terrarium terrarium)
+        public GameController()
         {
-            Day = 0;
-            Terrarium = terrarium;
+            TerrariumSettings = new TerrariumSettings();
+            ScreenController = new ScreenController(this);
         }
 
-        // Methods
-        public void WaitForInput()
+        public void StartGame()
         {
-
+            ScreenController.LoadScreens(TerrariumSettings);
+            WorldController = new WorldController(TerrariumSettings, ScreenController);
+            WorldController.Start();
         }
-
-        public void Start()
+        public bool SaveGame()
         {
-            Console.WriteLine("TERRARIUM");
-            Console.WriteLine("---------");
-            Console.WriteLine("Press enter to show next day, 'stop' to quit.");
-            string input = Console.ReadLine();
-            while(input != "stop")
+            string[] filePaths = Directory.GetFiles(@"c:\dir");
+            int fileCount = filePaths.Count();
+            string Path = @"c:\dir\Save" + fileCount + ".terra";
+            SaveObject Save = new SaveObject(WorldController.Terrarium, WorldController.TimeController, TerrariumSettings);
+            try
             {
-                NextDay();
-                Console.ReadLine();
+                using(var bestand = File.Open(Path, FileMode.OpenOrCreate))
+                {
+                    var schrijver = new BinaryFormatter();
+                    schrijver.Serialize(bestand, Save);
+                }
+                return true;
             }
+            catch(SerializationException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+        public void LoadGame(string path)
+        {
+            try
+            {
+                using ( var bestand = File.Open(path, FileMode.Open, FileAccess.Read))
+                {
+                    var lezer = new BinaryFormatter();
+                    SaveObject Load;
+                        Load=(SaveObject)lezer.Deserialize(bestand);
+                    WorldController world = new WorldController(Load.Terrarium, Load.TimeController, Load.TerrariumSettings, true);
+                    WorldController = world;
+                    TerrariumSettings = world.TerrariumSettings;
+                    WorldController.Start();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                ScreenController.GameScreen(new TerrariumSettings(), ex.Message);
+            }
+            
             
         }
 
-        public void Stop()
-        {
-
-        }
-
-        public void NextDay()
-        {
-            // Increase day by one
-            Day++;
-            Console.WriteLine("Day: " + Day);
-            Console.WriteLine("---------");
-            // Prints out terrarium in console
-            PrintTerrarium();
-        }
-        public void PrintTerrarium ()
-        {
-            for(int x = 0; x < Terrarium.Height; x++)
-            {
-                for (int y = 0; y < Terrarium.Width; y++)
-                {
-                    Console.Write(".");
-                    Console.Write("\t");
-                }
-                Console.WriteLine();
-            }
-        }
+        
     }
 }

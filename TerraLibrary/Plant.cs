@@ -3,24 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TerraLibrary;
 
 namespace TerraLibrary
-{
-    public class Plant : ITerrariumItem
+{[Serializable]
+    public class Plant : IOrganism
     {
-        public Terrarium Terrarium { get; set; }    // Terrarium that created this item, for deletion, checking adjacency,...
-        public Position Position { get; set; }      // Position within the terrarium (X, Y)
+        /* Properties */
+        // STATICS
+        public static string Letter = StringManager.GetExtendedAsciiCodeAsString(157);
+        public static ConsoleColor Color = ConsoleColor.Green;
+
+        // Props
+        public int Health { get; set; }
+        public Position Position { get; set; }
+        public Position LastPosition { get; set; }
+        public Terrarium Terrarium { get; set; }
+        public string DisplayLetter { get; set; }
+        public ConsoleColor DisplayColor { get; set; }
 
         /* Constructor */
-        public Plant (Terrarium terrarium)
+        //public Plant (Position position, Terrarium terrarium)
+        //{
+        //    Position = position;
+        //    Terrarium = terrarium;
+        //    DisplayColor = Color;
+        //    DisplayLetter = Letter;
+        //    Health = 1;
+        //    LastPosition = new Position(Position.X, Position.Y);
+        //}
+        public Plant()
         {
-            // Create reference to terrarium that created this item
-            Terrarium = terrarium;
-            // Generate random position (int) within terrarium dimensions
-            Position = new Position(
-                new Random().Next(0, Terrarium.Width),
-                new Random().Next(0, Terrarium.Height)
-                );
+            DisplayColor = Color;
+            DisplayLetter = Letter;
+            Health = 1;
         }
     }
 }
